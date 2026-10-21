@@ -1,0 +1,11 @@
+{
+  "name": "alfa-business-insights",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Design-first corporate news intelligence prototype",
+  "scripts": {
+    "dev": "node server.mjs",
+    "check": "node --check dist/ui.js && node --check dist/data/feed-preview.js && node --check dist/feed-app.js"
+  },
+  "engines": {"node": ">=20"}
+}

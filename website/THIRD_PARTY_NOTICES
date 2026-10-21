@@ -1,0 +1,22 @@
+Manrope variable font
+Copyright and license: dist/assets/manrope-license.txt (SIL Open Font License 1.1).
+Source: https://github.com/google/fonts/tree/main/ofl/manrope
+
+Editorial photographs: Unsplash, downloaded as local assets.
+finance.jpg: https://images.unsplash.com/photo-1486406146926-c627a92ad1ab
+logistics.jpg: https://images.unsplash.com/photo-1494412519320-aa613dfb7738
+industry.jpg: https://images.unsplash.com/photo-1486262715619-67b85e0b08d3
+License information: https://unsplash.com/license
+Photographs illustrate themes and are not evidence of described events.
+
+The Alfa-Business name and red A mark identify the banking context of the user-provided case.
+This is an unofficial design prototype, not a production banking service.
+
+Four anonymized company profiles, including revenue and payment relationship information, come from the user-provided demo_profiles.json.
+News fragments, relevance scores, explanations, rules and suggested products come from the user-provided feed_preview.xlsx.
+Company display names describe the industry and are not legal names.
+The supplied demo_profiles.json and feed_preview.xlsx are included in data/ for the team.
+The web server serves only dist/; original source files in data/ are not served.
+News text is preserved without completion or independent fact verification. Scores are not risk probabilities.
+No bank analytical materials were supplied with this feed, and no bank quotations have been invented.
+No external AI service, LLM, bank API or live news feed is integrated in this version. The user role is a demonstration role.
