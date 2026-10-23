@@ -5,15 +5,13 @@
 !/THIRD_PARTY_NOTICES
 !/package.json
 !/server.mjs
+!/server/
 !/dist/
 !/data/
-!/scripts/
 
 /data/*
 !/data/*.xlsx
 !/data/*.json
-/scripts/*
-!/scripts/import_preview.py
 
 # Локальные настройки, инструменты агента и временные результаты.
 .openai/
@@ -36,3 +34,9 @@ qa/
 artifacts/
 output/
 tmp/
+
+# Серверный код интеграции и шаблон без секретов.
+/server/*
+!/server/*.mjs
+!/.env.example
+*.dpapi

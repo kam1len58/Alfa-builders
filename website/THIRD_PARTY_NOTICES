@@ -13,10 +13,14 @@ The Alfa-Business name and red A mark identify the banking context of the user-p
 This is an unofficial design prototype, not a production banking service.
 
 Four anonymized company profiles, including revenue and payment relationship information, come from the user-provided demo_profiles.json.
-News fragments, relevance scores, explanations, rules and suggested products come from the user-provided feed_preview.xlsx.
+News text, relevance scores, explanations, rules and suggested products are returned by the team's NewsAnalytics backend.
+The backend currently seeds its news from the team's manually prepared golden_news.json.
 Company display names describe the industry and are not legal names.
 The supplied demo_profiles.json and feed_preview.xlsx are included in data/ for the team.
-The web server serves only dist/; original source files in data/ are not served.
-News text is preserved without completion or independent fact verification. Scores are not risk probabilities.
-No bank analytical materials were supplied with this feed, and no bank quotations have been invented.
-No external AI service, LLM, bank API or live news feed is integrated in this version. The user role is a demonstration role.
+The web server serves dist/, forwards read-only /api/ requests to the configured backend, and handles server-only /api/ai/ analysis and chat requests.
+Original source files in data/ are not served. News text and rule explanations are displayed as returned by the backend, without independent fact verification.
+Scores are not risk probabilities. Bank expertise and source links absent from the feed response are not invented by the website.
+AI inference uses the organizer-provided OpenAI-compatible service at https://changellenge.up.railway.app/v1 with deepseek/deepseek-v4.1-flash by default. Model availability and team limits are controlled by the organizer. Authentication is server-only through LLM_API_KEY; no key is included in source files or browser code.
+The application implements its own planning, allowlisted data tools, JSON validation, review/repair and cache. It uses built-in Node.js HTTP/fetch/crypto/filesystem APIs, without an external agent framework or model SDK.
+Model-generated interpretations are separate from source news, deterministic relevance scores, and bank materials. Review by the same model is not independent fact verification. Unverified prepared bank comments are not attributed to Alfa-Bank.
+No automatic live news collection or internet search tool is integrated. The user role is a demonstration role.

@@ -22,53 +22,6 @@ const companyLabels = {
     brief: 'Группа компаний<br>и расчётные связи',
   },
 };
-const newsLabels = {
-  N1: {
-    title: 'Инфляция в сентябре: 0,35% за месяц',
-    category: 'Экономика',
-    source: 'Росстат · по тексту подборки',
-    image: 'finance.jpg',
-    date: '9 октября',
-    isoDate: '2026-10-09',
-    timestamp: 20261009,
-  },
-  N2: {
-    title: 'Производственный PMI: 49,8 пункта',
-    category: 'Производство',
-    source: 'S&P Global · по тексту подборки',
-    image: 'industry.jpg',
-    date: '1 октября',
-    isoDate: '2026-10-01',
-    timestamp: 20261001,
-  },
-  N3: {
-    title: 'Санкционные и тарифные меры для покупателей нефти',
-    category: 'Внешняя торговля',
-    source: 'Подготовленная подборка',
-    image: 'logistics.jpg',
-    date: '15–19 октября',
-    isoDate: '2026-10-19',
-    timestamp: 20261019,
-  },
-  N4: {
-    title: 'Сообщение о возобновлении поставок дизельного топлива',
-    category: 'Топливо',
-    source: 'Кремль · по тексту подборки',
-    image: 'industry.jpg',
-    date: '15 октября',
-    isoDate: '2026-10-15',
-    timestamp: 20261015,
-  },
-  N5: {
-    title: 'Оценка нефтегазовых доходов бюджета',
-    category: 'Бюджет',
-    source: 'Reuters · по тексту подборки',
-    image: 'finance.jpg',
-    date: '15 октября',
-    isoDate: '2026-10-15',
-    timestamp: 20261015,
-  },
-};
 const productLabels = {
   has_rko: 'РКО',
   has_loans: 'Кредит',
@@ -86,34 +39,37 @@ const ruleLabels = {
   SUPPLIER_CONCENTRATION: 'Концентрация исходящих платежей',
   FUEL: 'Топливная составляющая',
   GOV_PROCUREMENT: 'Гипотеза о госзаказе',
+  OIL: 'Нефть и газ',
 };
-const bundle = window.ALFA_FEED;
-if (!bundle?.profiles?.length || !bundle?.news?.length) {
-  throw new Error('Не удалось загрузить профили и ленту');
-}
-const companies = bundle.profiles.map((profile) => ({
-  id: profile.synthetic_u,
-  profile,
-  ...companyLabels[profile.synthetic_u],
-  industry: profile.industry,
-  products: Object.entries(productLabels)
-    .filter(([key]) => profile.bank_products[key] === 1)
-    .map(([, name]) => name),
-}));
-const events = bundle.news.map((news) => ({ ...news, ...newsLabels[news.id] }));
-const storedCompany = loadPreference('company', companies[0].id);
+let companies = [];
+let events = [];
+let requestVersion = 0;
+let currentRequest;
+const storedCompany = loadPreference('company', 'U_9250');
 const storedSaved = loadPreference('feed-saved-v1', []);
 const state = {
-  company: companies.find((company) => company.id === storedCompany) || companies[0],
+  company: null,
+  loading: true,
+  error: '',
   view: 'overview',
   filter: 'focus',
   search: '',
   sort: 'priority',
   selected: null,
+  checked: new Set(),
+  filters: { from: '', to: '', topic: '', product: '' },
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
   density: loadPreference('density', 'normal'),
 };
-const companyAssignment = (event) => event.assignments[state.company.id];
+const hiddenAssignment = {
+  score: 0,
+  placement: 'скрыть',
+  rules: [],
+  explanation: '',
+  suggestedProducts: '',
+  products: [],
+};
+const companyAssignment = (event) => event.assignments[state.company?.id] || hiddenAssignment;
 const isVisibleForCompany = (event) => companyAssignment(event).placement !== 'скрыть';
 const savedEventKey = (id) => `${state.company.id}:${id}`;
 const isSaved = (id) => state.saved.has(savedEventKey(id));
@@ -169,9 +125,10 @@ function visibleSavedCount() {
 
 function renderCounts() {
   const available = events.filter(isVisibleForCompany);
-  $('#all-count').textContent = available.length;
-  $('#more-count').textContent = available.length;
-  $('#saved-count').textContent = visibleSavedCount();
+  const pending = state.loading || state.error;
+  $('#all-count').textContent = pending ? '—' : available.length;
+  $('#more-count').textContent = pending ? '—' : available.length;
+  $('#saved-count').textContent = pending ? '—' : visibleSavedCount();
 }
 
 function toggleSaved(id) {
@@ -190,6 +147,25 @@ function toggleSaved(id) {
 }
 
 function renderCompany() {
+  $('#company-switch').disabled = companies.length === 0;
+  $('#brief-open').disabled = state.loading || Boolean(state.error);
+  const status = $('#connection-status');
+  status.dataset.state = state.loading ? 'loading' : state.error ? 'error' : 'ready';
+  status.querySelector('span').textContent = state.loading
+    ? 'Обновляем подборку'
+    : state.error
+      ? 'Нет соединения'
+      : 'Данные сервиса';
+  if (!state.company) {
+    $('#company-name').textContent = state.loading ? 'Загрузка компаний' : 'Компании недоступны';
+    $('#company-monogram').textContent = '··';
+    $('#focus-count').textContent = '—';
+    $('#brief-description').textContent = state.loading
+      ? 'Загружаем вашу персональную повестку.'
+      : 'Не удалось обновить повестку. Повторите загрузку ниже.';
+    renderCounts();
+    return;
+  }
   const company = state.company,
     profile = company.profile,
     focusCount = events.filter((event) => companyAssignment(event).placement === 'В фокусе').length;
@@ -202,27 +178,32 @@ function renderCompany() {
   $('#context-products').textContent =
     featured.slice(0, 3).join(' · ') ||
     (profile.client_type === 'PROSPECT' ? 'Потенциальный клиент' : 'Продукты не отмечены');
-  $('#context-id').textContent = `${company.id} · ${profile.region}`;
+  $('#context-id').textContent = `${escapeHtml(company.id)} · ${profile.region}`;
   $('#brief-title').innerHTML = company.brief;
-  $('#focus-count').textContent = String(focusCount).padStart(2, '0');
+  $('#focus-count').textContent =
+    state.loading || state.error ? '—' : String(focusCount).padStart(2, '0');
+  $('#brief-open').disabled = state.loading || Boolean(state.error) || focusCount === 0;
   $('.brief-count p').innerHTML =
     `${focusCount === 1 ? 'событие' : focusCount < 5 ? 'события' : 'событий'}<br>в фокусе`;
   $('.brief-index').textContent =
     focusCount > 1 ? `01 — ${String(focusCount).padStart(2, '0')}` : '01';
-  $('#brief-description').textContent =
-    `В ленте ${events.filter(isVisibleForCompany).length} события с учётом профиля компании. Приоритеты и объяснения — из подготовленной подборки.`;
+  $('#brief-description').textContent = state.loading
+    ? 'Обновляем события для выбранной компании.'
+    : state.error
+      ? 'Не удалось обновить повестку. Повторите загрузку ниже.'
+      : `В ленте ${NewsTools.eventCount(events.filter(isVisibleForCompany).length)} с учётом профиля компании. Приоритеты и объяснения рассчитаны сервисом.`;
   $('#company-options').innerHTML = companies
     .map(
       (item) =>
         `<button
   class="company-option ${item.id === company.id ? 'selected' : ''}"
-  data-company="${item.id}"
+  data-company="${escapeHtml(item.id)}"
   aria-pressed="${item.id === company.id}"
 >
-  <span class="company-monogram">${item.monogram}</span
+  <span class="company-monogram">${escapeHtml(item.monogram)}</span
   ><span
     ><strong>${escapeHtml(item.name)}</strong
-    ><small>${item.id} · ${escapeHtml(item.profile.region)}</small></span
+    ><small>${escapeHtml(item.id)} · ${escapeHtml(item.profile.region)}</small></span
   >${item.id === company.id ? icon('check') : ''}
 </button>`
     )
@@ -237,6 +218,7 @@ function getFilteredEvents() {
     if (state.view === 'saved' && !isSaved(event.id)) return false;
 
     const assignment = companyAssignment(event);
+    if (!NewsTools.matches(event, assignment, state.filters)) return false;
     if (state.filter === 'focus' && assignment.placement !== 'В фокусе') return false;
     if (state.filter === 'general' && assignment.placement !== 'Все события') return false;
     if (!query) return true;
@@ -258,16 +240,16 @@ function getFilteredEvents() {
     if (state.sort === 'date') {
       return second.timestamp - first.timestamp || scoreDifference;
     }
-    return scoreDifference || first.id.localeCompare(second.id);
+    return scoreDifference || first.order - second.order;
   });
 }
 
 function renderEventCard(event, isFirst) {
   const assignment = companyAssignment(event);
-  return `<article class="event-card" aria-labelledby="title-${event.id}">
+  return `<article class="event-card ${state.checked.has(event.id) ? 'is-selected' : ''}" aria-labelledby="title-${escapeHtml(event.id)}">
   <button
     class="card-image-button"
-    data-event="${event.id}"
+    data-event="${escapeHtml(event.id)}"
     aria-label="Открыть разбор: ${escapeHtml(event.title)}"
   >
     <img
@@ -279,26 +261,28 @@ function renderEventCard(event, isFirst) {
     /><span class="image-category">${escapeHtml(event.category)}</span
     ><span class="image-arrow">${icon('arrow-up-right')}</span>
   </button>
+  <label class="event-select"><input type="checkbox" data-select-event="${escapeHtml(event.id)}" aria-label="Выбрать для экспорта: ${escapeHtml(event.title)}" ${state.checked.has(event.id) ? 'checked' : ''} /></label>
   <div class="card-body">
     <div class="card-meta">
-      <span class="source-label">${event.id} · Из подборки</span
+      <span class="source-label">${escapeHtml(event.id)} · Из подборки</span
       ><time datetime="${event.isoDate}">${event.date}</time>
     </div>
-    <h3 class="card-title" id="title-${event.id}">
-      <button data-event="${event.id}">${escapeHtml(event.title)}</button>
+    <h3 class="card-title" id="title-${escapeHtml(event.id)}">
+      <button data-event="${escapeHtml(event.id)}">${escapeHtml(event.title)}</button>
     </h3>
-    <p class="card-summary source-fragment">${escapeHtml(event.rawText)}${event.isTruncated ? '…' : ''}</p>
+    <p class="card-summary source-fragment">${escapeHtml(event.rawText)}</p>
     <div class="company-relevance">
       <div class="relevance-label">${icon('link')}Почему важно для компании</div>
-      <p>${escapeHtml(assignment.explanation)}</p>
+      <p class="${event.insight ? 'model-relevance' : ''}">${escapeHtml(event.insight?.analysis.whyImportant.text || assignment.explanation)}</p>
+      ${event.insight ? '<span class="analysis-caption">Персональный вывод модели</span>' : ''}
     </div>
     <div class="card-footer">
       <span class="impact neutral"><i></i>${assignment.placement === 'В фокусе' ? 'В фокусе' : 'Общий контекст'}</span
-      ><span class="ranking-score" title="Балл релевантности из таблицы. Не вероятность риска."
+      ><span class="ranking-score" title="Балл релевантности, рассчитанный сервисом. Не вероятность риска."
         >Балл ${formatScore(assignment.score)}</span
       ><button
         class="save-button ${isSaved(event.id) ? 'saved' : ''}"
-        data-save="${event.id}"
+        data-save="${escapeHtml(event.id)}"
         aria-label="${isSaved(event.id) ? 'Удалить из сохранённого' : 'Сохранить событие'}: ${escapeHtml(event.title)}"
         aria-pressed="${isSaved(event.id)}"
       >
@@ -310,6 +294,24 @@ function renderEventCard(event, isFirst) {
 }
 
 function renderEvents() {
+  renderWorkbench();
+  const pending = state.loading || Boolean(state.error);
+  $('#event-grid').setAttribute('aria-busy', String(state.loading));
+  $('#reset-filters').disabled = state.loading;
+  if (pending) {
+    $('#event-grid').innerHTML = '';
+    $('#section-count').textContent = '—';
+    $('#empty-state').hidden = false;
+    $('#show-more-wrap').hidden = true;
+    $('#empty-title').textContent = state.loading
+      ? 'Загружаем вашу повестку'
+      : 'Не удалось загрузить данные';
+    $('#empty-description').textContent = state.loading
+      ? 'Подбираем события для выбранной компании.'
+      : state.error;
+    $('#reset-filters').textContent = state.loading ? 'Загрузка…' : 'Повторить загрузку';
+    return;
+  }
   const shown = getFilteredEvents();
   $('#section-count').textContent = shown.length;
   $('#events-heading').textContent =
@@ -325,15 +327,24 @@ function renderEvents() {
     .join('');
   $('#empty-state').hidden = shown.length !== 0;
   $('#show-more-wrap').hidden =
-    state.view !== 'overview' || state.filter !== 'focus' || !!state.search;
+    state.view !== 'overview' ||
+    state.filter !== 'focus' ||
+    !!state.search ||
+    Object.values(state.filters).some(Boolean);
   if (state.view === 'saved' && !visibleSavedCount()) {
     $('#empty-title').textContent = 'Здесь будет ваша подборка';
     $('#empty-description').textContent =
       'Сохраняйте события выбранной компании, чтобы вернуться к ним позже.';
     $('#reset-filters').textContent = 'Перейти к событиям';
+  } else if (events.length === 0) {
+    $('#empty-title').textContent = 'Событий пока нет';
+    $('#empty-description').textContent = 'Сервис пока не вернул событий для этой компании.';
+    $('#reset-filters').textContent = 'Обновить подборку';
   } else {
     $('#empty-title').textContent = 'Ничего не найдено';
-    $('#empty-description').textContent = 'Попробуйте другую тему или измените раздел ленты.';
+    $('#empty-description').textContent = $('#filter-error').hidden
+      ? 'Измените поиск, период, тему или продукт для обсуждения.'
+      : 'Исправьте период в фильтрах или сбросьте его.';
     $('#reset-filters').textContent = 'Сбросить фильтры';
   }
 }
@@ -391,93 +402,12 @@ function renderDetailSave() {
   $('#detail-save').setAttribute('aria-pressed', String(saved));
 }
 
-function sourceCards(event) {
-  const assignment = companyAssignment(event);
-  return `<div class="source-card">
-  <div class="source-card-title">Профиль компании<span class="source-symbol">К</span></div>
-  <p>${state.company.id} · ${escapeHtml(state.company.industry)}</p>
-  <span class="analysis-caption">demo_profiles.json · synthetic_u = ${state.company.id}</span>
-</div>
-<div class="source-card">
-  <div class="source-card-title">Исходный текст новости<span class="source-symbol">Н</span></div>
-  <p>${escapeHtml(event.rawText)}</p>
-  <span class="analysis-caption"
-    >feed_preview.xlsx · Баллы!A${event.scoreRow} · ${event.id}</span
-  >
-</div>
-<div class="source-card">
-  <div class="source-card-title">Персональная разметка<span class="source-symbol">Р</span></div>
-  <p>Балл ${formatScore(assignment.score)} · ${escapeHtml(assignment.placement)}<br />${formatLines(assignment.explanation)}</p>
-  <span class="analysis-caption"
-    >feed_preview.xlsx · Почему!A${assignment.sourceRow}:G${assignment.sourceRow}</span
-  >
-</div>
-<p class="source-note">
-  В файлах нет ссылок на публикации и аналитических материалов банка. Новость показана в переданном
-  виде; факты не проверялись по первоисточнику. Балл определяет порядок, а не вероятность
-  наступления риска.
-</p>`;
-}
-
 function openEvent(id) {
   const event = events.find((event) => event.id === id && isVisibleForCompany(event));
   if (!event) return;
   state.selected = id;
-  const assignment = companyAssignment(event);
   closePopovers();
-  const concentration = assignment.rules.includes('SUPPLIER_CONCENTRATION');
-  $('#detail-body').innerHTML = `<img class="detail-photo" src="./assets/${event.image}" alt="" />
-<div class="detail-content">
-  <div class="detail-meta">
-    <span>${event.id} · ${escapeHtml(event.category)}</span><span>·</span
-    ><time>${event.date}</time><span class="detail-rank">Балл ${formatScore(assignment.score)}</span>
-  </div>
-  <h2 id="detail-title">${escapeHtml(event.title)}</h2>
-  <div class="detail-tabbar" role="group" aria-label="Содержание разбора">
-    <button class="detail-tab active" data-detail-tab="analysis" aria-pressed="true">
-      Событие и контекст</button
-    ><button class="detail-tab" data-detail-tab="sources" aria-pressed="false">
-      Источники и основания
-    </button>
-  </div>
-  <div id="analysis-panel">
-    <section class="analysis-block">
-      <h3>Что произошло</h3>
-      <p>${escapeHtml(event.rawText)}</p>
-      ${event.isTruncated ? '<span class="analysis-caption source-limitation">Текст обрывается в исходной таблице. Продолжение не добавлялось.</span>' : ''}<span class="analysis-caption">${escapeHtml(event.source)}</span>
-    </section>
-    <section class="analysis-block">
-      <h3>Почему событие в вашей ленте</h3>
-      <p>${formatLines(assignment.explanation)}</p>
-      <div class="evidence-tags">${assignment.rules.map((r) => `<span class="evidence-tag">${escapeHtml(ruleLabels[r] || r)}</span>`).join('')}</div>
-      <span class="analysis-caption">Объяснение и балл взяты из подготовленной разметки.</span
-      >${concentration ? '<p class="source-caveat">Доли в профиле рассчитаны по доступным платежам, а не по закупкам. Назначение платежей и отрасль части контрагентов неизвестны; причинная связь с событием требует проверки.</p>' : ''}
-    </section>
-    <section class="next-action">
-      <h3>Контекст компании</h3>
-      <p>
-        ${escapeHtml(state.company.industry)}. ${escapeHtml(state.company.profile.region)}. Группа — ${formatNumber(state.company.profile.affiliation.group_size)}
-        ${companyNoun(state.company.profile.affiliation.group_size)}.
-      </p>
-      <div class="evidence-tags">${state.company.products.map((p) => `<span class="evidence-tag">${escapeHtml(p)}</span>`).join('')}${state.company.profile.ved.has_ved ? '<span class="evidence-tag">ВЭД</span>' : ''}</div>
-    </section>
-    ${assignment.suggestedProducts ? `<section class="analysis-block"><h3>Продукты для обсуждения</h3><p>${escapeHtml(assignment.suggestedProducts)}</p><span class="analysis-caption">Из колонки «Продукты банка». Это возможные направления, а не сведения о подключённых продуктах.</span></section>` : ''}
-    <section class="analysis-block bank-material-status">
-      <h3>Аналитика банка</h3>
-      <p>Материалы банка к этой подборке не приложены.</p>
-    </section>
-    <section class="question-panel">
-      <h3>Уточнить по событию</h3>
-      <button class="question-chip" data-question="basis">
-        Почему эта новость показана компании?</button
-      ><button class="question-chip" data-question="missing">
-        Каких данных не хватает для оценки влияния?
-      </button>
-      <div class="question-answer" id="question-answer" hidden></div>
-    </section>
-  </div>
-  <div id="sources-panel" hidden>${sourceCards(event)}</div>
-</div>`;
+  NewsReader.open(event, state.company);
   renderDetailSave();
   if (!$('#detail-dialog').open) $('#detail-dialog').showModal();
   $('#detail-dialog').scrollTop = 0;
@@ -497,6 +427,10 @@ function partnerTable(partners, label) {
 }
 
 function openCompany() {
+  if (state.loading || state.error || !state.company?.profileReady) {
+    showToast('Профиль компании пока недоступен. Дождитесь загрузки данных.');
+    return;
+  }
   const company = state.company,
     profile = company.profile,
     counterparties = profile.counterparties,
@@ -504,7 +438,7 @@ function openCompany() {
     industryPosition = profile.industry_position;
   openUtility(
     'Профиль компании',
-    `<div class="profile-eyebrow">${company.id} · ${escapeHtml(profile.city)}</div>
+    `<div class="profile-eyebrow">${escapeHtml(company.id)} · ${escapeHtml(profile.city)}</div>
 <div class="profile-name">${escapeHtml(company.name)}</div>
 <dl class="profile-table">
   <div>
@@ -573,30 +507,18 @@ function openSources() {
   openUtility(
     'Данные и устройство ленты',
     `<div class="source-card">
-  <div class="source-card-title">4 профиля компаний</div>
-  <p>
-    Данные demo_profiles.json: отрасль, выручка, продуктовые флаги, связи и группа. Компании
-    обозначены обезличенными ID.
-  </p>
-</div>
-<div class="source-card">
-  <div class="source-card-title">5 событий и 20 назначений</div>
-  <p>
-    Лист «Баллы» задаёт оценки, лист «Почему» — видимость, объяснения и продукты для обсуждения. Они
-    используются без пересчёта.
-  </p>
-</div>
-<div class="source-card">
-  <div class="source-card-title">Порядок и видимость</div>
-  <p>
-    «В фокусе» — приоритетный обзор. «Все события» — общий контекст. Записи «скрыть» недоступны в
-    ленте и сохранённом для соответствующей компании.
-  </p>
-</div>
-<p class="source-note">
-  Четыре текста обрываются в исходном файле; продолжения и ссылки не добавлены. Баллы не являются
-  вероятностью риска. Первоисточники, аналитика банка и ответы LLM пока не подключены.
-</p>`
+    <div class="source-card-title">Профили компаний</div>
+    <p>Отрасль, выручка, продукты, платёжные связи и группа загружаются из сервиса. Компании обозначены обезличенными ID.</p>
+  </div>
+  <div class="source-card">
+    <div class="source-card-title">Персональная лента</div>
+    <p>Сервис выбирает новости для компании и передаёт оценки, раздел ленты и сработавшие правила. Карточки показывают эти результаты без пересчёта.</p>
+  </div>
+  <div class="source-card">
+    <div class="source-card-title">Порядок и видимость</div>
+    <p>«В фокусе» — приоритетный обзор, «Общий контекст» — остальные доступные события. Сохранённое и поиск работают внутри ленты выбранной компании.</p>
+  </div>
+  <p class="source-note">Банковская позиция и полный разбор последствий в ответ ленты пока не включены. Сведения из новостей не проверяются сайтом независимо; баллы не являются вероятностью риска.</p>`
   );
 }
 
@@ -630,45 +552,105 @@ function openSettings() {
   );
 }
 
-function selectCompany(id) {
-  const company = companies.find((company) => company.id === id);
-  if (!company) return;
+function makeCompany(profile) {
+  const label = companyLabels[profile.synthetic_u];
+  return {
+    id: profile.synthetic_u,
+    name: label?.name || profile.industry || profile.synthetic_u,
+    monogram: label?.monogram || 'К',
+    brief: label?.brief || 'События<br>для вашего бизнеса',
+    industry: profile.industry,
+    profile,
+    profileReady: false,
+    products: [],
+  };
+}
 
-  state.company = company;
-  savePreference('company', id);
+function loadFailed(error) {
+  state.loading = false;
+  state.error =
+    error.name === 'TimeoutError'
+      ? 'Сервис долго не отвечает. Попробуйте повторить загрузку.'
+      : 'Не удалось получить данные от сервиса. Повторите загрузку через некоторое время.';
   renderCompany();
   renderEvents();
+}
+
+async function initialize() {
+  const version = ++requestVersion;
+  currentRequest?.abort();
+  currentRequest = new AbortController();
+  state.loading = true;
+  state.error = '';
+  state.company = null;
+  companies = [];
+  events = [];
+  renderCompany();
+  renderEvents();
+  try {
+    const profiles = await AlfaApi.getCompanies(currentRequest.signal);
+    if (version !== requestVersion) return;
+    if (!profiles.length) throw new Error('Нет доступных компаний.');
+    companies = profiles.map(makeCompany);
+    const preferred = companies.find((company) => company.id === storedCompany) || companies[0];
+    await selectCompany(preferred.id, true);
+  } catch (error) {
+    if (version !== requestVersion) return;
+    loadFailed(error);
+  }
+}
+
+async function selectCompany(id, initial = false) {
+  const company = companies.find((company) => company.id === id);
+  if (!company) return;
+  const version = ++requestVersion;
+  currentRequest?.abort();
+  currentRequest = new AbortController();
+  const signal = currentRequest.signal;
+  $('#detail-dialog').close();
+  $('#utility-dialog').close();
+  $('#comparison-dialog').close();
+  state.selected = null;
+  state.company = company;
+  state.loading = true;
+  state.error = '';
+  company.profileReady = false;
+  events = [];
+  state.checked.clear();
+  resetAdvancedFilters();
   closePopovers();
-  showToast(`Повестка обновлена: ${id}`);
+  renderCompany();
+  renderEvents();
+  try {
+    const [profile, feed] = await Promise.all([
+      AlfaApi.getCompany(id, signal),
+      AlfaApi.getFeed(id, signal),
+    ]);
+    if (version !== requestVersion) return;
+    company.profile = profile;
+    company.profileReady = true;
+    company.industry = profile.industry;
+    company.products = Object.entries(productLabels)
+      .filter(([key]) => profile.bank_products[key] === 1)
+      .map(([, name]) => name);
+    events = feed;
+    renderFilterOptions();
+    state.loading = false;
+    savePreference('company', id);
+    renderCompany();
+    renderEvents();
+    if (!initial) showToast(`Повестка обновлена: ${id}`);
+  } catch (error) {
+    if (version !== requestVersion) return;
+    currentRequest.abort();
+    loadFailed(error);
+  }
 }
 
 function selectFilter(filter) {
   state.filter = filter;
   updateFilterButtons();
   renderEvents();
-}
-
-function selectDetailTab(button) {
-  document.querySelectorAll('[data-detail-tab]').forEach((tab) => {
-    const active = tab === button;
-    tab.classList.toggle('active', active);
-    tab.setAttribute('aria-pressed', String(active));
-  });
-  $('#analysis-panel').hidden = button.dataset.detailTab !== 'analysis';
-  $('#sources-panel').hidden = button.dataset.detailTab !== 'sources';
-}
-
-function answerQuestion(question) {
-  const event = events.find((event) => event.id === state.selected);
-  if (!event) return;
-
-  const assignment = companyAssignment(event);
-  const answer = $('#question-answer');
-  answer.hidden = false;
-  answer.textContent =
-    question === 'basis'
-      ? `${assignment.explanation} Балл: ${formatScore(assignment.score)}. Основание: feed_preview.xlsx, лист «Почему», строка ${assignment.sourceRow}.`
-      : 'Нужны полный текст и ссылка на новость, подтверждение конкретных контрактов и направлений, период платежей и условия финансовых продуктов. Доли платежей не равны долям закупок; наличие продукта не определяет размер обязательств. Это пояснение доступных данных, не ответ LLM.';
 }
 
 function setDensity(density) {
@@ -688,7 +670,7 @@ function openUserProfile() {
 function handlePageClick(event) {
   const target = event.target;
   const button = target.closest(
-    '[data-save], [data-event], [data-view], [data-company], [data-filter], [data-detail-tab], [data-question], [data-density], [data-action]'
+    '[data-save], [data-event], [data-view], [data-company], [data-filter], [data-density], [data-action]'
   );
 
   if (button) {
@@ -698,8 +680,6 @@ function handlePageClick(event) {
     else if (data.view) setView(data.view);
     else if (data.company) selectCompany(data.company);
     else if (data.filter) selectFilter(data.filter);
-    else if (data.detailTab) selectDetailTab(button);
-    else if (data.question) answerQuestion(data.question);
     else if (data.density) setDensity(data.density);
     else if (data.action === 'sources') openSources();
     else if (data.action === 'settings') openSettings();
@@ -713,10 +693,15 @@ function handlePageClick(event) {
 }
 
 hydrateIcons();
-renderCompany();
+$('#heading-date').textContent = new Intl.DateTimeFormat('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  weekday: 'long',
+}).format(new Date());
 document.body.classList.toggle('compact', state.density === 'compact');
 const initialView = location.hash.slice(1);
 setView(['overview', 'all', 'saved'].includes(initialView) ? initialView : 'overview');
+initialize();
 
 document.addEventListener('click', handlePageClick);
 $('#company-switch').addEventListener('click', () => {
@@ -757,23 +742,33 @@ $('#show-more').addEventListener('click', () => {
 });
 $('#brief-open').addEventListener('click', () => {
   const focus = events
-    .filter((event) => isVisibleForCompany(event) && companyAssignment(event).placement === 'В фокусе')
+    .filter(
+      (event) => isVisibleForCompany(event) && companyAssignment(event).placement === 'В фокусе'
+    )
     .sort((first, second) => companyAssignment(second).score - companyAssignment(first).score);
   if (focus[0]) openEvent(focus[0].id);
 });
 $('#reset-filters').addEventListener('click', () => {
+  if (state.loading) return;
+  if (state.error || events.length === 0) {
+    if (companies.length && state.company) selectCompany(state.company.id);
+    else initialize();
+    return;
+  }
   if (state.view === 'saved' && !visibleSavedCount()) {
     setView('all');
     return;
   }
   state.filter = 'all';
   state.search = '';
+  resetAdvancedFilters();
   $('#search').value = '';
   updateFilterButtons();
   renderEvents();
 });
 $('#detail-save').addEventListener('click', () => state.selected && toggleSaved(state.selected));
 $('#detail-close').addEventListener('click', () => $('#detail-dialog').close());
+$('#detail-dialog').addEventListener('close', renderEvents);
 $('#utility-close').addEventListener('click', () => $('#utility-dialog').close());
 for (const dialog of document.querySelectorAll('dialog')) {
   dialog.addEventListener('close', () => {
@@ -794,6 +789,10 @@ for (const dialog of document.querySelectorAll('dialog')) {
 }
 $('#utility-body').addEventListener('click', (event) => {
   if (event.target.closest('#clear-saved')) {
+    if (!state.company) {
+      showToast('Сначала выберите компанию.');
+      return;
+    }
     for (const key of [...state.saved])
       if (key.startsWith(state.company.id + ':')) state.saved.delete(key);
     savePreference('feed-saved-v1', [...state.saved]);

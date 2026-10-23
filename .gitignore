@@ -38,6 +38,9 @@ ScaffoldingReadMe.txt
 
 # dotenv environment variables file
 .env
+.env.*
+!.env.example
+*.dpapi
 
 # Others
 ~$*

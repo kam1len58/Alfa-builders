@@ -13,7 +13,11 @@
     <link rel="preload" href="./assets/manrope.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./ui.js" defer></script>
-    <script src="./data/feed-preview.js" defer></script>
+    <script src="./api.js" defer></script>
+    <script src="./news-tools.js" defer></script>
+    <script src="./ai-reader.js" defer></script>
+    <script src="./news-reader.js" defer></script>
+    <script src="./feed-tools.js" defer></script>
     <script src="./feed-app.js" defer></script>
   </head>
   <body>
@@ -29,7 +33,7 @@
         </button>
         <button class="nav-item" data-view="all">
           <span data-icon="news"></span><span>Все события</span
-          ><span class="nav-count" id="all-count">4</span>
+          ><span class="nav-count" id="all-count">—</span>
         </button>
         <button class="nav-item" data-view="company">
           <span data-icon="building"></span><span>Моя компания</span>
@@ -65,8 +69,8 @@
             aria-expanded="false"
             aria-controls="company-menu"
           >
-            <span class="company-monogram" id="company-monogram">ИС</span
-            ><span id="company-name">Инженерное строительство</span
+            <span class="company-monogram" id="company-monogram">··</span
+            ><span id="company-name">Загрузка компаний</span
             ><span class="chevron" data-icon="chevron"></span>
           </button>
           <div class="company-menu popover" id="company-menu" hidden>
@@ -113,9 +117,9 @@
               <div class="notification-entry">
                 <span class="notification-entry-dot"></span>
                 <div>
-                  <strong>Загружена ваша подборка</strong>
-                  <p>Четыре профиля компаний и пять событий с персональной разметкой.</p>
-                  <span>Из переданных файлов</span>
+                  <strong>Ваша персональная подборка</strong>
+                  <p>События, оценки и объяснения обновляются при выборе компании.</p>
+                  <span>Данные сервиса</span>
                 </div>
               </div>
             </div>
@@ -132,22 +136,22 @@
             <h1 id="page-title">Сегодня важно<span class="title-dot">.</span></h1>
           </div>
           <div class="heading-date">
-            <span id="heading-date">21 октября, среда</span
-            ><span class="updated"><i></i>Подготовленная подборка</span>
+            <span id="heading-date"></span
+            ><span class="updated" id="connection-status" role="status"
+              ><i></i><span>Загрузка данных</span></span
+            >
           </div>
         </div>
         <section class="overview-grid" id="overview-grid" aria-label="Обзор дня">
           <article class="daily-brief">
             <div class="brief-count">
-              <span id="focus-count">03</span>
+              <span id="focus-count">—</span>
               <p>события<br />в фокусе</p>
             </div>
             <div class="brief-content">
               <div class="section-overline">Ваша повестка</div>
-              <h2 id="brief-title">ВЭД, топливо<br />и бюджетные расходы</h2>
-              <p id="brief-description">
-                Что меняется вокруг бизнеса и на что стоит обратить внимание сегодня.
-              </p>
+              <h2 id="brief-title">Ваша повестка</h2>
+              <p id="brief-description">Загружаем события для вашей компании.</p>
               <button class="text-button brief-link" id="brief-open">
                 Перейти к главному<span data-icon="arrow-right"></span>
               </button>
@@ -168,19 +172,18 @@
             <div class="context-row">
               <span data-icon="building"></span>
               <div>
-                <span class="context-label">Отрасль</span
-                ><strong id="context-industry">Инженерное строительство</strong>
+                <span class="context-label">Отрасль</span><strong id="context-industry">—</strong>
               </div>
             </div>
             <div class="context-row">
               <span data-icon="briefcase"></span>
               <div>
                 <span class="context-label">Продукты и связи</span
-                ><strong id="context-products">Кредит · Лизинг · Гарантии</strong>
+                ><strong id="context-products">—</strong>
               </div>
             </div>
             <div class="context-footer">
-              <span id="context-id">U_9250 · Иркутская область</span
+              <span id="context-id">—</span
               ><button class="inline-link" data-action="company">
                 Подробнее<span data-icon="arrow-right"></span>
               </button>
@@ -191,7 +194,7 @@
           <div class="events-toolbar">
             <div class="section-title-wrap">
               <h2 id="events-heading">В фокусе</h2>
-              <span class="section-count" id="section-count">3</span>
+              <span class="section-count" id="section-count" aria-live="polite">—</span>
             </div>
             <div class="event-tabs" role="group" aria-label="Раздел ленты">
               <button class="event-tab" data-filter="all" aria-pressed="false">Все</button
@@ -209,6 +212,71 @@
               </select></label
             >
           </div>
+          <div class="feed-actionbar">
+            <label class="select-visible-label"
+              ><input
+                type="checkbox"
+                id="select-visible"
+                aria-label="Выбрать показанные события"
+              /><span id="visible-label">Загрузка подборки</span></label
+            >
+            <div class="feed-actions">
+              <button
+                class="tool-button"
+                id="filter-toggle"
+                aria-expanded="false"
+                aria-controls="advanced-filters"
+              >
+                <span data-icon="filter"></span>Фильтры<span id="filter-count"></span>
+              </button>
+              <button class="tool-button" id="compare-open">
+                <span data-icon="compare"></span>Сравнить
+              </button>
+              <button class="tool-button" id="export-open">
+                <span data-icon="download"></span>Экспорт
+              </button>
+            </div>
+          </div>
+          <section
+            class="advanced-filters"
+            id="advanced-filters"
+            aria-label="Фильтры событий"
+            hidden
+          >
+            <fieldset id="filter-fields">
+              <legend class="sr-only">Дата публикации, тема и предложенный продукт</legend>
+              <label>Дата с<input type="date" id="filter-from" /></label>
+              <label
+                >Дата по<input type="date" id="filter-to" aria-describedby="filter-error"
+              /></label>
+              <label
+                >Тема<select id="filter-topic">
+                  <option value="">Все темы</option>
+                </select></label
+              >
+              <label
+                >Продукт для обсуждения<select id="filter-product">
+                  <option value="">Все продукты</option>
+                </select></label
+              >
+            </fieldset>
+            <div class="filter-panel-footer">
+              <span>Важность задаётся разделом ленты выше</span
+              ><button class="inline-link" id="filters-reset">Сбросить фильтры</button>
+            </div>
+            <p class="field-error" id="filter-error" role="alert" hidden>
+              Дата окончания раньше даты начала. Исправьте период.
+            </p>
+          </section>
+          <div class="active-filters" id="active-filters" hidden></div>
+          <div class="selection-bar" id="selection-bar" hidden>
+            <span>Выбрано: <strong id="selected-count">0</strong></span
+            ><button id="selection-export">
+              Экспорт выбранного <span data-icon="download"></span></button
+            ><button id="clear-selection" aria-label="Снять выбор со всех событий">
+              <span data-icon="close"></span>
+            </button>
+          </div>
           <div class="event-grid" id="event-grid"></div>
           <div class="empty-state" id="empty-state" hidden>
             <span data-icon="search"></span>
@@ -218,7 +286,7 @@
           </div>
           <div class="show-more-wrap" id="show-more-wrap">
             <button class="show-more" id="show-more">
-              Все события<span id="more-count">4</span><span data-icon="arrow-right"></span>
+              Все события<span id="more-count">—</span><span data-icon="arrow-right"></span>
             </button>
           </div>
         </section>
@@ -234,7 +302,7 @@
         </section>
         <footer class="page-footer">
           <span>Альфа-Бизнес · Аналитика для решений</span
-          ><span>Профили и лента из переданных файлов · Источники не проверены</span>
+          ><span>Профили и лента из сервиса · Источники не проверены</span>
         </footer>
       </main>
     </div>
@@ -258,6 +326,25 @@
         </button>
       </div>
       <div id="utility-body"></div>
+    </dialog>
+    <dialog id="comparison-dialog" class="comparison-dialog" aria-labelledby="comparison-title">
+      <div class="comparison-heading">
+        <div>
+          <span class="eyebrow">Одна новость · Разный контекст</span>
+          <h2 id="comparison-title">Сравнение компаний</h2>
+        </div>
+        <button class="icon-button" id="comparison-close" aria-label="Закрыть сравнение">
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div class="comparison-controls">
+        <label for="comparison-event"
+          >Событие для сравнения<select id="comparison-event"></select></label
+        ><button class="secondary-button" id="comparison-refresh">Обновить оценки</button>
+      </div>
+      <p id="comparison-context" class="comparison-context"></p>
+      <div id="comparison-grid" class="comparison-grid"></div>
+      <p id="comparison-status" class="source-note" role="status"></p>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>

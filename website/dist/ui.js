@@ -21,6 +21,14 @@ const icons = {
   check: '<path d="m5 12 4 4L19 6"/>',
   link: '<path d="m9 15 6-6M7 16l-1 1a3.5 3.5 0 0 1-5-5l5-5a3.5 3.5 0 0 1 5 0M17 8l1-1a3.5 3.5 0 0 0-5-5l-5 5a3.5 3.5 0 0 0 0 5" transform="translate(2 2)"/>',
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/>',
+  compare: '<path d="M8 3v18M16 3v18M4 7h8M12 17h8M4 7l2-2M12 17l-2-2"/>',
+  download: '<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
+  filter:
+    '<path d="M4 6h16M7 12h10M10 18h4"/><circle cx="8" cy="6" r="2"/><circle cx="15" cy="12" r="2"/>',
+  message:
+    '<path d="M21 11a8 8 0 0 1-8 8H5l-3 3V11a9.5 9.5 0 0 1 19 0Z"/><path d="M7 10h9M7 14h6"/>',
+  flag: '<path d="M5 22V3c5-4 9 4 14 0v10c-5 4-9-4-14 0"/>',
+  minus: '<path d="M5 12h14"/>',
 };
 const icon = (name) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.info}</svg>`;
@@ -46,7 +54,9 @@ function loadPreference(key, fallback) {
 function savePreference(key, value) {
   try {
     localStorage.setItem(`alfa-insights:${key}`, JSON.stringify(value));
+    return true;
   } catch {
     // В приватном режиме браузер может запретить запись настроек.
+    return false;
   }
 }

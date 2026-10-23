@@ -5,7 +5,9 @@
   "description": "Design-first corporate news intelligence prototype",
   "scripts": {
     "dev": "node server.mjs",
-    "check": "node --check dist/ui.js && node --check dist/data/feed-preview.js && node --check dist/feed-app.js"
+    "check": "node --check server.mjs && node --check server/llm-client.mjs && node --check server/insights.mjs && node --check dist/ui.js && node --check dist/api.js && node --check dist/ai-reader.js && node --check dist/news-tools.js && node --check dist/news-reader.js && node --check dist/feed-tools.js && node --check dist/feed-app.js"
   },
-  "engines": {"node": ">=20"}
+  "engines": {
+    "node": ">=20.6"
+  }
 }
