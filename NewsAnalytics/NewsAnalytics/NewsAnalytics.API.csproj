@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="golden_news.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.13" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
@@ -24,12 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="golden_news.json" />
+    <ProjectReference Include="..\NewsAnalytics.BLL\NewsAnalytics.BLL.csproj" />
+    <ProjectReference Include="..\NewsAnalytics.DAL\NewsAnalytics.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NewsAnalytics.BLL\NewsAnalytics.BLL.csproj" />
-    <ProjectReference Include="..\NewsAnalytics.DAL\NewsAnalytics.DAL.csproj" />
+    <None Update="golden_news.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

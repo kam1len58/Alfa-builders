@@ -7,24 +7,26 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # Этот этап используется для сборки проекта службы
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["NewsAnalytics/NewsAnalytics.csproj", "NewsAnalytics/"]
-RUN dotnet restore "./NewsAnalytics/NewsAnalytics.csproj"
+COPY ["NewsAnalytics/NewsAnalytics.API.csproj", "NewsAnalytics/"]
+COPY ["NewsAnalytics.BLL/NewsAnalytics.BLL.csproj", "NewsAnalytics.BLL/"]
+COPY ["NewsAnalytics.DAL/NewsAnalytics.DAL.csproj", "NewsAnalytics.DAL/"]
+COPY ["NewsAnalytics.Models/NewsAnalytics.Models.csproj", "NewsAnalytics.Models/"]
+RUN dotnet restore "./NewsAnalytics/NewsAnalytics.API.csproj"
 COPY . .
 WORKDIR "/src/NewsAnalytics"
-RUN dotnet build "./NewsAnalytics.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./NewsAnalytics.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./NewsAnalytics.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./NewsAnalytics.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "NewsAnalytics.dll"]
+ENTRYPOINT ["dotnet", "NewsAnalytics.API.dll"]

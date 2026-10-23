@@ -10,5 +10,9 @@ public class NewsItem
     public string Category { get; set; } = string.Empty;
     public List<string> Tags { get; set; } = new();
     public List<string> OkvedSections { get; set; } = new();
+    public string WhyImportant { get; set; } = string.Empty;
+    public string Consequences { get; set; } = string.Empty;
+    public string Actions { get; set; } = string.Empty;
+    public string Sources { get; set; } = string.Empty;
+    public string AlfaView { get; set; } = string.Empty;
 }
-

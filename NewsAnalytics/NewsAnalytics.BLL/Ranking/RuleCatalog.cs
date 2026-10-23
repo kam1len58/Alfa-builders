@@ -46,7 +46,7 @@ public static class RuleCatalog
         {
             Code = "SUPPLIER_CONCENTRATION",
             Weight = 0.85,
-            Explanation = "Один поставщик ≥30% закупок → любой сбой в его отрасли критичен.",
+            Explanation = "Один поставщик ≥30% исходящих платежей → любой сбой в его отрасли критичен.",
             BankProducts = ["Аккредитив", "Кредит на запасы", "Реверсивный факторинг"],
             AppliesTo = c => c.Counterparties.TopSupplierShare >= 0.30
         },

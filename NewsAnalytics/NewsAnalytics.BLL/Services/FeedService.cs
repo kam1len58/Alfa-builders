@@ -1,12 +1,12 @@
 ﻿using NewsAnalytics.BLL.Dto;
 using NewsAnalytics.BLL.Ranking;
 using NewsAnalytics.BLL.Services.Interfaces;
-
 namespace NewsAnalytics.BLL.Services;
 
 public class FeedService(
     ICompanyService companyService,
     INewsService newsService,
+    IAlfaAnalyticsService alfaAnalyticsService,
     NewsScorer newsScorer) : IFeedService
 {
     public async Task<IReadOnlyList<ScoredNewsDto>?> GetFeedAsync(string companyId, CancellationToken ct = default)
@@ -16,6 +16,8 @@ public class FeedService(
             return null;
 
         var news = await newsService.GetAllAsync(ct);
-        return newsScorer.Rank(company, news);
+        var analytics = await alfaAnalyticsService.GetAllAsync(ct);
+
+        return newsScorer.Rank(company, news, analytics);
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NewsAnalytics.BLL.Agents;
 using NewsAnalytics.BLL.Ranking;
 using NewsAnalytics.BLL.Services;
 using NewsAnalytics.BLL.Services.Interfaces;
@@ -20,12 +21,24 @@ builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<IFeedService, FeedService>();
 builder.Services.AddSingleton<NewsScorer>();
 builder.Services.AddScoped<IAlfaAnalyticsService, AlfaAnalyticsService>();
+builder.Services.AddHttpClient<ILlmService, LlmService>();
+builder.Services.AddScoped<NewsClassifier>();
+builder.Services.AddScoped<NewsAnalysisAgent>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -60,6 +73,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

@@ -3,44 +3,132 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\vedinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\vedinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\goldennewsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\goldennewsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\partneritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\partneritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\newsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\newsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\newsinterpretationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\newsinterpretationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\industryposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\industryposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\counterpartyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\counterpartyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\companyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\companyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\bankproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\bankproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\alfaanalyticsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\alfaanalyticsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\affiliationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\affiliationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\newsanalytics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\newsanalytics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\rootdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\rootdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\goldennewsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\goldennewsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\goldenfiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\goldenfiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\ipartnerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\ipartnerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\icompanyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\icompanyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\ialfaanalyticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\ialfaanalyticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\newsclassifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\newsclassifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\llmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\llmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\feedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\feedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\companyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\companyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\alfaanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\alfaanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\illmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\illmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\ifeedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\ifeedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\icompanyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\icompanyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\ialfaanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\ialfaanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\companiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\companiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\scoringrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\scoringrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\rulecatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\rulecatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\rootdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\rootdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\data\\dto\\goldenfiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\data\\dto\\goldenfiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\newsscorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\newsscorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\dto\\scorednewsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,84 +139,56 @@
       "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\dto\\rulehitdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\dto\\newsinterpretationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\dto\\newsinterpretationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\dto\\feedtierdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\dto\\feedtierdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\feedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\feedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\ifeedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\ifeedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\newsscorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\newsscorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\rulecatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\rulecatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\ranking\\scoringrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\ranking\\scoringrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\dto\\companylistitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\dto\\companylistitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\agents\\newsanalysisagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\agents\\newsanalysisagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\companyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\companyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\golden_news.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\golden_news.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.bll\\services\\interfaces\\icompanyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C679EB59-CB63-AD2C-7006-6CB1E7E7EA9C}|NewsAnalytics.BLL\\NewsAnalytics.BLL.csproj|solutionrelative:newsanalytics.bll\\services\\interfaces\\icompanyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\companyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\companyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\newsinterpretationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\newsinterpretationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\newsinterpretationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\newsinterpretationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\partneritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\partneritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\newsanalytics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\newsanalytics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\alfaanalyticsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\alfaanalyticsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\controllers\\companiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\controllers\\companiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\industryposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\industryposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\newsanalytics.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\newsanalytics.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\vedinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\vedinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\bankproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\bankproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\counterpartyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\counterpartyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.models\\affiliationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABF43390-3D1D-43AB-DE23-B07487219F1D}|NewsAnalytics.Models\\NewsAnalytics.Models.csproj|solutionrelative:newsanalytics.models\\affiliationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\repositories\\alfaanalyticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -145,26 +205,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\repositories\\newsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\repositories\\newsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics\\newsanalytics.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{86770273-9190-1152-9E49-FE1413F7E5ED}|NewsAnalytics\\NewsAnalytics.API.csproj|solutionrelative:newsanalytics\\newsanalytics.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\ipartnerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\ipartnerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\ialfaanalyticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\ialfaanalyticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|c:\\users\\admin\\desktop\\business insights\\alfa-builders\\newsanalytics\\newsanalytics.dal\\contracts\\icompanyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F79405C9-ED8F-4F62-7B9A-C5A5974B5A59}|NewsAnalytics.DAL\\NewsAnalytics.DAL.csproj|solutionrelative:newsanalytics.dal\\contracts\\icompanyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -174,24 +214,310 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 30,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NewsAnalytics.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsAnalytics.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics\\Controllers\\NewsAnalytics.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsAnalytics.cs",
-              "RelativeToolTip": "NewsAnalytics\\Controllers\\NewsAnalytics.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA0AAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "AlfaAnalyticsItem.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T17:57:40.992Z",
+              "WhenOpened": "2026-10-21T13:24:36.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BankProducts.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\BankProducts.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\BankProducts.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\BankProducts.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\BankProducts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:07:34.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CompanyProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CompanyProfile.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\CompanyProfile.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CompanyProfile.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\CompanyProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T12:54:36.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CounterpartyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CounterpartyInfo.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\CounterpartyInfo.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CounterpartyInfo.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\CounterpartyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:11:21.203Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "IndustryPosition.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\IndustryPosition.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\IndustryPosition.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\IndustryPosition.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\IndustryPosition.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T21:16:32.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NewsInterpretationResult.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsInterpretationResult.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\NewsInterpretationResult.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsInterpretationResult.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\NewsInterpretationResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:26:32.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NewsItem.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsItem.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\NewsItem.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsItem.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\NewsItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T17:03:34.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PartnerItem.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\PartnerItem.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\PartnerItem.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\PartnerItem.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\PartnerItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:12:25.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VedInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\VedInfo.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\VedInfo.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\VedInfo.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\VedInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:10:20.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AffiliationInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AffiliationInfo.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.Models\\AffiliationInfo.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AffiliationInfo.cs",
+              "RelativeToolTip": "NewsAnalytics.Models\\AffiliationInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T13:13:27.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\DbInitializer.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\DbInitializer.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\DbInitializer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T17:18:23.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RootDataDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T17:24:39.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GoldenNewsDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T11:59:53.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GoldenFileDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T12:00:33.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IPartnerRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:54:22.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "INewsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:38:30.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ICompanyRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:29:22.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IAlfaAnalyticsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
+              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:45:20.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "NewsService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\NewsService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\NewsService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T09:29:45.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "NewsClassifier.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsClassifier.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\NewsClassifier.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsClassifier.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\NewsClassifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T17:48:14.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "LlmService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\LlmService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\LlmService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\LlmService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\LlmService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T18:03:19.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FeedService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\FeedService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\FeedService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\FeedService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\FeedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T11:51:04.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "CompanyService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\CompanyService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\CompanyService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\CompanyService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\CompanyService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAIwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T08:43:58.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "AlfaAnalyticsService.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\AlfaAnalyticsService.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\AlfaAnalyticsService.cs",
@@ -204,7 +530,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 24,
+              "Title": "INewsService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T09:24:22.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ILlmService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ILlmService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\ILlmService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ILlmService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\ILlmService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T18:00:42.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IFeedService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T10:23:35.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ICompanyService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T08:33:42.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "IAlfaAnalyticsService.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\IAlfaAnalyticsService.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\IAlfaAnalyticsService.cs",
@@ -217,56 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GoldenFileDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\GoldenFileDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T12:00:33.94Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GoldenNewsDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\GoldenNewsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:59:53.931Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "FeedService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\FeedService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\FeedService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\FeedService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\FeedService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:51:04.92Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "RuleCatalog.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAowAcAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:48:32.27Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 29,
               "Title": "ScoringRule.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\ScoringRule.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Ranking\\ScoringRule.cs",
@@ -274,23 +603,51 @@
               "RelativeToolTip": "NewsAnalytics.BLL\\Ranking\\ScoringRule.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:47:54.332Z"
+              "WhenOpened": "2026-10-22T11:47:54.332Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 30,
+              "Title": "RuleCatalog.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Ranking\\RuleCatalog.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowDwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T11:48:32.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "NewsScorer.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T10:33:26.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
               "Title": "ScoredNewsDto.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\ScoredNewsDto.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\ScoredNewsDto.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\ScoredNewsDto.cs",
               "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\ScoredNewsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:42:56.311Z"
+              "WhenOpened": "2026-10-22T11:42:56.311Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 33,
               "Title": "RuleHitDto.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\RuleHitDto.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\RuleHitDto.cs",
@@ -298,11 +655,25 @@
               "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\RuleHitDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:42:14.81Z"
+              "WhenOpened": "2026-10-22T11:42:14.81Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 34,
+              "Title": "NewsInterpretationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\NewsInterpretationDto.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\NewsInterpretationDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\NewsInterpretationDto.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\NewsInterpretationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T17:49:53.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
               "Title": "FeedTierDto.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\FeedTierDto.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\FeedTierDto.cs",
@@ -310,35 +681,90 @@
               "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\FeedTierDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T11:41:13.665Z"
+              "WhenOpened": "2026-10-22T11:41:13.665Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "NewsScorer.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Ranking\\NewsScorer.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowBoAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 36,
+              "Title": "CompanyListItemDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T10:33:26.645Z"
+              "WhenOpened": "2026-10-22T08:37:31.083Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "IFeedService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\IFeedService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 37,
+              "Title": "NewsAnalysisAgent.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Agents\\NewsAnalysisAgent.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Agents\\NewsAnalysisAgent.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Agents\\NewsAnalysisAgent.cs",
+              "RelativeToolTip": "NewsAnalytics.BLL\\Agents\\NewsAnalysisAgent.cs",
+              "ViewState": "AgIAAEMBAAAAAAAAAADwv74AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T10:23:35.441Z"
+              "WhenOpened": "2026-10-23T17:46:53.548Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 38,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Program.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Program.cs",
+              "RelativeToolTip": "NewsAnalytics\\Program.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAD0AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T19:39:15.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "golden_news.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\golden_news.json",
+              "RelativeDocumentMoniker": "NewsAnalytics\\golden_news.json",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\golden_news.json",
+              "RelativeToolTip": "NewsAnalytics\\golden_news.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-23T21:17:02.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\appsettings.json",
+              "RelativeDocumentMoniker": "NewsAnalytics\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\appsettings.json",
+              "RelativeToolTip": "NewsAnalytics\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-23T18:31:48.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "NewsInterpretationController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsInterpretationController.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics\\Controllers\\NewsInterpretationController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsInterpretationController.cs",
+              "RelativeToolTip": "NewsAnalytics\\Controllers\\NewsInterpretationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-23T17:50:16.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
               "Title": "NewsController.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsController.cs",
               "RelativeDocumentMoniker": "NewsAnalytics\\Controllers\\NewsController.cs",
@@ -351,214 +777,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "NewsService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\NewsService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\NewsService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\NewsService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBwAAAArAAAAAAAAAA==",
+              "DocumentIndex": 43,
+              "Title": "NewsAnalytics.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsAnalytics.cs",
+              "RelativeDocumentMoniker": "NewsAnalytics\\Controllers\\NewsAnalytics.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\NewsAnalytics.cs",
+              "RelativeToolTip": "NewsAnalytics\\Controllers\\NewsAnalytics.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T09:29:45.873Z"
+              "WhenOpened": "2026-10-22T17:57:40.992Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "INewsService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\INewsService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T09:24:22.559Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 44,
               "Title": "CompaniesController.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\CompaniesController.cs",
               "RelativeDocumentMoniker": "NewsAnalytics\\Controllers\\CompaniesController.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Controllers\\CompaniesController.cs",
               "RelativeToolTip": "NewsAnalytics\\Controllers\\CompaniesController.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAcwB4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-22T08:57:43.603Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "CompanyService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\CompanyService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\CompanyService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\CompanyService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\CompanyService.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAIwCEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T08:43:58.892Z"
+              "DocumentIndex": 46,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Dockerfile",
+              "RelativeDocumentMoniker": "NewsAnalytics\\Dockerfile",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Dockerfile",
+              "RelativeToolTip": "NewsAnalytics\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-10-23T16:43:08.149Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "CompanyListItemDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Dto\\CompanyListItemDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T08:37:31.083Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ICompanyService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
-              "RelativeToolTip": "NewsAnalytics.BLL\\Services\\Interfaces\\ICompanyService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T08:33:42.539Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "IndustryPosition.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\IndustryPosition.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\IndustryPosition.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\IndustryPosition.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\IndustryPosition.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T21:16:32.277Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "VedInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\VedInfo.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\VedInfo.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\VedInfo.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\VedInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:10:20.723Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "AlfaAnalyticsItem.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\AlfaAnalyticsItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:24:36.923Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "CompanyProfile.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CompanyProfile.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\CompanyProfile.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CompanyProfile.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\CompanyProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T12:54:36.712Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "BankProducts.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\BankProducts.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\BankProducts.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\BankProducts.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\BankProducts.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:07:34.398Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "CounterpartyInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CounterpartyInfo.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\CounterpartyInfo.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\CounterpartyInfo.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\CounterpartyInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:11:21.203Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "NewsInterpretationResult.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsInterpretationResult.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\NewsInterpretationResult.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\NewsInterpretationResult.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\NewsInterpretationResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:26:32.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\DbInitializer.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\DbInitializer.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\DbInitializer.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAuwHgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T17:18:23.803Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "AffiliationInfo.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AffiliationInfo.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\AffiliationInfo.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\AffiliationInfo.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\AffiliationInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:13:27.285Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "PartnerItem.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\PartnerItem.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.Models\\PartnerItem.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.Models\\PartnerItem.cs",
-              "RelativeToolTip": "NewsAnalytics.Models\\PartnerItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T13:12:25.246Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Program.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\Program.cs",
-              "RelativeToolTip": "NewsAnalytics\\Program.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAYwCsAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T19:39:15.517Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 47,
               "Title": "AlfaAnalyticsRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Repositories\\AlfaAnalyticsRepository.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Repositories\\AlfaAnalyticsRepository.cs",
@@ -570,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 48,
               "Title": "PartnerRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Repositories\\PartnerRepository.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Repositories\\PartnerRepository.cs",
@@ -582,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 49,
               "Title": "CompanyRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Repositories\\CompanyRepository.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Repositories\\CompanyRepository.cs",
@@ -594,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 50,
               "Title": "NewsRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Repositories\\NewsRepository.cs",
               "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Repositories\\NewsRepository.cs",
@@ -606,75 +863,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 45,
               "Title": "NewsAnalytics.API.csproj",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\NewsAnalytics.API.csproj",
               "RelativeDocumentMoniker": "NewsAnalytics\\NewsAnalytics.API.csproj",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics\\NewsAnalytics.API.csproj",
               "RelativeToolTip": "NewsAnalytics\\NewsAnalytics.API.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-10-21T20:05:39.89Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "IPartnerRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\IPartnerRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T14:54:22.244Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "RootDataDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Data\\Dto\\RootDataDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T17:24:39.858Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "IAlfaAnalyticsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\IAlfaAnalyticsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T14:45:20.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "INewsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\INewsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T14:38:30.278Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "ICompanyRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
-              "RelativeDocumentMoniker": "NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Business Insights\\Alfa-builders\\NewsAnalytics\\NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
-              "RelativeToolTip": "NewsAnalytics.DAL\\Contracts\\ICompanyRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-21T14:29:22.926Z"
             }
           ]
         }

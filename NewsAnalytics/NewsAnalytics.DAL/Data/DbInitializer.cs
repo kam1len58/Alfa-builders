@@ -38,12 +38,10 @@ public static class DbInitializer
     {
         if (await context.News.AnyAsync() || !File.Exists(goldenFilePath))
             return;
-
         await using var stream = File.OpenRead(goldenFilePath);
         var golden = await JsonSerializer.DeserializeAsync<GoldenFileDto>(stream, JsonOptions);
         if (golden is null || golden.News.Count == 0)
             return;
-
         var items = golden.News.Select(g => new NewsItem
         {
             Id = g.Id,
@@ -52,14 +50,17 @@ public static class DbInitializer
             Source = "golden",
             PublishedAt = ParseDate(g.Date),
             Category = "golden",
-            Tags = g.MatchedRules
+            Tags = g.MatchedRules,
+            WhyImportant = g.WhyImportant ?? "",
+            Consequences = g.Consequences ?? "",
+            Actions = g.Actions ?? "",
+            Sources = g.Sources ?? "",
+            AlfaView = g.AlfaView ?? ""
         });
-
         await context.News.AddRangeAsync(items);
         await context.SaveChangesAsync();
     }
 
-    // Автоматически заполняем аналитику Альфа-Банка прямо из golden_news.json
     public static async Task SeedAlfaAnalyticsAsync(AppDbContext context, string goldenFilePath)
     {
         if (await context.AlfaAnalytics.AnyAsync() || !File.Exists(goldenFilePath))
