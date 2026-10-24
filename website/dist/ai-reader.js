@@ -24,7 +24,24 @@ window.NewsAI = (() => {
     news_text: 'Текст события',
     ranking: 'Оценка и правила',
     bank_materials: 'Материалы банка',
+    source_search: 'Поиск по корпусу источников',
   };
+
+  function evidence(claim) {
+    if (!claim.evidence?.length) return '';
+    const names = {
+      industry: 'Отрасль',
+      okved: 'ОКВЭД',
+      region: 'Регион',
+      workers: 'Численность',
+      'ved.hasVed': 'Признак ВЭД',
+      'ved.country': 'Страны в данных ФТС',
+      'bankProducts.hasLoans': 'Кредитные продукты',
+      'bankProducts.hasGuarantees': 'Гарантии',
+      'payments.largestRecipientShare': 'Доля крупнейшего получателя платежей',
+    };
+    return `<details class="claim-evidence"><summary>На чём основан вывод</summary>${claim.evidence.map((item) => `<div><span>${escapeHtml(names[item.feature] || (item.feature ? 'Признак компании' : 'Фрагмент источника'))}</span><blockquote>${escapeHtml(item.quote)}</blockquote>${refs([item.sourceId])}</div>`).join('')}</details>`;
+  }
 
   function refs(ids) {
     if (!current?.result) return '';
@@ -44,7 +61,7 @@ window.NewsAI = (() => {
     return items
       .map(
         (item) =>
-          `<article class="ai-claim"><p>${formatLines(item.text)}</p><span class="ai-condition">${escapeHtml(type === 'actions' ? 'Основание: ' : 'Условие: ')}${escapeHtml(type === 'actions' ? item.rationale : item.condition)}</span>${refs(item.sourceIds)}</article>`
+          `<article class="ai-claim"><p>${formatLines(item.text)}</p><span class="ai-condition">${escapeHtml(type === 'actions' ? 'Основание: ' : 'Условие: ')}${escapeHtml(type === 'actions' ? item.rationale : item.condition)}</span>${refs(item.sourceIds)}${evidence(item)}</article>`
       )
       .join('');
   }
@@ -59,16 +76,16 @@ window.NewsAI = (() => {
     const a = result.analysis;
     $('#ai-summary').hidden = false;
     $('#ai-summary').innerHTML =
-      `<div class="content-origin">Краткий разбор модели</div><p>${formatLines(a.summary.text)}</p>${refs(a.summary.sourceIds)}`;
+      `<div class="content-origin">Краткий разбор модели</div><p>${formatLines(a.summary.text)}</p>${refs(a.summary.sourceIds)}${evidence(a.summary)}`;
     $('#ai-impact').innerHTML =
-      `<section class="analysis-block"><div class="content-origin">Вывод модели · Контекст компании</div><h3>Как событие связано с бизнесом</h3><p>${formatLines(a.whyImportant.text)}</p>${refs(a.whyImportant.sourceIds)}</section>
+      `<section class="analysis-block"><div class="content-origin">Вывод модели · Контекст компании</div><h3>Как событие связано с бизнесом</h3><p>${formatLines(a.whyImportant.text)}</p>${refs(a.whyImportant.sourceIds)}${evidence(a.whyImportant)}</section>
       <section class="analysis-block"><h3>Возможные риски</h3>${claimList(a.risks, 'risks')}</section>
       <section class="analysis-block"><h3>Возможности</h3>${claimList(a.opportunities, 'opportunities')}</section>
       <section class="ai-missing"><h3>Для уточнения оценки</h3>${a.missingData.length ? `<ul>${a.missingData.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>Дополнительные пробелы модель не выделила. Это не означает полноту исходных данных.</p>'}</section>`;
     $('#ai-actions').innerHTML =
       `<section class="analysis-block"><div class="content-origin">Предложенные моделью действия</div><h3>Что можно сделать</h3>${claimList(a.actions, 'actions')}<span class="analysis-caption">Действия предложены с учётом доступных данных. Условия контрактов и обязательств требуют проверки.</span></section>`;
     $('#ai-bank').innerHTML =
-      `<h3>Позиция Альфа-Банка</h3><p>${formatLines(result.bankView.status === 'available' ? result.bankView.text : 'Подтверждённый материал банка с датой и первоисточником для этого события не найден.')}</p>${refs(result.bankView.sourceIds)}<span class="analysis-caption">${result.bankView.status === 'available' ? 'Текст из связанного материала банка.' : 'Выводы модели выше не являются позицией банка.'}</span>`;
+      `<h3>${result.bankView.historical ? 'Исторический контекст Альфа-Банка' : 'Позиция Альфа-Банка'}</h3><p>${formatLines(result.bankView.status === 'available' ? result.bankView.text : 'Подтверждённый материал банка с датой и первоисточником для этого события не найден.')}</p>${refs(result.bankView.sourceIds)}<span class="analysis-caption">${result.bankView.status === 'available' ? 'Короткие цитаты из материалов банка на указанную дату. Они не являются текущей оценкой новой новости.' : 'Выводы модели выше не являются позицией банка.'}</span>`;
     const stamp = new Intl.DateTimeFormat('ru-RU', {
       dateStyle: 'short',
       timeStyle: 'short',
@@ -133,6 +150,11 @@ window.NewsAI = (() => {
     AlfaApi.getAiStatus()
       .then((status) => {
         if (ownVersion !== version) return;
+        if (!AlfaApi.can('analyze')) {
+          $('#ai-state').textContent = 'Для вашей роли доступен только просмотр события.';
+          $('#ai-run').disabled = true;
+          return;
+        }
         $('#ai-model').textContent = status.configured ? status.model : 'Модель не настроена';
         if (!status.configured && !current.result) {
           $('#ai-state').textContent = 'На сервере не настроено подключение к модели.';

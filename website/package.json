@@ -1,13 +1,21 @@
 {
   "name": "alfa-business-insights",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Design-first corporate news intelligence prototype",
+  "description": "Персональная новостная аналитика с проверяемыми источниками",
   "scripts": {
     "dev": "node server.mjs",
-    "check": "node --check server.mjs && node --check server/llm-client.mjs && node --check server/insights.mjs && node --check dist/ui.js && node --check dist/api.js && node --check dist/ai-reader.js && node --check dist/news-tools.js && node --check dist/news-reader.js && node --check dist/feed-tools.js && node --check dist/feed-app.js"
+    "start": "node scripts/start.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test test/*.test.mjs"
   },
   "engines": {
-    "node": ">=20.6"
-  }
+    "node": ">=24.22.1"
+  },
+  "dependencies": {
+    "fast-xml-parser": "5.11.2",
+    "linkedom": "0.18.14",
+    "pdfjs-dist": "6.4.299"
+  },
+  "packageManager": "pnpm@11.25.0"
 }

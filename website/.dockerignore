@@ -1,0 +1,13 @@
+*
+!package.json
+!pnpm-lock.yaml
+!server.mjs
+!server/
+!server/*.mjs
+!dist/
+!dist/**
+!config/
+!config/sources.json
+!config/bank-excerpts.json
+!data/
+!data/quality-benchmark.json

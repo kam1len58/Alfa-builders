@@ -1,0 +1,66 @@
+[
+  {
+    "id": "alfa-rate-20260911",
+    "title": "Ключевая ставка ЦБ РФ: ставка без изменения на 14,0%, риторика стала жестче",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-11",
+    "url": "https://drive.google.com/uc?export=download&id=1shHG89LtMgHT1_uEebHmQSFZe_zbeq7-",
+    "documentUrl": "https://drive.google.com/file/d/1shHG89LtMgHT1_uEebHmQSFZe_zbeq7-/view",
+    "sha256": "92a96805f2b720f76bd0c52d2491044812b38401ab62d0f4a9157b4ca81c49bb",
+    "filename": "ALFA-Macro_Insights-Policy_Rate_11Sep.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "ЦБ РФ принял решение оставить ставку неизменной на уровне 14,0%"
+      },
+      {
+        "page": 1,
+        "text": "Мы ожидаем сохранения паузы на заседании 23 октября"
+      }
+    ],
+    "topics": ["KEY_RATE", "INFL_COSTS", "CREDIT"],
+    "historical": true,
+    "caveat": "Позиция на 11.09.2026; фраза о заседании 23 октября — исторический прогноз, а не описание фактического решения и не текущая позиция."
+  },
+  {
+    "id": "alfa-inflation-20260902",
+    "title": "Инфляция 25–31 августа: основные выводы",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-02",
+    "url": "https://drive.google.com/uc?export=download&id=19iW3Ph8_wO0HHQY7Ik4lTfC3jRc9gjWV",
+    "documentUrl": "https://drive.google.com/file/d/19iW3Ph8_wO0HHQY7Ik4lTfC3jRc9gjWV/view",
+    "sha256": "09d5537f6a52f5f8f2d9518ed9171e794382972ce38cbdc4bd3099b2db129d0c",
+    "filename": "Inflation_tracker_02.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Мы также полагаем, что наблюдающаяся ситуация на рынке топлива не позволяет рассчитывать на то, что новая волна роста цен уже исчерпана"
+      }
+    ],
+    "topics": ["INFL_COSTS", "FUEL"],
+    "historical": true,
+    "caveat": "Оценка опубликована 02.09.2026 по неделе 25–31.08.2026; не переносить автоматически на текущие цены или последующие события."
+  },
+  {
+    "id": "alfa-macro-20260907",
+    "title": "Макростатистика 7М26: данные по рынку труда не подтверждают охлаждения экономики",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-07",
+    "url": "https://drive.google.com/uc?export=download&id=1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64",
+    "documentUrl": "https://drive.google.com/file/d/1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64/view",
+    "sha256": "3c64c1e43f3b46a795f9581967f2dbc8efb0994cb77ab82e95da180830e9ff8c",
+    "filename": "ALFA-7M26.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Ключевым вопросом текущих месяцев является скорость охлаждения рынка труда, этот фактор выглядит основным аргументом в пользу возможного продолжения цикла снижения ставки."
+      }
+    ],
+    "topics": ["LABOR", "KEY_RATE", "PMI_ORDERS"],
+    "historical": true,
+    "caveat": "Оценка на 07.09.2026, относится к статистике за первые семь месяцев года; позднейшие изменения не учтены."
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "allowedHosts": [
+    "www.cbr.ru",
+    "cbr.ru",
+    "alfabank.ru",
+    "www.alfabank.ru",
+    "drive.google.com",
+    "drive.usercontent.google.com"
+  ],
+  "sources": [
+    {
+      "id": "cbr-press",
+      "title": "Банк России · Пресс-релизы",
+      "publisher": "Банк России",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.cbr.ru/rss/RssPress",
+      "maxItems": 14
+    },
+    {
+      "id": "case-rate-20260911",
+      "title": "Материалы кейса · Ключевая ставка",
+      "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-rate-20260911",
+      "url": "https://drive.google.com/uc?export=download&id=1shHG89LtMgHT1_uEebHmQSFZe_zbeq7-"
+    },
+    {
+      "id": "case-inflation-20260902",
+      "title": "Материалы кейса · Инфляция",
+      "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-inflation-20260902",
+      "url": "https://drive.google.com/uc?export=download&id=19iW3Ph8_wO0HHQY7Ik4lTfC3jRc9gjWV"
+    },
+    {
+      "id": "case-macro-20260907",
+      "title": "Материалы кейса · Макростатистика",
+      "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-macro-20260907",
+      "url": "https://drive.google.com/uc?export=download&id=1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64"
+    }
+  ]
+}

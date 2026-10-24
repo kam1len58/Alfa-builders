@@ -1,0 +1,244 @@
+{
+  "version": "synthetic-holdout-1",
+  "description": "Синтетические примеры вне пяти демо-новостей. Метки отражают экспертные ожидания релевантности; они не являются измерением фактологической точности модели.",
+  "profiles": {
+    "wholesale": {
+      "okvedCode": "46.3",
+      "industry": "Оптовая торговля",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "construction": {
+      "okvedCode": "41.2",
+      "industry": "Строительство",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "software": {
+      "okvedCode": "62.0",
+      "industry": "Разработка программ",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "transport": {
+      "okvedCode": "49.4",
+      "industry": "Грузовые перевозки",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "w-inflation",
+      "profile": "wholesale",
+      "title": "Инфляция замедлилась",
+      "text": "Потребительские цены выросли меньше ожиданий.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-rate",
+      "profile": "software",
+      "title": "Изменение ключевой ставки",
+      "text": "Банк России объявил решение по ставке.",
+      "relevant": false,
+      "critical": true
+    },
+    {
+      "id": "c-rate",
+      "profile": "construction",
+      "title": "Ключевая ставка",
+      "text": "Изменились денежно-кредитные условия.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "t-diesel",
+      "profile": "transport",
+      "title": "Поставки дизеля",
+      "text": "Экспорт дизельного топлива увеличился.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-diesel",
+      "profile": "wholesale",
+      "title": "Дизельное топливо",
+      "text": "На внутреннем рынке изменились цены на топливо.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-tender",
+      "profile": "construction",
+      "title": "Новые условия тендеров",
+      "text": "Уточнён порядок госзакупок по 44-ФЗ.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-tender",
+      "profile": "software",
+      "title": "Новые условия тендеров",
+      "text": "Уточнён порядок госзакупок по 44-ФЗ.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "w-customs",
+      "profile": "wholesale",
+      "title": "Изменились пошлины",
+      "text": "Новые таможенные условия для импорта.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "c-customs",
+      "profile": "construction",
+      "title": "Изменились пошлины",
+      "text": "Новые таможенные условия для импорта.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "t-sanctions",
+      "profile": "transport",
+      "title": "Санкционные ограничения",
+      "text": "Уточнены санкции для международных перевозок.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "s-sanctions",
+      "profile": "software",
+      "title": "Санкционные ограничения",
+      "text": "Уточнены санкции для международных перевозок.",
+      "relevant": false,
+      "critical": true
+    },
+    {
+      "id": "w-pmi",
+      "profile": "wholesale",
+      "title": "PMI: 49,8",
+      "text": "Показатель деловой активности изменился.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-pmi",
+      "profile": "software",
+      "title": "PMI: 49,8",
+      "text": "Показатель деловой активности изменился.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-wages",
+      "profile": "construction",
+      "title": "ФОТ вырос",
+      "text": "Повышение зарплат влияет на расходы.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-wages",
+      "profile": "software",
+      "title": "ФОТ вырос",
+      "text": "Повышение зарплат влияет на расходы.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-neutral",
+      "profile": "wholesale",
+      "title": "Новый музей",
+      "text": "В городе открылась выставка художников.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-neutral",
+      "profile": "construction",
+      "title": "Спортивные результаты",
+      "text": "Команда выиграла международный турнир.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "t-customs",
+      "profile": "transport",
+      "title": "Условия экспорта",
+      "text": "Обновлены таможенные требования к экспорту товаров.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-demand",
+      "profile": "wholesale",
+      "title": "Снижение спроса",
+      "text": "Заказы промышленным компаниям сократились.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "t-pmi",
+      "profile": "transport",
+      "title": "Производственный PMI",
+      "text": "Деловая активность в промышленности изменилась.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "s-security",
+      "profile": "software",
+      "title": "Цифровая безопасность",
+      "text": "Обнаружена уязвимость в программном обеспечении.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "c-fuel",
+      "profile": "construction",
+      "title": "Цены на бензин",
+      "text": "Топливные издержки изменились.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-mixed",
+      "profile": "wholesale",
+      "title": "PMI вырос ниже 50",
+      "text": "Новые заказы сократились, индекс вырос.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-neutral",
+      "profile": "software",
+      "title": "Наука и культура",
+      "text": "Объявлены результаты конкурса музейных проектов.",
+      "relevant": false,
+      "critical": false
+    }
+  ]
+}

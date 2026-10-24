@@ -1,6 +1,22 @@
 'use strict';
 
 window.AlfaApi = (() => {
+  let session;
+  let sessionRequest;
+  async function getSession(force = false) {
+    if (session && !force) return session;
+    if (sessionRequest && !force) return sessionRequest;
+    sessionRequest = fetch('/api/session', { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((value) => {
+        session = value;
+        return value;
+      })
+      .finally(() => {
+        sessionRequest = null;
+      });
+    return sessionRequest;
+  }
   const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
     day: 'numeric',
     month: 'long',
@@ -18,6 +34,11 @@ window.AlfaApi = (() => {
   };
 
   async function getJson(path, signal) {
+    const active = await getSession();
+    if (!active.authenticated) {
+      window.dispatchEvent(new Event('alfa-login-required'));
+      throw new Error('Войдите в сервис.');
+    }
     const timeout = AbortSignal.timeout(12000);
     const response = await fetch(path, {
       signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
@@ -25,6 +46,10 @@ window.AlfaApi = (() => {
       headers: { Accept: 'application/json' },
     });
     if (!response.ok) {
+      if (response.status === 401) {
+        session = null;
+        window.dispatchEvent(new Event('alfa-login-required'));
+      }
       throw new Error(
         response.status === 404
           ? 'Данные компании больше недоступны.'
@@ -35,10 +60,15 @@ window.AlfaApi = (() => {
   }
 
   async function postAi(path, body, signal) {
+    const active = await getSession();
     const timeout = AbortSignal.timeout(240000);
     const response = await fetch(path, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-CSRF-Token': active.csrfToken || '',
+      },
       cache: 'no-store',
       body: JSON.stringify(body),
       signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
@@ -111,6 +141,9 @@ window.AlfaApi = (() => {
       isoDate: hasDate ? new Date(timestamp).toISOString().slice(0, 10) : '',
       timestamp: hasDate ? timestamp : 0,
       order,
+      origin: news.origin || 'prepared',
+      contentHash: news.contentHash,
+      rankingOrigin: item.rankingOrigin || 'backend',
       assignments: {
         [companyId]: {
           score,
@@ -129,6 +162,59 @@ window.AlfaApi = (() => {
   }
 
   return {
+    getSession,
+    userId() {
+      return session?.user?.id || 'anonymous';
+    },
+    can(permission) {
+      return session?.permissions?.includes(permission) === true;
+    },
+    async login(username, password) {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      const value = await response.json();
+      if (!response.ok) throw new Error(value.message);
+      session = value;
+      return value;
+    },
+    async logout() {
+      await postAi('/api/logout', {});
+      session = null;
+      return getSession(true);
+    },
+    getSources(signal) {
+      return getJson('/api/sources', signal);
+    },
+    refreshSources() {
+      return postAi('/api/sources/refresh', {});
+    },
+    importSource(url, kind) {
+      return postAi('/api/sources/import', { url, kind });
+    },
+    getQuality() {
+      return getJson('/api/quality');
+    },
+    getAudit() {
+      return getJson('/api/audit');
+    },
+    evaluate() {
+      return postAi('/api/quality/evaluate', {});
+    },
+    review(body) {
+      return postAi('/api/quality/review', body);
+    },
+    getFeedback(companyId, newsId) {
+      return getJson('/api/feedback?' + new URLSearchParams({ companyId, newsId }));
+    },
+    getCompanyFeedback(companyId) {
+      return getJson('/api/feedback?' + new URLSearchParams({ companyId }));
+    },
+    saveFeedback(body) {
+      return postAi('/api/feedback', body);
+    },
     getAiStatus(signal) {
       return getJson('/api/ai/status', signal);
     },

@@ -4,14 +4,30 @@
 !/README.md
 !/THIRD_PARTY_NOTICES
 !/package.json
+!/pnpm-lock.yaml
+!/Dockerfile
+!/.dockerignore
+!/compose.yaml
+!/ARCHITECTURE.md
+!/QUALITY.md
 !/server.mjs
 !/server/
 !/dist/
 !/data/
+!/config/
+!/scripts/
+!/test/
 
 /data/*
 !/data/*.xlsx
 !/data/*.json
+/config/*
+!/config/sources.json
+!/config/bank-excerpts.json
+/scripts/*
+!/scripts/*.mjs
+/test/*
+!/test/*.test.mjs
 
 # Локальные настройки, инструменты агента и временные результаты.
 .openai/

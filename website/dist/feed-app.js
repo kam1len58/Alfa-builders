@@ -140,7 +140,7 @@ function toggleSaved(id) {
     state.saved.add(key);
     showToast('Событие сохранено');
   }
-  savePreference('feed-saved-v1', [...state.saved]);
+  savePreference('feed-saved-v2:' + AlfaApi.userId(), [...state.saved]);
   renderEvents();
   renderCounts();
   if (state.selected === id) renderDetailSave();
@@ -264,7 +264,7 @@ function renderEventCard(event, isFirst) {
   <label class="event-select"><input type="checkbox" data-select-event="${escapeHtml(event.id)}" aria-label="Выбрать для экспорта: ${escapeHtml(event.title)}" ${state.checked.has(event.id) ? 'checked' : ''} /></label>
   <div class="card-body">
     <div class="card-meta">
-      <span class="source-label">${escapeHtml(event.id)} · Из подборки</span
+      <span class="source-label">${escapeHtml(event.origin === 'collected' ? (event.sourceUrl ? new URL(event.sourceUrl).hostname : 'Из источника') : event.id + ' · Из подборки')}</span
       ><time datetime="${event.isoDate}">${event.date}</time>
     </div>
     <h3 class="card-title" id="title-${escapeHtml(event.id)}">
@@ -273,8 +273,8 @@ function renderEventCard(event, isFirst) {
     <p class="card-summary source-fragment">${escapeHtml(event.rawText)}</p>
     <div class="company-relevance">
       <div class="relevance-label">${icon('link')}Почему важно для компании</div>
-      <p class="${event.insight ? 'model-relevance' : ''}">${escapeHtml(event.insight?.analysis.whyImportant.text || assignment.explanation)}</p>
-      ${event.insight ? '<span class="analysis-caption">Персональный вывод модели</span>' : ''}
+      <p>${escapeHtml(event.insight?.analysis.whyImportant.text || assignment.explanation)}</p>
+      <div class="relevance-meta">${event.insight ? '<span>Вывод модели</span>' : ''}<button class="relevance-more" data-event="${escapeHtml(event.id)}" ${event.insight ? 'data-open-impact' : ''} aria-label="Подробнее: почему событие важно для компании — ${escapeHtml(event.title)}">Подробнее ${icon('arrow-right')}</button></div>
     </div>
     <div class="card-footer">
       <span class="impact neutral"><i></i>${assignment.placement === 'В фокусе' ? 'В фокусе' : 'Общий контекст'}</span
@@ -504,6 +504,10 @@ ${partnerTable(counterparties.top_suppliers, 'Крупнейшие получа�
 }
 
 function openSources() {
+  if (window.ServicePanels) {
+    ServicePanels.sources();
+    return;
+  }
   openUtility(
     'Данные и устройство ленты',
     `<div class="source-card">
@@ -588,6 +592,13 @@ async function initialize() {
   renderCompany();
   renderEvents();
   try {
+    const session = await AlfaApi.getSession();
+    document.querySelector('[data-action="quality"]').hidden = !AlfaApi.can('quality');
+    const saved = loadPreference(
+      'feed-saved-v2:' + AlfaApi.userId(),
+      session.user?.id === 'local-owner' ? storedSaved : []
+    );
+    state.saved = new Set(Array.isArray(saved) ? saved : []);
     const profiles = await AlfaApi.getCompanies(currentRequest.signal);
     if (version !== requestVersion) return;
     if (!profiles.length) throw new Error('Нет доступных компаний.');
@@ -626,6 +637,7 @@ async function selectCompany(id, initial = false) {
       AlfaApi.getCompany(id, signal),
       AlfaApi.getFeed(id, signal),
     ]);
+    await NewsReader.syncFeedback(id);
     if (version !== requestVersion) return;
     company.profile = profile;
     company.profileReady = true;
@@ -661,6 +673,10 @@ function setDensity(density) {
 }
 
 function openUserProfile() {
+  if (window.ServicePanels) {
+    ServicePanels.profile();
+    return;
+  }
   openUtility(
     'Профиль пользователя',
     '<div class="profile-name">Финансовый директор</div><p>Роль интерфейса для демонстрации обзора. Пользовательские роли в переданных файлах не указаны.</p>'
@@ -676,8 +692,10 @@ function handlePageClick(event) {
   if (button) {
     const data = button.dataset;
     if (data.save) toggleSaved(data.save);
-    else if (data.event) openEvent(data.event);
-    else if (data.view) setView(data.view);
+    else if (data.event) {
+      openEvent(data.event);
+      if (button.hasAttribute('data-open-impact')) NewsReader.selectTab('impact', true);
+    } else if (data.view) setView(data.view);
     else if (data.company) selectCompany(data.company);
     else if (data.filter) selectFilter(data.filter);
     else if (data.density) setDensity(data.density);
@@ -685,6 +703,7 @@ function handlePageClick(event) {
     else if (data.action === 'settings') openSettings();
     else if (data.action === 'company') openCompany();
     else if (data.action === 'profile') openUserProfile();
+    else if (data.action === 'quality') ServicePanels.quality();
     return;
   }
 
@@ -795,7 +814,7 @@ $('#utility-body').addEventListener('click', (event) => {
     }
     for (const key of [...state.saved])
       if (key.startsWith(state.company.id + ':')) state.saved.delete(key);
-    savePreference('feed-saved-v1', [...state.saved]);
+    savePreference('feed-saved-v2:' + AlfaApi.userId(), [...state.saved]);
     renderCounts();
     renderEvents();
     showToast('Подборка компании очищена');

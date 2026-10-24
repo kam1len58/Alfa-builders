@@ -5,9 +5,8 @@ window.NewsReader = (() => {
   let chatRequest;
   let chatVersion = 0;
   const questionHistory = new Map();
-  const stored = loadPreference('feedback-v1', {});
-  const feedback = stored && typeof stored === 'object' && !Array.isArray(stored) ? stored : {};
-  const key = () => JSON.stringify([context.company.id, context.event.id]);
+  const feedback = {};
+  const key = () => JSON.stringify([AlfaApi.userId(), context.company.id, context.event.id]);
   const feedbackKey = () => `${context.company.id}:${context.event.id}`;
 
   function sourcePanel(event, company) {
@@ -28,6 +27,10 @@ window.NewsReader = (() => {
     ++chatVersion;
     chatRequest?.abort();
     context = { event, company, messages: [], busy: false };
+    const localFeedback = loadPreference('feedback-v2:' + AlfaApi.userId(), {});
+    Object.keys(feedback).forEach((k) => delete feedback[k]);
+    if (localFeedback && typeof localFeedback === 'object' && !Array.isArray(localFeedback))
+      Object.assign(feedback, localFeedback);
     const a = event.assignments[company.id];
     const tabs = [
       ['event', 'Событие'],
@@ -70,7 +73,7 @@ window.NewsReader = (() => {
       </div>
       <div id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" tabindex="0" hidden>${sourcePanel(event, company)}<div id="ai-sources"></div></div>
       <details class="reader-chat" id="reader-chat"><summary>${icon('message')}<span>Уточнить по событию<small>Диалог с аналитической моделью</small></span>${icon('chevron')}</summary>
-        <div class="chat-content"><p class="chat-disclosure">Ответ учитывает событие, профиль компании и предыдущие сообщения. Для первого вопроса сервис подготовит и проверит разбор. Внешний поиск пока не подключён.</p>
+        <div class="chat-content"><p class="chat-disclosure">Ответ учитывает событие, профиль компании, материалы банка и контекст разговора. Сервис может уточнить сведения в собранном корпусе официальных публикаций. Первый вопрос запускает проверку разбора.</p>
         <div class="chat-chips"><button data-chat-prompt="Почему эта новость показана компании?">Почему показано?</button><button data-chat-prompt="Что означает балл?">Как читать балл?</button><button data-chat-prompt="Каких данных не хватает?">Чего не хватает?</button></div>
         <div class="chat-log" id="chat-log" role="log" aria-label="Диалог по событию" aria-live="polite" aria-relevant="additions"></div>
         <form id="chat-form"><label class="sr-only" for="chat-input">Вопрос по событию</label><div class="chat-composer"><textarea id="chat-input" rows="2" maxlength="500" placeholder="Вопрос по этой новости…" required></textarea><button class="icon-button" type="submit" aria-label="Отправить вопрос">${icon('arrow-right')}</button></div><div class="chat-foot"><span>История хранится в этом браузере</span><button type="button" id="clear-chat">Очистить диалог</button></div></form></div>
@@ -87,7 +90,11 @@ window.NewsReader = (() => {
       <form id="feedback-form" hidden><label for="feedback-comment">Что стоит уточнить? <span>Необязательно</span></label><textarea id="feedback-comment" maxlength="1000" rows="3" placeholder="Например, новость не относится к нашей деятельности"></textarea><div class="feedback-footer"><button class="secondary-button" type="submit">Сохранить комментарий</button><button class="inline-link" type="button" id="remove-feedback">Убрать оценку</button></div></form>
       <p id="feedback-status" class="analysis-caption" role="status">Оценка сохраняется в этом браузере и пока не отправляется на сервер.</p></section></div>`;
     if (!questionHistory.has(key())) {
-      const saved = loadPreference('chat-v2:' + key(), []);
+      const legacy =
+        AlfaApi.userId() === 'local-owner'
+          ? loadPreference('chat-v2:' + JSON.stringify([company.id, event.id]), [])
+          : [];
+      const saved = loadPreference('chat-v3:' + key(), legacy);
       questionHistory.set(key(), Array.isArray(saved) ? saved : []);
     }
     context.messages = questionHistory
@@ -108,8 +115,22 @@ window.NewsReader = (() => {
           : [],
       }));
     renderChat();
+    $('#reader-chat').hidden = !AlfaApi.can('analyze');
     renderFeedback();
     NewsAI.mount(event, company);
+    const opened = context;
+    AlfaApi.getFeedback(company.id, event.id)
+      .then((result) => {
+        if (context !== opened) return;
+        if (result.feedback) feedback[feedbackKey()] = result.feedback;
+        else delete feedback[feedbackKey()];
+        renderFeedback();
+      })
+      .catch(() => {
+        if (context === opened)
+          $('#feedback-status').textContent =
+            'Серверные оценки недоступны. Локальная копия может быть устаревшей.';
+      });
   }
 
   function selectTab(id, focus = false) {
@@ -144,7 +165,7 @@ window.NewsReader = (() => {
   function persistChat() {
     const messages = context.messages.filter((m) => !m.pending && !m.error).slice(-10);
     questionHistory.set(key(), messages);
-    if (!savePreference('chat-v2:' + key(), messages))
+    if (!savePreference('chat-v3:' + key(), messages))
       showToast('История доступна до закрытия страницы: браузер запретил сохранение.');
   }
 
@@ -212,6 +233,7 @@ window.NewsReader = (() => {
     const value = feedback[feedbackKey()];
     const valid = value && NewsTools.feedbackLabels[value.rating];
     document.querySelectorAll('[data-feedback]').forEach((button) => {
+      button.disabled = !AlfaApi.can('feedback');
       button.setAttribute(
         'aria-pressed',
         String(Boolean(valid && button.dataset.feedback === value.rating))
@@ -219,23 +241,41 @@ window.NewsReader = (() => {
     });
     $('#feedback-form').hidden = !valid;
     $('#feedback-comment').value = valid ? value.comment || '' : '';
-    $('#feedback-status').textContent = valid
-      ? 'Есть локальная оценка. На сервер не отправлена; доступна в экспорте.'
-      : 'Оценка сохраняется в этом браузере и пока не отправляется на сервер.';
+    $('#feedback-status').textContent = !AlfaApi.can('feedback')
+      ? 'Для вашей роли доступен только просмотр.'
+      : valid
+        ? 'Оценка загружена. Она учитывается в мониторинге качества.'
+        : 'Оценка и комментарий сохраняются на сервере для проверки качества. Не указывайте конфиденциальные сведения.';
   }
 
-  function storeFeedback(rating, comment) {
+  async function storeFeedback(rating, comment) {
     if (!context) return;
+    const active = context;
     feedback[feedbackKey()] = {
       rating,
       comment: comment.slice(0, 1000),
       updatedAt: new Date().toISOString(),
     };
-    const persisted = savePreference('feedback-v1', feedback);
+    const persisted = savePreference('feedback-v2:' + AlfaApi.userId(), feedback);
     renderFeedback();
     $('#feedback-status').textContent = persisted
-      ? 'Сохранено в этом браузере. На сервер не отправлено; доступно в экспорте.'
-      : 'Оценка сохранена только до закрытия страницы: браузер запретил запись.';
+      ? 'Локальная копия сохранена. Отправляем оценку на сервер…'
+      : 'Отправляем оценку на сервер…';
+    try {
+      await AlfaApi.saveFeedback({
+        companyId: active.company.id,
+        newsId: active.event.id,
+        rating,
+        comment: comment.slice(0, 1000),
+        analysisId: active.event.insight?.id || null,
+      });
+      if (context === active)
+        $('#feedback-status').textContent =
+          'Оценка сохранена на сервере и учтена в мониторинге качества.';
+    } catch (error) {
+      if (context === active)
+        $('#feedback-status').textContent = 'На сервер не сохранено: ' + error.message;
+    }
   }
 
   $('#detail-body').addEventListener('click', (event) => {
@@ -253,17 +293,26 @@ window.NewsReader = (() => {
     if (button.dataset.feedback)
       storeFeedback(button.dataset.feedback, $('#feedback-comment').value);
     if (button.id === 'remove-feedback') {
+      const active = context;
       delete feedback[feedbackKey()];
-      const persisted = savePreference('feedback-v1', feedback);
+      const persisted = savePreference('feedback-v2:' + AlfaApi.userId(), feedback);
       renderFeedback();
       $('#feedback-status').textContent = persisted
-        ? 'Оценка удалена из этого браузера.'
+        ? 'Удаляем оценку с сервера…'
         : 'Не удалось обновить хранилище браузера. После перезагрузки прежняя оценка может появиться снова.';
+      AlfaApi.saveFeedback({ companyId: active.company.id, newsId: active.event.id, rating: null })
+        .then(() => {
+          if (context === active) $('#feedback-status').textContent = 'Оценка удалена с сервера.';
+        })
+        .catch((error) => {
+          if (context === active)
+            $('#feedback-status').textContent = 'Серверная оценка не удалена: ' + error.message;
+        });
     }
     if (button.id === 'clear-chat') {
       context.messages = [];
       questionHistory.set(key(), []);
-      const persisted = savePreference('chat-v2:' + key(), []);
+      const persisted = savePreference('chat-v3:' + key(), []);
       renderChat();
       if (!persisted) showToast('Не удалось очистить историю в хранилище браузера.');
     }
@@ -303,5 +352,17 @@ window.NewsReader = (() => {
     chatRequest?.abort();
   });
 
-  return { open, selectTab, feedback };
+  async function syncFeedback(companyId) {
+    try {
+      const result = await AlfaApi.getCompanyFeedback(companyId);
+      Object.keys(feedback)
+        .filter((key) => key.startsWith(companyId + ':'))
+        .forEach((key) => delete feedback[key]);
+      for (const row of result.feedback) feedback[row.companyId + ':' + row.newsId] = row;
+      savePreference('feedback-v2:' + AlfaApi.userId(), feedback);
+    } catch {
+      /* Лента остаётся доступной; статус оценки уточняется в карточке. */
+    }
+  }
+  return { open, selectTab, feedback, syncFeedback };
 })();
