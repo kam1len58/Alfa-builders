@@ -83,7 +83,7 @@ def main():
                 "news_id": news["id"], "company_id": company["synthetic_u"], "scenario": company["demo_scenario"],
                 "score": score, "bucket": bucket(score),
                 "rules": [r["id"] for r in fired],
-                "why": [r["prompt_hint"] for r in fired],
+                "why": [r["client_text"] for r in fired],
                 "products": sorted({p for r in fired for p in r["bank_products"]}),
             })
 
