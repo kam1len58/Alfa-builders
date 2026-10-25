@@ -1,10 +1,11 @@
+import { companyContext } from './company-context.mjs';
 import { createHash, randomUUID } from 'node:crypto';
 import { readFile, writeFile, mkdir, rename, appendFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { AiError } from './llm-client.mjs';
 import { inspectEvidence } from './evidence.mjs';
 
-const VERSION = 3;
+const VERSION = 5;
 const CACHE_TTL = 6 * 60 * 60 * 1000;
 const tools = ['company_profile', 'news_text', 'ranking', 'bank_materials', 'source_search'];
 const coreRules = `Ты аналитик персональной новостной ленты для руководителя компании. Отвечай по-русски, кратко и предметно.
@@ -13,8 +14,11 @@ const coreRules = `Ты аналитик персональной новостн
 Факты из переданной новости не являются независимо проверенными. Выводы о будущем — условные гипотезы, не факты и не вероятности.
 Доли платежей не равны долям закупок. Не называй получателей поставщиками без подтверждения. Наличие кредита не определяет размер долга; наличие гарантий не подтверждает госзаказ.
 Доля платежей сама по себе НЕ доказывает зависимость закупок/поставок и НЕ позволяет оценить критичность сбоя. Сначала предложи установить назначение платежей и роль получателя. Не используй слово «критичный» для неподтверждённой зависимости.
+Учитывай отрасли крупнейших получателей/отправителей платежей и наблюдаемый состав группы, когда это связано с событием. Связь по GROUP_ID не доказывает общих обязательств. datasetPosition — положение в выборке, НЕ доля реального рынка. Сумма выручки участников группы не консолидирована. Не добавляй эти признаки в разбор без связи с темой.
+scope=reviewed_summary — краткое редакционное изложение, сверенное с источниками; это не дословный текст издателя. originalExcerpt — отдельная короткая оригинальная цитата и границы её подтверждения. Для rss_excerpt известен только анонс. При discrepancies явно отметь необходимость сверить различия и не выбирай истинную цифру без основания.
 ОКВЭД «пищевые продукты, включая рыбу» не подтверждает специализацию на рыбе, холодовую цепь или состав импорта. Влияние фрахта, топлива и хранения допустимо лишь как гипотеза с явно указанным условием. В whyImportant также отделяй признаки профиля от гипотезы влияния.
 Единицы выручки в профиле неизвестны. Не называй выручку рублями/миллиардами. Не выводи географию конкретной сделки только из списка стран ВЭД.
+ved.country — страны из данных ФТС, а НЕ страны платежей. Запрещено утверждать «расчёты с/по [страна]», «платежи идут в [страна]» на этом основании. Пиши «в данных ФТС указаны страны ...; география платежей неизвестна».
 Балл ranking — релевантность, не вероятность риска. Не пересчитывай его. Не превращай предложенные банковские продукты в обязательные действия.
 Официальную позицию Альфа-Банка можно цитировать только из источника kind=bank с verified=true. Если такого источника нет, сообщи об отсутствии позиции; не приписывай банку выводы модели.
 Материалы банка с historical=true содержат позицию на указанную дату. Обязательно называй дату, не превращай исторический прогноз в состоявшееся событие и не выдавай старую оценку за актуальную. Цитаты подтверждены происхождением документа, но не независимой проверкой экономических фактов.
@@ -90,26 +94,6 @@ function assertInput(companyId, newsId) {
     throw new AiError('INVALID_INPUT', 'Не указаны компания или событие.', 400);
 }
 
-function companyContext(p) {
-  // Передаём агрегаты, без ID контрагентов, строк платежей и выручки с неизвестной единицей.
-  return {
-    id: p.syntheticU,
-    industry: p.industry,
-    okved: p.okvedCode,
-    region: p.region,
-    workers: p.workers,
-    bankProducts: p.bankProducts,
-    ved: p.ved,
-    group: { size: p.affiliation?.groupSize },
-    payments: {
-      recipientsCount: p.counterparties?.suppliersCount,
-      sendersCount: p.counterparties?.customersCount,
-      largestRecipientShare: p.counterparties?.topSupplierShare,
-      note: 'Это доли доступных платежей. Назначение и период платежей неизвестны.',
-    },
-  };
-}
-
 export function validateAnalysis(value, sourceIds) {
   const allowed = new Set(sourceIds);
   const claim = (item, extra) =>
@@ -119,6 +103,15 @@ export function validateAnalysis(value, sourceIds) {
     item.sourceIds.length > 0 &&
     item.sourceIds.length <= 8 &&
     item.sourceIds.every((id) => allowed.has(id)) &&
+    (item.evidence === undefined ||
+      (Array.isArray(item.evidence) &&
+        item.evidence.every(
+          (e) =>
+            e &&
+            typeof e === 'object' &&
+            typeof e.sourceId === 'string' &&
+            typeof e.quote === 'string'
+        ))) &&
     (!extra || text(item[extra], 700));
   if (!value || !claim(value.summary) || !claim(value.whyImportant)) return false;
   if (
@@ -224,23 +217,67 @@ export function createInsightsService({
     const { company, item } = ctx;
     const news = item.news;
     return [
-      {
-        id: 'news:' + news.id,
-        kind: 'news',
-        title: 'Текст новости ' + news.id,
-        url: safeUrl(news.source),
-        date: news.publishedAt,
-        contentHash: news.contentHash,
-        data: {
-          title: news.title,
-          content: news.content,
-          source: news.source,
-          publishedAt: news.publishedAt,
-          quotes: [news.title, ...(news.content.match(/[^.!?]+[.!?](?:\s|$)/g) || [news.content])]
-            .slice(0, 12)
-            .map((q) => q.trim().slice(0, 250)),
-        },
-      },
+      ...(
+        news.sourceRecords || [
+          {
+            id: news.id,
+            title: news.title,
+            text: news.content,
+            url: news.source,
+            date: news.publishedAt,
+            contentHash: news.contentHash,
+            scope: news.contentScope,
+          },
+        ]
+      )
+        .slice(0, 4)
+        .flatMap((publication) => [
+          {
+            id: 'news:' + publication.id,
+            kind: 'news',
+            title: publication.title,
+            url: safeUrl(publication.url),
+            date: publication.date,
+            contentHash: publication.contentHash,
+            data: {
+              title: publication.title,
+              content: publication.text.slice(0, 12000),
+              publishedAt: publication.date,
+              scope: publication.scope,
+              scopeNote:
+                publication.scope === 'rss_excerpt'
+                  ? 'Только анонс RSS; полная статья не загружена.'
+                  : '',
+              originalExcerpt: publication.originalExcerpt,
+              sourceLinks: publication.links,
+              discrepancies: news.discrepancies || [],
+              quotes: [
+                publication.title,
+                ...(publication.text.match(/[^.!?]+[.!?](?:\s|$)/g) || [publication.text]),
+              ]
+                .slice(0, 12)
+                .map((q) => q.trim().slice(0, 250)),
+            },
+          },
+          ...(publication.originalExcerpt
+            ? [
+                {
+                  id: 'news:' + publication.id + ':excerpt',
+                  kind: 'news',
+                  title: publication.originalExcerpt.title,
+                  url: safeUrl(publication.originalExcerpt.url),
+                  date: publication.date,
+                  data: {
+                    title: publication.originalExcerpt.title,
+                    content: publication.originalExcerpt.quote,
+                    scope: 'original_excerpt',
+                    scopeNote: publication.originalExcerpt.confirms,
+                    quotes: [publication.originalExcerpt.quote],
+                  },
+                },
+              ]
+            : []),
+        ]),
       {
         id: 'company:' + company.syntheticU,
         kind: 'company',
@@ -380,7 +417,7 @@ export function createInsightsService({
       },
       news_text: async () => {
         selected.news = dataService
-          ? await dataService.news(ctx.item.news.id)
+          ? await dataService.news(ctx.item.news.id, ctx.company.syntheticU)
           : await backend('/api/News/' + encodeURIComponent(ctx.item.news.id));
       },
       ranking: async () => {
@@ -514,6 +551,8 @@ export function createInsightsService({
         );
       }
       if (!evidence.valid && evidence.issues.length) review.issues = evidence.issues;
+      if (!review || typeof review !== 'object')
+        review = { approved: false, issues: ['Проверяющая модель вернула некорректный формат.'] };
       if (
         structurallyValid &&
         evidence.valid &&
@@ -537,7 +576,7 @@ export function createInsightsService({
                   .map(
                     (source) =>
                       'Позиция на ' +
-                      source.date +
+                      (source.date || 'неизвестную дату публикации') +
                       ': ' +
                       source.data.text +
                       (source.caveat ? '\n' + source.caveat : '')
@@ -870,8 +909,47 @@ export function createInsightsService({
     }
   }
 
+  async function savedTrace(id) {
+    if (!/^[a-f0-9]{64}$/.test(id)) return null;
+    let hit = cache.get(id);
+    if (!hit && cacheDirectory) {
+      try {
+        hit = JSON.parse(await readFile(join(cacheDirectory, id + '.json'), 'utf8'));
+      } catch {
+        return null;
+      }
+    }
+    return hit?.id === id ? hit : null;
+  }
+  async function cachedForContext(ctx) {
+    const bank = await materialsFor(ctx.item.news.id, ctx.item.news),
+      sources = makeSources(ctx, bank);
+    const id = createHash('sha256')
+      .update(
+        JSON.stringify({
+          version: VERSION,
+          model: llm.model,
+          reviewer: reviewer.model,
+          sources,
+          corpus: collector?.fingerprint(),
+        })
+      )
+      .digest('hex');
+    const hit = await savedTrace(id);
+    if (!hit || hit.version !== VERSION || Date.now() - Date.parse(hit.generatedAt) >= CACHE_TTL)
+      return null;
+    const restored = restoreSources(hit.sources, sources);
+    return validateAnalysis(
+      hit.analysis,
+      restored.map((s) => s.id)
+    ) && inspectEvidence(hit.analysis, restored).valid
+      ? { ...hit, cached: true }
+      : null;
+  }
   return {
     analysisFor,
+    cachedForContext,
+    savedTrace,
     chat,
     status: () => ({ configured: llm.configured, model: llm.model, onDemand: true }),
   };

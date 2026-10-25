@@ -88,8 +88,8 @@ function create(queue, { changed = false } = {}) {
     configured: true,
     model: 'synthetic-test-model',
     complete: async (system, data) => {
+      assert.ok(queue.length, 'Лишний вызов модели');
       const result = queue.shift();
-      assert.ok(result, 'Лишний вызов модели');
       return {
         result: structuredClone(result),
         usage: { inputTokens: 1, outputTokens: 1 },
@@ -127,6 +127,14 @@ test('План, инструменты, источники банка, точн�
   assert.equal((await service.analysisFor('C1', 'UNSEEN')).cached, true);
   assert.equal(events.filter((e) => !e.cached).length, 1);
   assert.equal(events.at(-1).cached, true);
+});
+test('Пустой ответ проверяющей модели и null в цитатах запускают исправление без TypeError', async () => {
+  const first = create([plan, good, null, good, { approved: true, issues: [] }]);
+  assert.equal((await first.service.analysisFor('C1', 'UNSEEN')).quality.repaired, true);
+  const malformed = structuredClone(good);
+  malformed.whyImportant.evidence = [null];
+  const second = create([plan, malformed, good, { approved: true, issues: [] }]);
+  assert.equal((await second.service.analysisFor('C1', 'UNSEEN')).quality.repaired, true);
 });
 test('Выдуманная цитата приводит к повторному поиску и исправлению, а не к выдаче ошибки как факта', async () => {
   const bad = structuredClone(good);

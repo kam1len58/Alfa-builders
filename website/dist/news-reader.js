@@ -13,14 +13,39 @@ window.NewsReader = (() => {
     return `<div class="source-card"><div class="source-card-title">01 / Новость</div>
       <p>${escapeHtml(event.source)} · ${escapeHtml(event.id)} · ${escapeHtml(event.date)}</p>
       ${event.sourceUrl ? `<a class="inline-link" href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noopener noreferrer">Открыть публикацию ${icon('arrow-up-right')}</a>` : '<p class="data-gap">Ссылка на первоисточник не передана.</p>'}
-      <span class="analysis-caption">Текст получен от сервиса. Изображение в карточке иллюстративное.</span></div>
+      <span class="analysis-caption">${escapeHtml(scopeLabel(event))} Изображение в карточке иллюстративное.</span>${publications(event)}</div>
       <div class="source-card"><div class="source-card-title">02 / Профиль компании</div>
       <p>${escapeHtml(company.id)} · ${escapeHtml(company.profile.industry)} · ОКВЭД ${escapeHtml(company.profile.okved_code)}</p>
       <button class="inline-link" data-reader-tab="impact">Посмотреть признаки отбора ${icon('arrow-right')}</button></div>
       <div class="source-card"><div class="source-card-title">03 / Оценка и интерпретация</div>
-      <p>Балл, раздел ленты, причины отбора и продукты переданы бэкендом. Сайт не пересчитывает оценку.</p>
+      <p>Оценка рассчитана серверными правилами по профилю компании. Перепечатки одного события объединены без сложения баллов.</p>
+      <button class="inline-link" data-reader-trace>Посмотреть этапы проверки ${icon('arrow-right')}</button>
       <span class="analysis-caption">Выводы модели и этапы их проверки отображаются ниже после подготовки разбора. Банковская позиция используется только с подтверждённым источником.</span></div>
       <p class="source-note">Релевантность не означает вероятность риска. Сведения из публикации и объяснения сервиса не прошли независимую проверку.</p>`;
+  }
+  function scopeLabel(event) {
+    return event.contentScope === 'reviewed_summary'
+      ? 'Краткое изложение, сверенное с публикациями; не дословный текст издателя.'
+      : event.contentScope === 'rss_excerpt'
+        ? 'Только анонс RSS. Полный текст статьи не загружен.'
+        : 'Текст публикации, извлечённый сервисом.';
+  }
+  function publications(event) {
+    return (event.publications || [])
+      .map(
+        (p) => `<details class="publication-details"><summary>${escapeHtml(p.title)}</summary>
+      <p class="analysis-caption">${escapeHtml(p.date || 'Дата не указана')} · ${escapeHtml(p.scope === 'reviewed_summary' ? 'Сверенное изложение' : p.scope === 'rss_excerpt' ? 'Анонс RSS' : 'Текст источника')}</p>
+      ${p.url ? `<a class="inline-link" data-source-open href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer">Открыть публикацию ${icon('arrow-up-right')}</a>` : ''}
+      ${(p.links || [])
+        .filter((s) => s.url !== p.url)
+        .map(
+          (s) =>
+            `<p><a class="inline-link" data-source-open href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title)}</a>${s.liveHttps === false ? '<span class="analysis-caption"> · Прямая загрузка недоступна</span>' : ''}</p>`
+        )
+        .join('')}
+      ${p.originalExcerpt ? `<blockquote>${escapeHtml(p.originalExcerpt.quote)}</blockquote><p class="analysis-caption">Оригинальная цитата · ${escapeHtml(p.originalExcerpt.publisher)}<br>${escapeHtml(p.originalExcerpt.confirms)}</p><a class="inline-link" data-source-open href="${escapeHtml(p.originalExcerpt.url)}" target="_blank" rel="noopener noreferrer">Источник цитаты</a>` : ''}</details>`
+      )
+      .join('');
   }
 
   function open(event, company) {
@@ -46,7 +71,8 @@ window.NewsReader = (() => {
       <section class="ai-entry" aria-label="Персональный разбор"><div class="ai-entry-heading"><span>Разбор для вашей компании</span><button class="secondary-button" id="ai-run">Подготовить разбор</button></div><span class="ai-model" id="ai-model">Модель организаторов</span><p id="ai-state" role="status">Риски, возможности и действия с проверкой оснований. Запускается по вашему запросу.</p></section>
       <div class="detail-tabbar" role="tablist" aria-label="Содержание разбора">${tabs.map(([id, name], i) => `<button class="detail-tab ${i === 0 ? 'active' : ''}" id="tab-${id}" data-detail-tab="${id}" role="tab" aria-selected="${i === 0}" aria-controls="panel-${id}" tabindex="${i === 0 ? 0 : -1}">${name}</button>`).join('')}</div>
       <div id="panel-event" role="tabpanel" aria-labelledby="tab-event" tabindex="0">
-        <section class="analysis-block"><div class="content-origin">Материал новости</div><h3>Что произошло</h3><p>${formatLines(event.rawText)}</p><span class="analysis-caption">${escapeHtml(event.source)} · ${escapeHtml(event.date)}</span></section>
+        <section class="analysis-block"><div class="content-origin">${escapeHtml(scopeLabel(event))}</div><h3>Что произошло</h3><p>${formatLines(event.rawText)}</p><span class="analysis-caption">${escapeHtml(event.date)} · Публикаций: ${event.publications.length || 1}</span>
+        ${[...(event.sourceWarnings || []), ...(event.discrepancies || []).map((d) => d.text)].map((w) => `<p class="source-caveat">${escapeHtml(w)}</p>`).join('')}</section>
         <section class="reader-summary"><div><span>Приоритет</span><strong>${escapeHtml(a.placement)}</strong></div><div><span>Релевантность</span><strong>${formatScore(a.score)} <small>из 1</small></strong></div></section>
         <section class="analysis-block"><div class="content-origin">Объяснение сервиса</div><h3>Почему важно для компании</h3><p>${formatLines(a.explanation)}</p><button class="inline-link reader-next" data-reader-tab="impact">Посмотреть основания ${icon('arrow-right')}</button></section>
         <section class="analysis-block ai-summary" id="ai-summary" hidden></section><div class="reader-actions"><button class="secondary-button" data-reader-compare>${icon('compare')} Сравнить компании</button><button class="secondary-button" data-reader-export>${icon('download')} Экспорт события</button></div>
@@ -54,7 +80,7 @@ window.NewsReader = (() => {
       <div id="panel-impact" role="tabpanel" aria-labelledby="tab-impact" tabindex="0" hidden>
         <div id="ai-impact"><section class="missing-analysis"><span class="content-origin">Риски и возможности</span><h3>Подготовьте персональный разбор</h3><p>Модель сопоставит событие с профилем компании, укажет возможные последствия, условия и недостающие данные.</p></section></div>
 <details class="ranking-details"><summary>Правила отбора и признаки профиля</summary>
-        <section class="analysis-block"><div class="content-origin">Персонализация сервиса</div><h3>Основания отбора</h3><p>${formatLines(a.explanation)}</p></section>
+        <section class="analysis-block"><div class="content-origin">Персонализация сервиса</div><h3>Основания отбора</h3><p>${formatLines(a.explanation)}</p><p class="analysis-caption">${escapeHtml(company.profile.affiliation.group_context?.note || 'Группа указана по идентификатору из данных.')} Положение в выборке ОКВЭД не означает долю реального рынка.</p></section>
         <div class="evidence-list">${
           NewsTools.evidence(company.profile, a.rules)
             .map(
@@ -280,8 +306,11 @@ window.NewsReader = (() => {
 
   $('#detail-body').addEventListener('click', (event) => {
     if (!context) return;
+    if (event.target.closest('a[href^="http"]'))
+      AlfaApi.engage(context.company.id, context.event.id, 'source_open');
     const button = event.target.closest('button');
     if (!button) return;
+    if (button.hasAttribute('data-reader-trace')) showTrace();
     if (button.dataset.detailTab) selectTab(button.dataset.detailTab);
     if (button.dataset.readerTab) {
       selectTab(button.dataset.readerTab);
@@ -319,6 +348,31 @@ window.NewsReader = (() => {
     if (button.hasAttribute('data-reader-compare')) openComparison(context.event.id);
     if (button.hasAttribute('data-reader-export')) openExport([context.event]);
   });
+  async function showTrace() {
+    const active = context;
+    openUtility('Как подготовлена карточка', '<p role="status">Загружаем этапы проверки…</p>');
+    try {
+      const trace = await AlfaApi.getTrace(active.event.insight?.id || active.event.traceId);
+      if (context !== active || !$('#utility-dialog').open) return;
+      const names = {
+        company_profile: 'Профиль и связи компании',
+        event_grouping: 'Объединение публикаций',
+        ranking: 'Оценка релевантности',
+        news_text: 'Тексты источников',
+        bank_materials: 'Материалы Альфа-Банка',
+        source_search: 'Поиск оснований',
+        plan: 'План проверки',
+        analysis: 'Подготовка выводов',
+        review: 'Проверка содержания',
+        repair: 'Исправление оснований',
+        tool: 'Обращение к данным',
+      };
+      $('#utility-body').innerHTML =
+        `<p class="analysis-caption">${trace.status === 'ranking_only' ? 'Серверный отбор. Разбор модели ещё не подготовлен.' : 'Разбор с проверкой источников и содержания.'}</p><ol class="trace-steps">${(trace.steps || []).map((s) => `<li>${escapeHtml(names[s.tool] || names[s.stage] || 'Проверка')} ${s.score !== undefined ? `<strong>${formatScore(s.score)}</strong>` : ''}</li>`).join('')}</ol><p class="analysis-caption">Оснований: ${(trace.sources || []).length}. Это журнал этапов обработки.</p>`;
+    } catch (error) {
+      $('#utility-body').innerHTML = `<p role="alert">${escapeHtml(error.message)}</p>`;
+    }
+  }
   $('#detail-body').addEventListener('submit', (event) => {
     event.preventDefault();
     if (!context) return;

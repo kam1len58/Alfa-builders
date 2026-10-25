@@ -5,11 +5,16 @@
 !/THIRD_PARTY_NOTICES
 !/package.json
 !/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/analytics/
 !/Dockerfile
 !/.dockerignore
 !/compose.yaml
 !/ARCHITECTURE.md
 !/QUALITY.md
+!/HANDOFF.md
+!/DEMO.md
+!/API_CONTRACT.md
 !/server.mjs
 !/server/
 !/dist/
@@ -24,10 +29,13 @@
 /config/*
 !/config/sources.json
 !/config/bank-excerpts.json
+!/config/prepared-news.json
 /scripts/*
 !/scripts/*.mjs
 /test/*
 !/test/*.test.mjs
+/analytics/*
+!/analytics/*.py
 
 # Локальные настройки, инструменты агента и временные результаты.
 .openai/

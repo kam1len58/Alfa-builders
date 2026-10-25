@@ -121,16 +121,19 @@ export function parseArticle(html, sourceUrl) {
     ),
   };
 }
-export function parsePdf(bytes) {
+export function parsePdf(bytes, options = {}) {
   return new Promise((resolve, reject) => {
     const worker = new Worker(new URL('./pdf-worker.mjs', import.meta.url), {
-      workerData: Uint8Array.from(bytes),
-      resourceLimits: { maxOldGenerationSizeMb: 160 },
+      workerData: { bytes: Uint8Array.from(bytes), options },
+      resourceLimits: { maxOldGenerationSizeMb: 384 },
     });
-    const timer = setTimeout(() => {
-      worker.terminate();
-      reject(new Error('PDF_TIMEOUT'));
-    }, 20000);
+    const timer = setTimeout(
+      () => {
+        worker.terminate();
+        reject(new Error('PDF_TIMEOUT'));
+      },
+      Math.min(options.timeoutMs || 120000, 180000)
+    );
     worker.once('message', (result) => {
       clearTimeout(timer);
       worker.terminate();

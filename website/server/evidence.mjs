@@ -30,6 +30,10 @@ export function inspectEvidence(analysis, sources, { requireBank = true } = {}) 
     }
     const valid = [];
     for (const e of claim.evidence) {
+      if (!e || typeof e !== 'object') {
+        issues.push(path + ': некорректное основание.');
+        continue;
+      }
       const source = registry.get(e.sourceId);
       if (
         !source ||
@@ -76,15 +80,17 @@ export function inspectEvidence(analysis, sources, { requireBank = true } = {}) 
   }
   const important = analysis?.whyImportant;
   if (
-    !important?.evidence?.some((e) => registry.get(e.sourceId)?.kind === 'company') ||
-    !important?.evidence?.some((e) => registry.get(e.sourceId)?.kind === 'news')
+    !important?.evidence?.some((e) => e && registry.get(e.sourceId)?.kind === 'company') ||
+    !important?.evidence?.some((e) => e && registry.get(e.sourceId)?.kind === 'news')
   )
     issues.push('Связь с компанией требует новости и конкретного признака профиля.');
   const banks = sources.filter((s) => s.kind === 'bank' && s.verified);
   if (
     requireBank &&
     banks.length &&
-    !claims.some((claim) => claim.evidence?.some((e) => banks.some((b) => b.id === e.sourceId)))
+    !claims.some((claim) =>
+      claim.evidence?.some((e) => e && banks.some((b) => b.id === e.sourceId))
+    )
   )
     issues.push('Релевантный материал банка не использован в выводах.');
   const bankClaims = claims.filter((claim) =>
@@ -92,6 +98,12 @@ export function inspectEvidence(analysis, sources, { requireBank = true } = {}) 
   );
   if (bankClaims.some((claim) => !claim.sourceIds?.some((id) => registry.get(id)?.kind === 'bank')))
     issues.push('Банковская оценка приведена без материала банка.');
+  for (const [, claim] of entries.filter(([path]) => ['summary', 'whyImportant'].includes(path))) {
+    if (/(?:с|имеет) расч[её]тами? (?:по|с|в)\s/u.test(claim.text || ''))
+      issues.push(
+        'Страны ФТС не подтверждают географию расчётов. Уберите утверждение о странах платежей; их география неизвестна.'
+      );
+  }
   return {
     valid: issues.length === 0,
     issues: [...new Set(issues)].slice(0, 8),

@@ -32,6 +32,7 @@ export function createLlmClient({
   baseUrl = process.env.LLM_BASE_URL || 'https://changellenge.up.railway.app/v1',
   model = process.env.LLM_MODEL || 'deepseek/deepseek-v4.1-flash',
   fetcher = fetch,
+  meter = null,
 } = {}) {
   const endpoint = new URL(baseUrl.replace(/\/$/, '') + '/chat/completions');
   if (endpoint.protocol !== 'https:' && !['127.0.0.1', 'localhost'].includes(endpoint.hostname)) {
@@ -63,7 +64,14 @@ export function createLlmClient({
     ++active;
     recent.push(now);
     const start = Date.now();
+    let reservation,
+      metered = false;
     try {
+      reservation = meter?.reserve(
+        model,
+        Buffer.byteLength(system) + Buffer.byteLength(JSON.stringify(data)),
+        maxTokens
+      );
       const timeout = AbortSignal.timeout(90000);
       const response = await fetcher(endpoint, {
         method: 'POST',
@@ -129,6 +137,13 @@ export function createLlmClient({
         throw new AiError('INVALID_MODEL_RESPONSE', 'Сервис моделей вернул некорректный ответ.');
       }
       const choice = payload.choices?.[0];
+      await meter?.record({
+        model,
+        usage: payload.usage,
+        durationMs: Date.now() - start,
+        status: choice?.finish_reason || 'response',
+      });
+      metered = true;
       if (choice?.finish_reason === 'length')
         throw new AiError(
           'AI_TRUNCATED',
@@ -144,6 +159,13 @@ export function createLlmClient({
         durationMs: Date.now() - start,
       };
     } catch (error) {
+      if (meter && reservation && !metered)
+        await meter.record({
+          model,
+          usage: null,
+          durationMs: Date.now() - start,
+          status: error.code || 'connection_error',
+        });
       if (error instanceof AiError) throw error;
       if (error.name === 'TimeoutError' || error.name === 'AbortError')
         throw new AiError(
@@ -157,6 +179,7 @@ export function createLlmClient({
         503
       );
     } finally {
+      meter?.release(reservation);
       --active;
     }
   }

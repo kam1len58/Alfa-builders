@@ -35,7 +35,9 @@ test('Адаптер сохраняет исходные баллы, но не �
   const [row] = await service.feed('C');
   assert.equal(row.score, original.score);
   assert.equal(row.tier, original.tier);
-  assert.equal(row.news, news);
+  assert.equal(row.news.content, news.content);
+  assert.deepEqual(row.news.memberIds, [news.id]);
+  assert.equal(row.news.sourceRecords[0].text, news.content);
   assert.ok(row.hits.every((hit) => hit.explanationOrigin === 'profile_safety_note'));
   assert.ok(!row.hits.some((hit) => /гарантирован|критически зависимы/.test(hit.explanation)));
 });

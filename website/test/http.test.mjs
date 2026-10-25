@@ -11,7 +11,7 @@ const listen = (server) =>
   new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(server.address().port)));
 test(
   'HTTP: вход, права компаний, CSRF/CSP, запрещённый прокси, отзывы и перезапуск',
-  { timeout: 30000 },
+  { timeout: 60000 },
   async () => {
     const root = await mkdtemp(join(tmpdir(), 'alfa-http-'));
     const profile = (id) => ({
@@ -81,6 +81,8 @@ test(
             APP_DATA_DIR: join(root, 'state'),
             AUTH_USERS_FILE: users,
             LLM_API_KEY: '',
+            PROFILES_FILE: '',
+            APP_BIND_ADDRESS: '127.0.0.1',
             SOURCE_REFRESH_MINUTES: '0',
           },
           stdio: 'pipe',
@@ -90,9 +92,14 @@ test(
         child.stderr.on('data', (chunk) => {
           output += chunk;
         });
-        for (let i = 0; i < 80; i++) {
+        child.stdout.on('data', (chunk) => {
+          output += chunk;
+        });
+        const deadline = Date.now() + 20000;
+        while (Date.now() < deadline) {
           try {
-            if ((await fetch(base + '/api/session')).ok) return;
+            if ((await fetch(base + '/api/session', { signal: AbortSignal.timeout(1000) })).ok)
+              return;
           } catch {}
           if (child.exitCode !== null) throw new Error(output);
           await new Promise((r) => setTimeout(r, 100));
@@ -155,6 +162,50 @@ test(
       );
       assert.equal((await call('/api/sources/refresh', { session: viewer, body: {} })).status, 403);
       const owner = await login('owner', 'test-owner-password');
+      const common = await call('/api/feed?company_id=C1', { session: viewer });
+      assert.equal(common.status, 200);
+      assert.equal(common.value[0].news_id, 'N');
+      assert.equal(common.value[0].ai_conclusion, null);
+      assert.equal(common.value[0].facts.text, null);
+      assert.equal((await call('/api/companies', { session: viewer })).value[0].id, 'C1');
+      assert.equal((await call('/api/company?id=C2', { session: viewer })).status, 403);
+      assert.equal((await call('/api/feed?company_id=C2', { session: viewer })).status, 403);
+      assert.equal(
+        (
+          await call('/api/trace?id=' + encodeURIComponent(common.value[0].trace_id), {
+            session: viewer,
+          })
+        ).value.status,
+        'ranking_only'
+      );
+      const other = await call('/api/feed?company_id=C2', { session: owner });
+      assert.equal(
+        (
+          await call('/api/trace?id=' + encodeURIComponent(other.value[0].trace_id), {
+            session: viewer,
+          })
+        ).status,
+        403
+      );
+      assert.equal(
+        (
+          await call('/analyze', {
+            session: viewer,
+            body: { company: { id: 'C1' }, news: { id: 'N' } },
+          })
+        ).status,
+        403
+      );
+      assert.equal(
+        (
+          await call('/api/chat', {
+            session: owner,
+            headers: { 'X-CSRF-Token': '' },
+            body: { company_id: 'C1', news_id: 'N', question: 'Что произошло?' },
+          })
+        ).status,
+        403
+      );
       assert.equal(
         (
           await call('/api/feedback', {

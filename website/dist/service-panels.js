@@ -14,6 +14,12 @@ window.ServicePanels = (() => {
       : new Intl.NumberFormat('ru-RU', { style: 'percent', maximumFractionDigits: 1 }).format(
           value
         );
+  const criterion = (key, label) =>
+    '<label>' +
+    label +
+    '<select name="' +
+    key +
+    '"><option value="">Не оценено</option><option value="yes">Да</option><option value="no">Нет</option></select></label>';
   const statusNames = {
     ready: 'Доступен',
     error: 'Ошибка загрузки',
@@ -95,7 +101,13 @@ window.ServicePanels = (() => {
           .map(
             (d) =>
               '<article class="bank-document"><span class="content-origin">' +
-              escapeHtml(d.publishedAt.slice(0, 10)) +
+              escapeHtml(
+                d.publishedAt
+                  ? d.publishedAt.slice(0, 10)
+                  : d.period
+                    ? 'Отчётный период: ' + d.period + ' · Дата публикации неизвестна'
+                    : 'Дата публикации неизвестна'
+              ) +
               ' · Материал кейса</span><h4>' +
               escapeHtml(d.title) +
               '</h4>' +
@@ -123,7 +135,7 @@ window.ServicePanels = (() => {
         '</section>' +
         '<section class="service-section"><h3>Последние публикации</h3>' +
         news
-          .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+          .sort((a, b) => String(b.publishedAt || '').localeCompare(a.publishedAt || ''))
           .slice(0, 8)
           .map(
             (d) =>
@@ -167,9 +179,9 @@ window.ServicePanels = (() => {
           'Точные цитаты и признаки профиля'
         ) +
         card(
-          'Экспертное одобрение',
+          'Одобрение разборов',
           pct(metrics.expertApproval),
-          data.counts.expertReviews + ' экспертных оценок'
+          data.counts.expertReviews + ' ручных оценок; независимость не подтверждена'
         ) +
         card(
           'Пользовательская польза',
@@ -178,7 +190,69 @@ window.ServicePanels = (() => {
         ) +
         card('С первого раза', pct(metrics.firstPass), 'Без исправления моделью') +
         card('Ошибки обработки', pct(metrics.failureRate), 'Не выдаются как готовый разбор') +
+        card(
+          'Открывают источники',
+          pct(metrics.sourceOpenRate),
+          (data.feedMonitoring?.openedCards || 0) + ' открытых карточек'
+        ) +
+        card(
+          'Уточняют в диалоге',
+          pct(metrics.chatUseRate),
+          'Доля открытых карточек с полученным ответом'
+        ) +
+        card(
+          'Precision@5',
+          pct(metrics.precisionAt5),
+          (metrics.fullyReviewedTop5 || 0) + ' полностью оценённых пятёрок'
+        ) +
+        card(
+          'Пересечение отраслей',
+          pct(metrics.crossIndustryTop5Overlap),
+          (metrics.crossIndustryPairs || 0) + ' пар последних лент'
+        ) +
+        card(
+          'Загрузка ленты P95',
+          metrics.feedP95Ms == null ? '—' : Math.round(metrics.feedP95Ms) + ' мс',
+          'Включает чтение кэша и подготовку карточек'
+        ) +
+        card(
+          'Факты без ошибок',
+          pct(metrics.expertFactsCorrect),
+          'По отдельным оценкам экспертов'
+        ) +
+        card(
+          'Релевантность компании',
+          pct(metrics.expertRelevant),
+          'По отдельным оценкам экспертов'
+        ) +
+        card(
+          'Полезность действий',
+          pct(metrics.expertActionsUseful),
+          'По отдельным оценкам экспертов'
+        ) +
         '</div>' +
+        '<p class="service-note">' +
+        escapeHtml(data.feedMonitoring?.note || '') +
+        '</p>' +
+        (data.usage
+          ? '<section class="service-section"><h3>Расход модели за день</h3><p>' +
+            data.usage.calls +
+            ' вызовов · ' +
+            formatNumber(data.usage.inputTokens) +
+            ' входных и ' +
+            formatNumber(data.usage.outputTokens) +
+            ' выходных токенов.</p><p>Стоимость: ' +
+            (data.usage.costRub == null
+              ? 'неизвестна — тариф или usage не получены'
+              : data.usage.costRub.toFixed(2) + ' ₽') +
+            '. Лимит команды: ' +
+            data.usage.dailyBudgetRub +
+            ' ₽, обновление в 03:00 МСК.</p><p class="analysis-caption">' +
+            escapeHtml(data.usage.budgetScope) +
+            ' ' +
+            escapeHtml(data.usage.note) +
+            '</p></section>'
+          : '') +
         '<p class="service-note">Связь с источниками измеряет наличие проверенных оснований, а не истинность каждого вывода. Выборка: ' +
         escapeHtml(data.window) +
         '.</p>' +
@@ -252,7 +326,12 @@ window.ServicePanels = (() => {
                   '</option>'
               )
               .join('') +
-            '</select></label><label>Результат<select name="verdict"><option value="approved">Обоснован</option><option value="rejected">Нужна доработка</option></select></label><label>Комментарий<textarea name="comment" rows="3" maxlength="1000"></textarea></label><button class="secondary-button" type="submit">Сохранить оценку</button><p id="expert-status" role="status"></p></form></section>'
+            '</select></label>' +
+            criterion('factsCorrect', 'Факты верны') +
+            criterion('relevant', 'Влияние применимо к компании') +
+            criterion('actionsUseful', 'Рекомендации полезны') +
+            criterion('bankAttributionCorrect', 'Позиция банка передана корректно') +
+            '<label>Результат<select name="verdict"><option value="approved">Обоснован</option><option value="rejected">Нужна доработка</option></select></label><label>Комментарий<textarea name="comment" rows="3" maxlength="1000"></textarea></label><button class="secondary-button" type="submit">Сохранить оценку</button><p id="expert-status" role="status"></p></form></section>'
           : '') +
         '<section class="service-section"><h3>Обратная связь</h3>' +
         data.feedback
@@ -381,7 +460,18 @@ window.ServicePanels = (() => {
         status.textContent = 'Материал добавлен. Обновите ленту.';
       }
       if (form.id === 'expert-review-form') {
-        await AlfaApi.review(values);
+        const criteria = Object.fromEntries(
+          ['factsCorrect', 'relevant', 'actionsUseful', 'bankAttributionCorrect'].map((key) => [
+            key,
+            values[key] === 'yes' ? true : values[key] === 'no' ? false : null,
+          ])
+        );
+        await AlfaApi.review({
+          analysisId: values.analysisId,
+          verdict: values.verdict,
+          comment: values.comment,
+          criteria,
+        });
         status.textContent = 'Экспертная оценка сохранена.';
       }
     } catch (error) {

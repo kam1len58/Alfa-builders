@@ -143,6 +143,13 @@ window.AlfaApi = (() => {
       order,
       origin: news.origin || 'prepared',
       contentHash: news.contentHash,
+      memberIds: news.memberIds || [news.id],
+      publications: news.sourceRecords || [],
+      sourceWarnings: news.sourceWarnings || [],
+      discrepancies: news.discrepancies || [],
+      contentScope: news.contentScope,
+      traceId: item.traceId,
+      insight: item.insight,
       rankingOrigin: item.rankingOrigin || 'backend',
       assignments: {
         [companyId]: {
@@ -218,21 +225,36 @@ window.AlfaApi = (() => {
     getAiStatus(signal) {
       return getJson('/api/ai/status', signal);
     },
-    analyze(companyId, newsId, signal) {
-      return postAi('/api/ai/analysis', { companyId, newsId }, signal);
+    async analyze(companyId, newsId, signal) {
+      const card = await postAi(
+        '/analyze',
+        { company: { id: companyId }, news: { id: newsId } },
+        signal
+      );
+      return card.analysis_payload;
     },
     ask(companyId, newsId, question, history, signal) {
-      return postAi('/api/ai/chat', { companyId, newsId, question, history }, signal);
+      return postAi(
+        '/api/chat',
+        { company_id: companyId, news_id: newsId, question, history },
+        signal
+      );
+    },
+    getTrace(id) {
+      return getJson('/api/trace?' + new URLSearchParams({ id }));
+    },
+    engage(companyId, newsId, type) {
+      return postAi('/api/engagement', { companyId, newsId, type }).catch(() => {});
     },
     async getCompanies(signal) {
-      const items = await getJson('/api/Companies', signal);
-      if (!Array.isArray(items) || items.some((item) => !item?.syntheticU)) {
+      const items = await getJson('/api/companies', signal);
+      if (!Array.isArray(items) || items.some((item) => !item?.id)) {
         throw new Error('Сервер вернул некорректный список компаний.');
       }
-      return items.map(toProfile);
+      return items.map((item) => toProfile({ ...item, syntheticU: item.id }));
     },
     async getCompany(id, signal) {
-      const profile = await getJson('/api/Companies/' + encodeURIComponent(id), signal);
+      const profile = await getJson('/api/company?' + new URLSearchParams({ id }), signal);
       if (
         profile?.syntheticU !== id ||
         !profile.bankProducts ||
@@ -246,10 +268,39 @@ window.AlfaApi = (() => {
       return toProfile(profile);
     },
     async getFeed(id, signal) {
-      const items = await getJson('/api/Companies/' + encodeURIComponent(id) + '/feed', signal);
+      const items = await getJson('/api/feed?' + new URLSearchParams({ company_id: id }), signal);
       if (!Array.isArray(items)) throw new Error('Сервер вернул некорректную ленту.');
       return items
-        .map((item, index) => toEvent(item, id, index))
+        .map((card, index) =>
+          toEvent(
+            {
+              score: card.score,
+              tier: card.bucket === 'focus' ? 'Focus' : 'All',
+              hits: card.ranking.hits,
+              traceId: card.trace_id,
+              insight: card.analysis_payload,
+              rankingOrigin: card.ranking.origin,
+              news: {
+                id: card.news_id,
+                title: card.title,
+                content: card.source_excerpt,
+                source: card.facts.sources[0]?.url || '',
+                publishedAt: card.date,
+                category: card.category,
+                tags: card.ranking.hits.map((h) => h.rule),
+                memberIds: card.member_ids,
+                sourceRecords: card.publications,
+                sourceWarnings: card.source_warnings,
+                discrepancies: card.discrepancies,
+                contentScope: card.content_scope,
+                origin: card.origin,
+                contentHash: card.content_hash,
+              },
+            },
+            id,
+            index
+          )
+        )
         .filter((event) => event.assignments[id].placement !== 'скрыть');
     },
   };

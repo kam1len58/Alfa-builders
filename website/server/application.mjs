@@ -9,6 +9,9 @@ import { createCollector } from './collector.mjs';
 import { createAccess } from './access.mjs';
 import { createDataService } from './data-service.mjs';
 import { createQuality, evaluateBenchmark } from './quality.mjs';
+import { loadProfiles } from './profiles.mjs';
+import { createContractApi } from './contract-api.mjs';
+import { createMeter } from './meter.mjs';
 
 const publicDirectory = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
 const contentTypes = {
@@ -35,10 +38,19 @@ const store = await openState();
 const collector = await createCollector({ store });
 const access = await createAccess({ port });
 const quality = createQuality({ store });
-const data = createDataService({ backendUrl, collector });
+const profiles = await loadProfiles();
+const data = createDataService({ backendUrl, collector, profiles, eventStore: store });
+const meter = createMeter({
+  store,
+  prices: JSON.parse(process.env.LLM_PRICES_RUB_PER_MILLION || '{}'),
+  budget: Number(process.env.LLM_DAILY_BUDGET_RUB || 500),
+});
 const insights = createInsightsService({
-  llm: createLlmClient(),
-  reviewer: createLlmClient({ model: process.env.LLM_REVIEW_MODEL || 'qwen/qwen3.6-35b-a3b' }),
+  llm: createLlmClient({ meter }),
+  reviewer: createLlmClient({
+    model: process.env.LLM_REVIEW_MODEL || 'qwen/qwen3.6-35b-a3b',
+    meter,
+  }),
   backendUrl,
   dataService: data,
   collector,
@@ -49,7 +61,7 @@ const benchmark = JSON.parse(
   await readFile(new URL('../data/quality-benchmark.json', import.meta.url), 'utf8')
 );
 await store.update((state) => {
-  state.evaluation = evaluateBenchmark(benchmark);
+  state.evaluation = evaluateBenchmark(benchmark, { usedForTuning: true });
 });
 
 function send(response, status, value) {
@@ -96,6 +108,15 @@ function validatePair(input) {
   )
     throw new AiError('INVALID_INPUT', 'Не указаны компания или событие.', 400);
 }
+const contractApi = createContractApi({
+  data,
+  insights,
+  quality,
+  access,
+  send,
+  readJson,
+  validatePair,
+});
 async function api(url, request, response) {
   access.boundary(request);
   if (url.pathname === '/api/session') {
@@ -114,6 +135,7 @@ async function api(url, request, response) {
   const session = access.session(request, response);
   access.requirePermission(session, 'read');
   if (!['GET', 'HEAD'].includes(request.method)) access.csrf(request, session);
+  if (await contractApi(url, request, response, session)) return;
   if (url.pathname === '/api/logout') {
     method(request, 'POST');
     access.logout(request, response);
@@ -250,13 +272,16 @@ async function api(url, request, response) {
   if (url.pathname === '/api/quality') {
     method(request, 'GET');
     access.requirePermission(session, 'quality');
-    return send(response, 200, quality.overview(session.user));
+    return send(response, 200, {
+      ...quality.overview(session.user),
+      usage: session.user.companies.includes('*') ? meter.overview() : null,
+    });
   }
   if (url.pathname === '/api/quality/evaluate') {
     method(request, 'POST');
     access.requirePermission(session, 'quality');
     access.limit(session, 'evaluate', 2);
-    const evaluation = evaluateBenchmark(benchmark);
+    const evaluation = evaluateBenchmark(benchmark, { usedForTuning: true });
     await store.update((state) => {
       state.evaluation = evaluation;
     });
@@ -296,7 +321,7 @@ const server = http.createServer(async (request, response) => {
   );
   try {
     const url = new URL(request.url, 'http://localhost');
-    if (url.pathname.startsWith('/api/')) {
+    if (url.pathname.startsWith('/api/') || ['/analyze', '/chat'].includes(url.pathname)) {
       await api(url, request, response);
       return;
     }
@@ -319,13 +344,23 @@ const server = http.createServer(async (request, response) => {
     if (response.destroyed) return;
     if (error instanceof AiError)
       send(response, error.status, { code: error.code, message: error.message });
-    else
+    else {
+      console.error(
+        JSON.stringify({
+          operation: 'request_failure',
+          name: error.name,
+          frames: String(error.stack || '')
+            .split('\n')
+            .slice(1, 4),
+        })
+      );
       send(response, request.url.startsWith('/api/') ? 500 : 404, {
         code: request.url.startsWith('/api/') ? 'SERVICE_ERROR' : 'NOT_FOUND',
         message: request.url.startsWith('/api/')
           ? 'Не удалось выполнить запрос. Повторите позже.'
           : 'Не найдено.',
       });
+    }
   }
 });
 server.requestTimeout = 300000;
@@ -349,7 +384,7 @@ const qualityTimer = setInterval(
   () =>
     store
       .update((state) => {
-        state.evaluation = evaluateBenchmark(benchmark);
+        state.evaluation = evaluateBenchmark(benchmark, { usedForTuning: true });
       })
       .catch(() => {}),
   24 * 3600000

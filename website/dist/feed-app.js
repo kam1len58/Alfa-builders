@@ -40,6 +40,8 @@ const ruleLabels = {
   FUEL: 'Топливная составляющая',
   GOV_PROCUREMENT: 'Гипотеза о госзаказе',
   OIL: 'Нефть и газ',
+  PARTNER_SECTOR: 'Отрасль контрагента',
+  GROUP_SECTOR: 'Отрасль группы',
 };
 let companies = [];
 let events = [];
@@ -72,7 +74,8 @@ const hiddenAssignment = {
 const companyAssignment = (event) => event.assignments[state.company?.id] || hiddenAssignment;
 const isVisibleForCompany = (event) => companyAssignment(event).placement !== 'скрыть';
 const savedEventKey = (id) => `${state.company.id}:${id}`;
-const isSaved = (id) => state.saved.has(savedEventKey(id));
+const eventKeys = (id) => (events.find((e) => e.id === id)?.memberIds || [id]).map(savedEventKey);
+const isSaved = (id) => eventKeys(id).some((key) => state.saved.has(key));
 const scoreFormatter = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 3 });
 const numberFormatter = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
 const percentFormatter = new Intl.NumberFormat('ru-RU', {
@@ -108,6 +111,18 @@ function closePopovers() {
   $('#notification-button').setAttribute('aria-expanded', 'false');
 }
 
+function filterCompanyOptions() {
+  const query = $('#company-search').value.trim().toLocaleLowerCase('ru');
+  let visible = 0;
+  for (const button of document.querySelectorAll('#company-options .company-option')) {
+    button.hidden = !button.textContent.toLocaleLowerCase('ru').includes(query);
+    if (!button.hidden) visible++;
+  }
+  $('#company-menu .popover-note').textContent =
+    `Найдено: ${visible} · Доступно: ${companies.length}`;
+}
+$('#company-search').addEventListener('input', filterCompanyOptions);
+
 function closeMobileMenu() {
   $('#sidebar').classList.remove('open');
   $('#mobile-shade').hidden = true;
@@ -133,8 +148,8 @@ function renderCounts() {
 
 function toggleSaved(id) {
   const key = savedEventKey(id);
-  if (state.saved.has(key)) {
-    state.saved.delete(key);
+  if (isSaved(id)) {
+    eventKeys(id).forEach((k) => state.saved.delete(k));
     showToast('Событие удалено из сохранённого');
   } else {
     state.saved.add(key);
@@ -208,6 +223,7 @@ function renderCompany() {
 </button>`
     )
     .join('');
+  filterCompanyOptions();
   renderCounts();
 }
 
@@ -271,6 +287,7 @@ function renderEventCard(event, isFirst) {
       <button data-event="${escapeHtml(event.id)}">${escapeHtml(event.title)}</button>
     </h3>
     <p class="card-summary source-fragment">${escapeHtml(event.rawText)}</p>
+    <div class="publication-meta"><span>${event.publications.length > 1 ? event.publications.length + ' публикации' : event.contentScope === 'rss_excerpt' ? 'Анонс RSS' : event.contentScope === 'reviewed_summary' ? 'Сверено с источниками' : 'Текст источника'}</span>${event.discrepancies.length ? '<span>Есть расхождения</span>' : ''}</div>
     <div class="company-relevance">
       <div class="relevance-label">${icon('link')}Почему важно для компании</div>
       <p>${escapeHtml(event.insight?.analysis.whyImportant.text || assignment.explanation)}</p>
@@ -294,6 +311,11 @@ function renderEventCard(event, isFirst) {
 }
 
 function renderEvents() {
+  $('#bank-entry-summary').textContent = state.loading
+    ? 'Загружаем события компании…'
+    : state.error
+      ? state.error
+      : `${state.company?.name || 'Ваша компания'} · Событий: ${events.filter(isVisibleForCompany).length}, ${events.filter((e) => companyAssignment(e).score >= 0.6).length} в фокусе`;
   renderWorkbench();
   const pending = state.loading || Boolean(state.error);
   $('#event-grid').setAttribute('aria-busy', String(state.loading));
@@ -371,6 +393,7 @@ function setView(view) {
   closeMobileMenu();
   closeMobileSearch();
   const labels = {
+    bank: ['Ваш бизнес', 'Главная банка'],
     overview: ['Обзор руководителя', 'Сегодня важно'],
     all: ['Персональная повестка', 'Все события'],
     saved: ['Ваша подборка', 'Сохранённое'],
@@ -379,7 +402,9 @@ function setView(view) {
   $('#page-eyebrow').textContent = eyebrow;
   $('#page-title').innerHTML = `${title}<span class="title-dot">.</span>`;
   $('#overview-grid').hidden = view !== 'overview';
-  $('#reading-strip').hidden = view === 'saved';
+  $('#bank-home').hidden = view !== 'bank';
+  $('.events-section').hidden = view === 'bank';
+  $('#reading-strip').hidden = view === 'saved' || view === 'bank';
   document.querySelectorAll('[data-view]').forEach((el) => {
     const active = el.dataset.view === view;
     el.classList.toggle('active', active);
@@ -408,6 +433,7 @@ function openEvent(id) {
   state.selected = id;
   closePopovers();
   NewsReader.open(event, state.company);
+  AlfaApi.engage(state.company.id, event.id, 'card_open');
   renderDetailSave();
   if (!$('#detail-dialog').open) $('#detail-dialog').showModal();
   $('#detail-dialog').scrollTop = 0;
@@ -491,6 +517,7 @@ function openCompany() {
   </div>
 </dl>
 ${partnerTable(counterparties.top_suppliers, 'Крупнейшие получатели платежей')}${partnerTable(counterparties.top_customers, 'Крупнейшие отправители платежей')}
+${group.group_context ? `<section class="partner-section"><h3>Отрасли наблюдаемой группы</h3><p>${(group.group_context.industries || []).map((i) => escapeHtml(i.name || i.okved)).join(' · ')}</p><p class="analysis-caption">${escapeHtml(group.group_context.note)} Сумма выручки не консолидирована.</p></section>` : ''}
 <p class="profile-note">
   ${escapeHtml(counterparties.note)}. Обозначения «поставщики» и «покупатели» в исходном профиле не подтверждают
   назначение платежей.
@@ -719,7 +746,7 @@ $('#heading-date').textContent = new Intl.DateTimeFormat('ru-RU', {
 }).format(new Date());
 document.body.classList.toggle('compact', state.density === 'compact');
 const initialView = location.hash.slice(1);
-setView(['overview', 'all', 'saved'].includes(initialView) ? initialView : 'overview');
+setView(['bank', 'overview', 'all', 'saved'].includes(initialView) ? initialView : 'overview');
 initialize();
 
 document.addEventListener('click', handlePageClick);

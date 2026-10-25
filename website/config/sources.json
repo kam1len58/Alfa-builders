@@ -5,7 +5,9 @@
     "alfabank.ru",
     "www.alfabank.ru",
     "drive.google.com",
-    "drive.usercontent.google.com"
+    "drive.usercontent.google.com",
+    "www.vedomosti.ru",
+    "vedomosti.ru"
   ],
   "sources": [
     {
@@ -43,6 +45,111 @@
       "format": "pdf",
       "excerptId": "alfa-macro-20260907",
       "url": "https://drive.google.com/uc?export=download&id=1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64"
+    },
+    {
+      "id": "vedomosti-energy",
+      "title": "Ведомости · ТЭК",
+      "publisher": "Ведомости",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.vedomosti.ru/rss/rubric/business/energy",
+      "maxItems": 12,
+      "fetchArticles": false
+    },
+    {
+      "id": "vedomosti-industry",
+      "title": "Ведомости · Промышленность",
+      "publisher": "Ведомости",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.vedomosti.ru/rss/rubric/business/industry",
+      "maxItems": 12,
+      "fetchArticles": false
+    },
+    {
+      "id": "vedomosti-transport",
+      "title": "Ведомости · Транспорт",
+      "publisher": "Ведомости",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.vedomosti.ru/rss/rubric/business/transport",
+      "maxItems": 12,
+      "fetchArticles": false
+    },
+    {
+      "id": "vedomosti-agriculture",
+      "title": "Ведомости · Агропром",
+      "publisher": "Ведомости",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.vedomosti.ru/rss/rubric/business/agriculture",
+      "maxItems": 12,
+      "fetchArticles": false
+    },
+    {
+      "id": "vedomosti-retail",
+      "title": "Ведомости · Торговля и услуги",
+      "publisher": "Ведомости",
+      "kind": "news",
+      "format": "rss",
+      "url": "https://www.vedomosti.ru/rss/rubric/business/retail",
+      "maxItems": 12,
+      "fetchArticles": false
+    },
+    {
+      "id": "case-alfa-bond-brief-20260914",
+      "title": "Бонд Бриф: Итоги недели. Заседание ЦБ по ставке добавило долговому рынку негатива",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-bond-brief-20260914",
+      "url": "https://drive.google.com/uc?export=download&id=1bPzix_332N2CyMY0tqCHuYtGsfJWnFGv"
+    },
+    {
+      "id": "case-alfa-steel-20210415",
+      "title": "Российская сталь: ралли цен продолжается; прогноз результатов за 1К21",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-steel-20210415",
+      "url": "https://drive.google.com/uc?export=download&id=1yLCBrIoyIsubLTEBvBHh6io48ysnW-wn"
+    },
+    {
+      "id": "case-alfa-consumption-20260805",
+      "title": "Потребление на пике",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-consumption-20260805",
+      "url": "https://drive.google.com/uc?export=download&id=1riR1lhsb6EY1MwGMxdBlS_tI5ed9mIiz"
+    },
+    {
+      "id": "case-alfa-macro-1h2026-20260731",
+      "title": "Макростатистика 1П26: слабый рост 1П26 смещает наш прогноз роста ВВП на 0,1% за год",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-macro-1h2026-20260731",
+      "url": "https://drive.google.com/uc?export=download&id=1khcHwoS0FkG9p_0J4XoHGaGq3B4V0ime"
+    },
+    {
+      "id": "case-alfa-bonds-20260722",
+      "title": "Долговой рынок: тактический взгляд на 3-й квартал 2026 г. — Время собирать камни",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-bonds-20260722",
+      "url": "https://drive.google.com/uc?export=download&id=1hq3Fhyz9ce_sRyGUQB1MdoHeQdfAJfhK",
+      "maxBytes": 40000000
+    },
+    {
+      "id": "case-alfa-gold-202608",
+      "title": "Обзор рынка золота. Август 2026",
+      "publisher": "Альфа-Банк",
+      "kind": "bank",
+      "format": "pdf",
+      "excerptId": "alfa-gold-202608",
+      "url": "https://drive.google.com/uc?export=download&id=1a7TXOCHARfKzUR0hn9Cm9gQSrIldxTDE"
     }
   ]
 }

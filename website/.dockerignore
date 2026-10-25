@@ -1,6 +1,7 @@
 *
 !package.json
 !pnpm-lock.yaml
+!pnpm-workspace.yaml
 !server.mjs
 !server/
 !server/*.mjs
@@ -9,5 +10,6 @@
 !config/
 !config/sources.json
 !config/bank-excerpts.json
+!config/prepared-news.json
 !data/
 !data/quality-benchmark.json

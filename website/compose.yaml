@@ -26,22 +26,37 @@ services:
     environment:
       BACKEND_URL: http://backend:8080
       APP_DATA_DIR: /data
+      PROFILES_FILE: ${CONTAINER_PROFILES_FILE:-}
       APP_BIND_ADDRESS: 0.0.0.0
       AUTH_USERS_FILE: /run/secrets/access.json
       LLM_API_KEY: ${LLM_API_KEY:-}
       LLM_BASE_URL: ${LLM_BASE_URL:-https://changellenge.up.railway.app/v1}
       LLM_MODEL: ${LLM_MODEL:-deepseek/deepseek-v4.1-flash}
       LLM_REVIEW_MODEL: ${LLM_REVIEW_MODEL:-qwen/qwen3.6-35b-a3b}
+      LLM_PRICES_RUB_PER_MILLION: ${LLM_PRICES_RUB_PER_MILLION:-}
+      LLM_DAILY_BUDGET_RUB: ${LLM_DAILY_BUDGET_RUB:-500}
       LLM_CACHE_DIR: /data/ai-cache
       LLM_AUDIT_PATH: /data/model-metadata.jsonl
     ports:
-      - '127.0.0.1:4173:4173'
+      - '127.0.0.1:${PORT:-4173}:4173'
     volumes:
       - website-data:/data
+      - ${ALFA_PROFILES_DIR:-./data}:/profiles:ro
       - ${ALFA_ACCESS_FILE:?Укажите путь к файлу учётных записей вне Git}:/run/secrets/access.json:ro
     depends_on:
       - backend
     restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          'Promise.all([fetch("http://127.0.0.1:4173/api/session"),fetch("http://backend:8080/api/Companies").then(r=>r.json())]).then(([s,c])=>process.exit(s.ok&&Array.isArray(c)&&c.length>0?0:1)).catch(()=>process.exit(1))',
+        ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
 volumes:
   backend-data:
   website-data:

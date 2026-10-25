@@ -40,7 +40,7 @@ window.NewsAI = (() => {
       'bankProducts.hasGuarantees': 'Гарантии',
       'payments.largestRecipientShare': 'Доля крупнейшего получателя платежей',
     };
-    return `<details class="claim-evidence"><summary>На чём основан вывод</summary>${claim.evidence.map((item) => `<div><span>${escapeHtml(names[item.feature] || (item.feature ? 'Признак компании' : 'Фрагмент источника'))}</span><blockquote>${escapeHtml(item.quote)}</blockquote>${refs([item.sourceId])}</div>`).join('')}</details>`;
+    return `<details class="claim-evidence"><summary>На чём основан вывод</summary>${claim.evidence.map((item) => `<div><span>${escapeHtml(names[item.feature] || (item.feature ? 'Признак компании' : current.event.publications?.some((p) => 'news:' + p.id === item.sourceId && p.scope === 'reviewed_summary') ? 'Фрагмент сверенного изложения' : 'Фрагмент источника'))}</span><blockquote>${escapeHtml(item.quote)}</blockquote>${refs([item.sourceId])}</div>`).join('')}</details>`;
   }
 
   function refs(ids) {
@@ -144,7 +144,7 @@ window.NewsAI = (() => {
         event.assignments[company.id],
       ]),
     };
-    const result = results.get(current.key);
+    const result = results.get(current.key) || event.insight;
     if (result) render(result);
     const ownVersion = version;
     AlfaApi.getAiStatus()

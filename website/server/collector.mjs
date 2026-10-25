@@ -16,7 +16,7 @@ export async function createCollector({
   let current,
     lastStarted = 0;
   function document(item, source, extras = {}) {
-    if (!item.title || !item.text || !item.publishedAt) return null;
+    if (!item.title || !item.text || (!item.publishedAt && source.kind !== 'bank')) return null;
     assertSourceUrl(item.url, config.allowedHosts);
     const text = item.text.trim().slice(0, 18000);
     const keyFacts = (text.match(/[^.!?]+[.!?](?:\s|$)/g) || [text])
@@ -47,7 +47,7 @@ export async function createCollector({
     const known = store.snapshot().documents.filter((d) => d.sourceId === source.id);
     const response = await download(source.url, {
       allowedHosts: config.allowedHosts,
-      maxBytes: source.format === 'pdf' ? 12000000 : 2500000,
+      maxBytes: source.format === 'pdf' ? Math.min(source.maxBytes || 12000000, 40000000) : 2500000,
       timeoutMs: source.format === 'pdf' ? 45000 : 20000,
       headers: previous?.etag ? { 'If-None-Match': previous.etag } : {},
     });
@@ -71,7 +71,7 @@ export async function createCollector({
             )
           )
             continue;
-          if (item.text.length < 120) {
+          if (item.text.length < 120 && source.fetchArticles !== false) {
             const articleResponse = await download(item.url, { allowedHosts: config.allowedHosts });
             const article = parseArticle(
               new TextDecoder().decode(articleResponse.bytes),
@@ -80,8 +80,10 @@ export async function createCollector({
             item.text = article.text || item.text;
             item.title = article.title || item.title;
           }
-          const result = document(item, source);
-          if (result && result.text.length >= 80) documents.push(result);
+          const result = document(item, source, {
+            contentScope: source.fetchArticles === false ? 'rss_excerpt' : 'source_text',
+          });
+          if (result && result.text.length >= 40) documents.push(result);
         } catch {
           /* Один непригодный материал не отменяет остальные записи RSS. */
         }
@@ -126,6 +128,8 @@ export async function createCollector({
               ]),
             ],
             reviewedAt: approved.reviewedAt,
+            period: approved.period || null,
+            datePrecision: approved.datePrecision || 'day',
           })
         );
       } else {
@@ -148,6 +152,12 @@ export async function createCollector({
           documentHash,
           status: 'review_required',
           scanned: pdf.scanned,
+          extraction: {
+            ocrPages: pdf.ocrPages,
+            totalPages: pdf.totalPages,
+            truncated: pdf.truncated,
+          },
+          pages: pdf.pages,
           topics: [],
           contentHash: documentHash,
         });

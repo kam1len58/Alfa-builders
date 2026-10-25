@@ -3,7 +3,7 @@ const catalog = [
   [
     'RATE',
     0.8,
-    /(?<![а-яё])ставк[а-яё]*|денежно.кредит|кредитован/u,
+    /ключев.{0,15}ставк|процентн.{0,15}ставк|ставк.{0,30}(?:цб|кредит|депозит)|денежно.кредит|кредитован/u,
     (p) => p.bankProducts?.hasLoans === 1 || p.bankProducts?.hasDeposit === 1,
     'У компании есть кредитные или депозитные продукты; условия и сроки требуют проверки.',
     ['Кредит', 'Депозит'],
@@ -11,7 +11,7 @@ const catalog = [
   [
     'INFL_COSTS',
     0.5,
-    /инфляц|потребительск.{0,25}цен|индекс.{0,15}цен|себестоим|фот|зарплат/u,
+    /инфляц|потребительск.{0,25}цен|индекс.{0,15}цен|себестоим|(?<![а-яё])фот(?![а-яё])|зарплат|фонд.{0,12}оплат.{0,8}труд|расход.{0,12}на персонал|(?:рост|повышен|снижен).{0,15}цен|материал.{0,15}дорожа/u,
     () => true,
     'Изменение цен может влиять на расходы; состав затрат компании неизвестен.',
     ['Оборотный кредит'],
@@ -27,7 +27,7 @@ const catalog = [
   [
     'SANCTIONS',
     0.9,
-    /санкц|эмбарго|ограничен.{0,30}(экспорт|импорт)|запрет.{0,25}(экспорт|импорт)/u,
+    /санкц|эмбарго|ограничен.{0,45}(?:экспорт|импорт|международн.{0,12}торгов|внешн.{0,12}постав)|запрет.{0,25}(?:экспорт|импорт)/u,
     (p) => p.ved?.hasVed === 1,
     'Есть признаки ВЭД; применимость ограничений к конкретным сделкам не установлена.',
     ['Сопровождение ВЭД'],
@@ -52,7 +52,7 @@ const catalog = [
   [
     'GOV_PROCUREMENT',
     0.6,
-    /госзакуп|44.фз|223.фз|госконтракт|тендер/u,
+    /госзакуп|государственн.{0,12}закуп|44.фз|223.фз|госконтракт|тендер/u,
     (p) => p.bankProducts?.hasGuarantees === 1,
     'Есть банковские гарантии; участие в госзаказе остаётся гипотезой.',
     ['Гарантия'],
@@ -60,7 +60,7 @@ const catalog = [
   [
     'OIL',
     0.8,
-    /нефт|газ|brent|urals|добыч/u,
+    /нефт|(?<![а-яё])газ(?:а|у|ом|е|овый|овая|овые|одобыч[а-яё]*)?(?![а-яё])|brent|urals|добыч/u,
     (p) => [6, 9, 19].includes(division(p)),
     'Нефтегазовая отрасль: проверьте применимость изменения к продукции и рынкам компании.',
     ['Оборотный кредит'],
@@ -77,7 +77,22 @@ const catalog = [
 const division = (p) => Number.parseInt(p.okvedCode, 10);
 const between = (n, a, b) => n >= a && n <= b;
 export function classify(text) {
-  const normalized = String(text).toLowerCase();
+  // Remove explicitly negated topics and cultural uses before matching business events.
+  const title = String(text)
+    .split(/[.!?\n]/u)[0]
+    .toLowerCase();
+  if (
+    /ставк.{0,30}(?:матч|финал|чемпионат)|(?:фильм|музе[йяе]|кинофестивал|роман|спектакл)/u.test(
+      title
+    )
+  )
+    return [];
+  const normalized = String(text)
+    .toLowerCase()
+    .replace(
+      /(?:а не|не касается|не затрагивает|не связан[а-яё]* с|не тарифов|без сообщения об)[^.;!?]*/gu,
+      ' '
+    );
   return catalog.filter(([, , pattern]) => pattern.test(normalized)).map(([code]) => code);
 }
 export function rankDocument(profile, document) {
@@ -90,6 +105,13 @@ export function rankDocument(profile, document) {
       explanation,
       bankProducts,
     }));
+  hits.push(
+    ...relationshipHits(
+      profile,
+      tags,
+      hits.map((h) => h.rule)
+    )
+  );
   const score = hits.length
     ? Math.min(0.99, 1 - hits.reduce((rest, hit) => rest * (1 - hit.weight), 1))
     : 0;
@@ -106,12 +128,56 @@ export function rankDocument(profile, document) {
       contentHash: document.contentHash,
       collectedAt: document.collectedAt,
       sourceId: document.sourceId,
+      contentScope: document.contentScope || 'source_text',
     },
     score: Number(score.toFixed(6)),
-    tier: score === 0 ? 'Hidden' : score >= 0.6 ? 'Focus' : 'All',
+    tier: score < 0.4 ? 'Hidden' : score >= 0.6 ? 'Focus' : 'All',
     hits,
-    rankingOrigin: 'source-rules-v1',
+    rankingOrigin: 'source-rules-v3',
   };
+}
+export function relationshipHits(profile, tags, directRules = []) {
+  const sectorRules = new Set(['PMI_ORDERS', 'FUEL', 'OIL', 'TECH_SECURITY']);
+  const relevant = (p) =>
+    catalog
+      .filter(
+        ([code, , , applies]) =>
+          sectorRules.has(code) && tags.includes(code) && !directRules.includes(code) && applies(p)
+      )
+      .map(([code]) => code);
+  const hits = [];
+  for (const [direction, partners] of [
+    ['outgoing', profile.counterparties?.topSuppliers],
+    ['incoming', profile.counterparties?.topCustomers],
+  ]) {
+    for (const [i, p] of (partners || []).slice(0, 3).entries()) {
+      if (!Number.isFinite(p.share) || p.share < 0.1) continue;
+      for (const code of relevant({ okvedCode: p.okvedCode }))
+        hits.push({
+          rule: 'PARTNER_SECTOR',
+          relation: direction + ':' + i + ':' + code,
+          weight: 0.42,
+          companyFeature: 'partners.' + direction + '.partner' + (i + 1) + '.industry',
+          bankProducts: [],
+          explanation: `Крупный ${direction === 'outgoing' ? 'получатель' : 'отправитель'} платежей (${Math.round(p.share * 100)}% этого направления) относится к отрасли «${p.okvedName || p.okvedCode}». Событие может затронуть расчёты с ним; назначение платежей и роль контрагента требуется проверить.`,
+        });
+    }
+  }
+  for (const [i, p] of (profile.affiliation?.groupContext?.industries || [])
+    .slice(0, 5)
+    .entries()) {
+    for (const code of relevant({ okvedCode: p.okved }))
+      hits.push({
+        rule: 'GROUP_SECTOR',
+        relation: 'group:' + i + ':' + code,
+        weight: 0.4,
+        companyFeature: 'group.industries.industry' + (i + 1) + '.name',
+        bankProducts: [],
+        explanation: `В наблюдаемой группе по GROUP_ID есть отрасль «${p.name || p.okved}». Проверьте, связан ли эффект с вашей компанией: принадлежность к группе не подтверждает общие обязательства.`,
+      });
+  }
+  // Several indirect links are one hypothesis, not independent evidence that can inflate priority.
+  return hits.slice(0, 1);
 }
 export function rankDocuments(profile, documents) {
   return documents
@@ -168,7 +234,9 @@ export function searchDocuments(documents, query, { kind, limit = 4 } = {}) {
     })
     .filter((row) => row.match > 0)
     .sort(
-      (a, b) => b.match - a.match || b.document.publishedAt.localeCompare(a.document.publishedAt)
+      (a, b) =>
+        b.match - a.match ||
+        String(b.document.publishedAt || '').localeCompare(a.document.publishedAt || '')
     )
     .slice(0, limit)
     .map((row) => ({ ...row.document, match: row.match }));

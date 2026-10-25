@@ -49,6 +49,12 @@ test('Точные цитаты, конкретные признаки и исп
   const missing = structuredClone(analysis);
   missing.actions = [];
   assert.equal(inspectEvidence(missing, sources).valid, false);
+  const malformed = structuredClone(analysis);
+  malformed.whyImportant.evidence = [null];
+  assert.equal(inspectEvidence(malformed, sources).valid, false);
+  const country = structuredClone(analysis);
+  country.whyImportant.text = 'Компания с расчётами по Израилю и Камеруну.';
+  assert.equal(inspectEvidence(country, sources).valid, false);
 });
 test('Новые новости классифицируются независимо от регистра; выставка и поставки не являются ставкой', () => {
   assert.ok(classify('PMI изменился, ФОТ вырос').includes('PMI_ORDERS'));
@@ -68,8 +74,11 @@ test('Синтетический benchmark выдаёт вычисленные �
     await readFile(new URL('../data/quality-benchmark.json', import.meta.url), 'utf8')
   );
   const result = evaluateBenchmark(data);
-  assert.equal(result.cases.length, 24);
-  assert.equal(result.metrics.tp + result.metrics.fp + result.metrics.fn + result.metrics.tn, 24);
+  assert.equal(result.cases.length, data.cases.length);
+  assert.equal(
+    result.metrics.tp + result.metrics.fp + result.metrics.fn + result.metrics.tn,
+    data.cases.length
+  );
   assert.equal(result.independentValidation, false);
   assert.ok(result.metrics.precision >= 0.85);
   assert.ok(result.metrics.recall >= 0.85);
@@ -91,6 +100,7 @@ test('Отзывы изолированы по пользователям и к�
       { companyId: 'C2', newsId: 'N', rating: 'error' }
     );
     assert.equal(quality.overview(user).counts.feedback, 1);
+    assert.equal(quality.overview(user).metrics.expertFactsCorrect, null);
     await assert.rejects(
       quality.review(user, { analysisId: 'missing', verdict: 'approved' }),
       (e) => e.status === 404
@@ -104,8 +114,23 @@ test('Отзывы изолированы по пользователям и к�
       citedClaims: 2,
       bankUsed: true,
     });
-    await quality.review(user, { analysisId: 'known', verdict: 'rejected', comment: 'Тест' });
+    await quality.review(user, {
+      analysisId: 'known',
+      verdict: 'rejected',
+      comment: 'Тест',
+      criteria: { factsCorrect: false, actionsUseful: true },
+    });
     assert.equal(quality.overview(user).metrics.expertApproval, 0);
+    assert.equal(quality.overview(user).metrics.expertFactsCorrect, 0);
+    assert.equal(quality.overview(user).metrics.expertActionsUseful, 1);
+    await assert.rejects(
+      quality.review(user, {
+        analysisId: 'known',
+        verdict: 'approved',
+        criteria: { factsCorrect: 'yes' },
+      }),
+      (e) => e.status === 400
+    );
     await quality.feedback(user, { companyId: 'C1', newsId: 'N', rating: null });
     assert.equal(quality.overview(user).counts.feedback, 0);
   } finally {

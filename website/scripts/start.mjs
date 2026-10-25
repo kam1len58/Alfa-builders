@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { buildProfiles } from './build-profiles.mjs';
 const site = fileURLToPath(new URL('../', import.meta.url));
 try {
   process.loadEnvFile(join(site, '.env.local'));
@@ -11,6 +12,7 @@ try {
   if (error.code !== 'ENOENT') throw error;
 }
 const runtime = resolve(process.env.APP_DATA_DIR || join(homedir(), '.alfa-business', 'runtime'));
+buildProfiles();
 const backend = resolve(process.env.BACKEND_PATH || join(site, '../../Alfa-builders-backend'));
 const project = join(backend, 'NewsAnalytics/NewsAnalytics/NewsAnalytics.API.csproj');
 await access(project);

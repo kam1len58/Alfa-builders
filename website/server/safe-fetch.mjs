@@ -45,15 +45,28 @@ export function assertSourceUrl(value, allowedHosts) {
 }
 export async function safeFetch(
   value,
-  { allowedHosts, maxBytes = 2500000, redirects = 3, headers = {}, timeoutMs = 20000 }
+  {
+    allowedHosts,
+    maxBytes = 2500000,
+    redirects = 3,
+    headers = {},
+    timeoutMs = 20000,
+    resolver = lookup,
+    requester = https.request,
+  }
 ) {
   let url = assertSourceUrl(value, allowedHosts);
   for (let hop = 0; hop <= redirects; hop++) {
-    const addresses = await lookup(url.hostname, { all: true });
+    const addresses = await resolver(url.hostname, { all: true });
     if (!addresses.length || addresses.some((item) => !isPublicAddress(item.address)))
       throw new AiError('SOURCE_NETWORK', 'Адрес источника отклонён.', 502);
     const response = await new Promise((resolve, reject) => {
-      const req = https.request(
+      let timer, stream;
+      const fail = (error) => {
+        clearTimeout(timer);
+        reject(error);
+      };
+      const req = requester(
         url,
         {
           headers: {
@@ -69,24 +82,36 @@ export async function safeFetch(
               : callback(null, addresses[0].address, addresses[0].family),
         },
         (res) => {
+          stream = res;
           const chunks = [];
           let length = 0;
           res.on('data', (chunk) => {
             length += chunk.length;
             if (length > maxBytes) {
-              res.destroy();
-              req.destroy(new Error('SOURCE_TOO_LARGE'));
+              const error = new Error('SOURCE_TOO_LARGE');
+              fail(error);
+              res.destroy(error);
+              req.destroy(error);
             } else chunks.push(chunk);
           });
-          res.on('error', reject);
-          res.on('end', () =>
-            resolve({ status: res.statusCode, headers: res.headers, bytes: Buffer.concat(chunks) })
-          );
+          res.on('error', fail);
+          res.on('aborted', () => fail(new Error('SOURCE_INCOMPLETE')));
+          res.on('close', () => {
+            if (!res.complete) fail(new Error('SOURCE_INCOMPLETE'));
+          });
+          res.on('end', () => {
+            clearTimeout(timer);
+            resolve({ status: res.statusCode, headers: res.headers, bytes: Buffer.concat(chunks) });
+          });
         }
       );
-      const timer = setTimeout(() => req.destroy(new Error('SOURCE_TIMEOUT')), timeoutMs);
-      req.on('error', reject);
-      req.on('close', () => clearTimeout(timer));
+      timer = setTimeout(() => {
+        const error = new Error('SOURCE_TIMEOUT');
+        fail(error);
+        stream?.destroy(error);
+        req.destroy(error);
+      }, timeoutMs);
+      req.on('error', fail);
       req.end();
     });
     if ([301, 302, 303, 307, 308].includes(response.status)) {
