@@ -91,8 +91,8 @@ python analytics/score_news.py
 
 | Роль | Участник |
 |---|---|
-| Product / Team Lead | |
-| Product / презентация | |
-| ML | |
-| Backend (.NET) | |
+| Product / Team Lead | Nuri |
+| Product / презентация | Anna |
+| ML | Daria |
+| Backend (.NET) | Kamil |
 | Frontend и сервер сайта | Damir |
