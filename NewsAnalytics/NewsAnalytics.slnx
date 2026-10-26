@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="NewsAnalytics.BLL/NewsAnalytics.BLL.csproj" />
+  <Project Path="NewsAnalytics.DAL/NewsAnalytics.DAL.csproj" />
+  <Project Path="NewsAnalytics.Models/NewsAnalytics.Models.csproj" />
+  <Project Path="NewsAnalytics/NewsAnalytics.API.csproj" />
+</Solution>
