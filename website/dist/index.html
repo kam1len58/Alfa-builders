@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#111214" />
+    <meta
+      name="description"
+      content="Персональная повестка бизнеса: события, их влияние на компанию и аналитические материалы."
+    />
+    <title>Обзор руководителя — Альфа-Бизнес</title>
+    <script src="./themes.js"></script>
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="preload" href="./assets/manrope.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script src="./ui.js" defer></script>
+    <script src="./api.js" defer></script>
+    <script src="./news-tools.js" defer></script>
+    <script src="./ai-reader.js" defer></script>
+    <script src="./news-reader.js" defer></script>
+    <script src="./feed-tools.js" defer></script>
+    <script src="./service-panels.js" defer></script>
+    <script src="./feed-app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+    <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
+      <a class="brand" href="#overview" aria-label="Альфа-Бизнес, обзор"
+        ><span class="alfa-mark" aria-hidden="true">А</span><span>Альфа-Бизнес</span></a
+      >
+      <div class="workspace-label">Бизнес-аналитика</div>
+      <nav class="nav-primary">
+        <button class="nav-item" data-view="bank">
+          <span data-icon="building"></span><span>Главная банка</span>
+        </button>
+        <button class="nav-item active" data-view="overview" aria-current="page">
+          <span data-icon="home"></span><span>Обзор</span>
+        </button>
+        <button class="nav-item" data-view="all">
+          <span data-icon="news"></span><span>Все события</span
+          ><span class="nav-count" id="all-count">—</span>
+        </button>
+        <button class="nav-item" data-view="company">
+          <span data-icon="building"></span><span>Моя компания</span>
+        </button>
+        <button class="nav-item" data-view="saved">
+          <span data-icon="bookmark"></span><span>Сохранённое</span
+          ><span class="nav-count" id="saved-count">0</span>
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-action="sources">
+          <span data-icon="sources"></span><span>Источники</span>
+        </button>
+        <button class="nav-item" data-action="settings">
+          <span data-icon="settings"></span><span>Настройки</span>
+        </button>
+        <button class="nav-item" data-action="quality">
+          <span data-icon="check"></span><span>Качество анализа</span>
+        </button>
+        <div class="sidebar-foot">
+          <span class="small-alfa">А</span>
+          <div>Для вашего бизнеса<span>Дизайн-прототип</span></div>
+        </div>
+      </div>
+    </aside>
+    <button class="mobile-shade" id="mobile-shade" aria-label="Закрыть меню" hidden></button>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menu-button" aria-label="Открыть меню">
+          <span data-icon="menu"></span>
+        </button>
+        <div class="company-switch-wrap">
+          <button
+            class="company-switch"
+            id="company-switch"
+            aria-expanded="false"
+            aria-controls="company-menu"
+          >
+            <span class="company-monogram" id="company-monogram">··</span
+            ><span id="company-name">Загрузка компаний</span
+            ><span class="chevron" data-icon="chevron"></span>
+          </button>
+          <div class="company-menu popover" id="company-menu" hidden>
+            <div class="popover-label">Выберите компанию</div>
+            <input
+              type="search"
+              id="company-search"
+              placeholder="Отрасль, регион или ID"
+              aria-label="Поиск компании"
+              autocomplete="off"
+            />
+            <div id="company-options"></div>
+            <div class="popover-note">Обезличенные профили из набора данных</div>
+          </div>
+        </div>
+        <span class="topbar-divider"></span>
+        <span class="role-label">Финансовый директор</span>
+        <div class="topbar-right">
+          <button
+            class="theme-trigger"
+            id="theme-trigger"
+            aria-label="Изменить тему"
+            aria-haspopup="dialog"
+            aria-controls="theme-dialog"
+            title="Тема: Графит"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 3a9 9 0 1 0 0 18h1.5a1.5 1.5 0 0 0 1.2-2.4l-.3-.4a1.5 1.5 0 0 1 1.2-2.4H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"
+              />
+              <circle cx="7.5" cy="10.5" r=".7" />
+              <circle cx="10.5" cy="7.2" r=".7" />
+              <circle cx="15" cy="7.8" r=".7" />
+              <circle cx="17" cy="11.5" r=".7" /></svg
+            ><span>Тема</span>
+          </button>
+          <div class="search-wrap">
+            <span data-icon="search"></span
+            ><input
+              id="search"
+              type="search"
+              placeholder="Найти событие"
+              aria-label="Поиск по событиям"
+              autocomplete="off"
+            /><kbd>/</kbd>
+          </div>
+          <button
+            class="icon-button mobile-search-trigger"
+            id="mobile-search-button"
+            aria-label="Открыть поиск"
+            aria-expanded="false"
+          >
+            <span data-icon="search"></span>
+          </button>
+          <div class="notification-wrap">
+            <button
+              class="icon-button"
+              id="notification-button"
+              aria-label="Открыть уведомления"
+              aria-expanded="false"
+            >
+              <span data-icon="bell"></span
+              ><span class="notification-dot" id="notification-dot"></span>
+            </button>
+            <div class="notification-menu popover" id="notification-menu" hidden>
+              <div class="notification-heading">
+                <strong>Уведомления</strong><button id="read-notifications">Прочитать всё</button>
+              </div>
+              <div class="notification-entry">
+                <span class="notification-entry-dot"></span>
+                <div>
+                  <strong>Ваша персональная подборка</strong>
+                  <p>События, оценки и объяснения обновляются при выборе компании.</p>
+                  <span>Данные сервиса</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="avatar" data-action="profile" aria-label="Открыть профиль пользователя">
+            ФД
+          </button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow" id="page-eyebrow">Обзор руководителя</div>
+            <h1 id="page-title">Сегодня важно<span class="title-dot">.</span></h1>
+          </div>
+          <div class="heading-date">
+            <span id="heading-date"></span
+            ><span class="updated" id="connection-status" role="status"
+              ><i></i><span>Загрузка данных</span></span
+            >
+          </div>
+        </div>
+        <section id="bank-home" class="bank-home" aria-label="Главная Альфа-Бизнес" hidden>
+          <div class="bank-welcome">
+            <span class="section-overline">Альфа-Бизнес · Демонстрация</span>
+            <h2>Бизнес в контексте событий</h2>
+            <p>
+              Персональная аналитика для вашей компании — с фактами, основаниями и планом действий.
+            </p>
+          </div>
+          <button class="bank-analytics-entry" data-view="overview">
+            <div>
+              <span class="section-overline">Для руководителя</span>
+              <h3>Новостная аналитика</h3>
+              <p id="bank-entry-summary">Загружаем события компании…</p>
+              <span class="bank-entry-link"
+                >Открыть повестку <span data-icon="arrow-right"></span
+              ></span>
+            </div>
+            <span class="bank-entry-art" aria-hidden="true"
+              >А<span>Бизнес<br />и события</span></span
+            >
+          </button>
+          <div class="bank-home-links">
+            <button class="secondary-button" data-view="company">
+              <span data-icon="building"></span>Профиль компании</button
+            ><button class="secondary-button" data-view="saved">
+              <span data-icon="bookmark"></span>Сохранённое
+            </button>
+          </div>
+          <p class="analysis-caption">
+            Демонстрационный экран точки входа. Сведения о счетах и операциях банка здесь не
+            используются.
+          </p>
+        </section>
+        <section class="overview-grid" id="overview-grid" aria-label="Обзор дня">
+          <article class="daily-brief">
+            <div class="brief-count">
+              <span id="focus-count">—</span>
+              <p>события<br />в фокусе</p>
+            </div>
+            <div class="brief-content">
+              <div class="section-overline">Ваша повестка</div>
+              <h2 id="brief-title">Ваша повестка</h2>
+              <p id="brief-description">Загружаем события для вашей компании.</p>
+              <button class="text-button brief-link" id="brief-open">
+                Перейти к главному<span data-icon="arrow-right"></span>
+              </button>
+            </div>
+            <span class="brief-index" aria-hidden="true">01 — 03</span>
+          </article>
+          <article class="context-card">
+            <div class="context-heading">
+              <h2>Контекст компании</h2>
+              <button
+                class="icon-button"
+                data-action="company"
+                aria-label="Открыть профиль компании"
+              >
+                <span data-icon="arrow-up-right"></span>
+              </button>
+            </div>
+            <div class="context-row">
+              <span data-icon="building"></span>
+              <div>
+                <span class="context-label">Отрасль</span><strong id="context-industry">—</strong>
+              </div>
+            </div>
+            <div class="context-row">
+              <span data-icon="briefcase"></span>
+              <div>
+                <span class="context-label">Продукты и связи</span
+                ><strong id="context-products">—</strong>
+              </div>
+            </div>
+            <div class="context-footer">
+              <span id="context-id">—</span
+              ><button class="inline-link" data-action="company">
+                Подробнее<span data-icon="arrow-right"></span>
+              </button>
+            </div>
+          </article>
+        </section>
+        <section class="events-section" aria-labelledby="events-heading">
+          <div class="events-toolbar">
+            <div class="section-title-wrap">
+              <h2 id="events-heading">В фокусе</h2>
+              <span class="section-count" id="section-count" aria-live="polite">—</span>
+            </div>
+            <div class="event-tabs" role="group" aria-label="Раздел ленты">
+              <button class="event-tab" data-filter="all" aria-pressed="false">Все</button
+              ><button class="event-tab active" data-filter="focus" aria-pressed="true">
+                В фокусе</button
+              ><button class="event-tab" data-filter="general" aria-pressed="false">
+                Общий контекст
+              </button>
+            </div>
+            <label class="sort-wrap"
+              ><span data-icon="sort"></span
+              ><select id="sort" aria-label="Порядок событий">
+                <option value="priority">По значимости</option>
+                <option value="date">Сначала новые</option>
+              </select></label
+            >
+          </div>
+          <div class="feed-actionbar">
+            <label class="select-visible-label"
+              ><input
+                type="checkbox"
+                id="select-visible"
+                aria-label="Выбрать показанные события"
+              /><span id="visible-label">Загрузка подборки</span></label
+            >
+            <div class="feed-actions">
+              <button
+                class="tool-button"
+                id="filter-toggle"
+                aria-expanded="false"
+                aria-controls="advanced-filters"
+              >
+                <span data-icon="filter"></span>Фильтры<span id="filter-count"></span>
+              </button>
+              <button class="tool-button" id="compare-open">
+                <span data-icon="compare"></span>Сравнить
+              </button>
+              <button class="tool-button" id="export-open">
+                <span data-icon="download"></span>Экспорт
+              </button>
+            </div>
+          </div>
+          <section
+            class="advanced-filters"
+            id="advanced-filters"
+            aria-label="Фильтры событий"
+            hidden
+          >
+            <fieldset id="filter-fields">
+              <legend class="sr-only">Дата публикации, тема и предложенный продукт</legend>
+              <label>Дата с<input type="date" id="filter-from" /></label>
+              <label
+                >Дата по<input type="date" id="filter-to" aria-describedby="filter-error"
+              /></label>
+              <label
+                >Тема<select id="filter-topic">
+                  <option value="">Все темы</option>
+                </select></label
+              >
+              <label
+                >Продукт для обсуждения<select id="filter-product">
+                  <option value="">Все продукты</option>
+                </select></label
+              >
+            </fieldset>
+            <div class="filter-panel-footer">
+              <span>Важность задаётся разделом ленты выше</span
+              ><button class="inline-link" id="filters-reset">Сбросить фильтры</button>
+            </div>
+            <p class="field-error" id="filter-error" role="alert" hidden>
+              Дата окончания раньше даты начала. Исправьте период.
+            </p>
+          </section>
+          <div class="active-filters" id="active-filters" hidden></div>
+          <div class="selection-bar" id="selection-bar" hidden>
+            <span>Выбрано: <strong id="selected-count">0</strong></span
+            ><button id="selection-export">
+              Экспорт выбранного <span data-icon="download"></span></button
+            ><button id="clear-selection" aria-label="Снять выбор со всех событий">
+              <span data-icon="close"></span>
+            </button>
+          </div>
+          <div class="event-grid" id="event-grid"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <span data-icon="search"></span>
+            <h3 id="empty-title">Ничего не найдено</h3>
+            <p id="empty-description">Попробуйте другую тему или измените фильтр.</p>
+            <button class="secondary-button" id="reset-filters">Сбросить фильтры</button>
+          </div>
+          <div class="show-more-wrap" id="show-more-wrap">
+            <button class="show-more" id="show-more">
+              Все события<span id="more-count">—</span><span data-icon="arrow-right"></span>
+            </button>
+          </div>
+        </section>
+        <section class="reading-strip" id="reading-strip">
+          <span data-icon="sources"></span>
+          <div>
+            <h2>Источники и основания</h2>
+            <p>Какие сведения о компании и материалы используются в разборе событий.</p>
+          </div>
+          <button class="text-button" data-action="sources">
+            Как устроен обзор<span data-icon="arrow-up-right"></span>
+          </button>
+        </section>
+        <footer class="page-footer">
+          <span>Альфа-Бизнес · Аналитика для решений</span
+          ><span>Профили и лента из сервиса · Источники не проверены</span>
+        </footer>
+      </main>
+    </div>
+    <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
+      <div class="detail-chrome">
+        <span id="detail-chrome-label">Разбор события</span>
+        <div>
+          <button class="icon-button" id="detail-save" aria-label="Сохранить событие"></button
+          ><button class="icon-button" id="detail-close" aria-label="Закрыть разбор">
+            <span data-icon="close"></span>
+          </button>
+        </div>
+      </div>
+      <div id="detail-body"></div>
+    </dialog>
+    <dialog id="utility-dialog" class="utility-dialog" aria-labelledby="utility-title">
+      <div class="utility-heading">
+        <h2 id="utility-title"></h2>
+        <button class="icon-button" id="utility-close" aria-label="Закрыть">
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div id="utility-body"></div>
+    </dialog>
+    <dialog id="comparison-dialog" class="comparison-dialog" aria-labelledby="comparison-title">
+      <div class="comparison-heading">
+        <div>
+          <span class="eyebrow">Одна новость · Разный контекст</span>
+          <h2 id="comparison-title">Сравнение компаний</h2>
+        </div>
+        <button class="icon-button" id="comparison-close" aria-label="Закрыть сравнение">
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div class="comparison-controls">
+        <label for="comparison-event"
+          >Событие для сравнения<select id="comparison-event"></select></label
+        ><button class="secondary-button" id="comparison-refresh">Обновить оценки</button>
+      </div>
+      <p id="comparison-context" class="comparison-context"></p>
+      <div id="comparison-grid" class="comparison-grid"></div>
+      <p id="comparison-status" class="source-note" role="status"></p>
+    </dialog>
+    <dialog
+      id="theme-dialog"
+      class="theme-dialog"
+      aria-labelledby="theme-title"
+      aria-describedby="theme-description"
+    >
+      <div class="theme-heading">
+        <div>
+          <span class="theme-eyebrow">Рабочее пространство</span>
+          <h2 id="theme-title">Оформление</h2>
+        </div>
+        <button type="button" class="icon-button" id="theme-close" aria-label="Закрыть выбор темы">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="m6 6 12 12M6 18 18 6" />
+          </svg>
+        </button>
+      </div>
+      <p id="theme-description">Выберите тему для работы с аналитикой.</p>
+      <fieldset class="theme-options">
+        <legend class="sr-only">Тема сайта</legend>
+        <label class="theme-option"
+          ><input type="radio" name="site-theme" value="graphite" aria-label="Графит" /><span
+            class="theme-preview"
+            data-preview="graphite"
+            aria-hidden="true"
+            ><i class="preview-sidebar"></i><i class="preview-heading"></i
+            ><i class="preview-card"></i><i class="preview-card"></i></span
+          ><span class="theme-copy"
+            ><strong>Графит</strong><small>Тёмная · Красный акцент</small></span
+          ><span class="theme-check" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m5 12 4 4L19 6" /></svg></span
+        ></label>
+        <label class="theme-option"
+          ><input type="radio" name="site-theme" value="daylight" aria-label="Светлая" /><span
+            class="theme-preview"
+            data-preview="daylight"
+            aria-hidden="true"
+            ><i class="preview-sidebar"></i><i class="preview-heading"></i
+            ><i class="preview-card"></i><i class="preview-card"></i></span
+          ><span class="theme-copy"
+            ><strong>Светлая</strong><small>Светлая · Красный акцент</small></span
+          ><span class="theme-check" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m5 12 4 4L19 6" /></svg></span
+        ></label>
+        <label class="theme-option"
+          ><input type="radio" name="site-theme" value="north" aria-label="Север" /><span
+            class="theme-preview"
+            data-preview="north"
+            aria-hidden="true"
+            ><i class="preview-sidebar"></i><i class="preview-heading"></i
+            ><i class="preview-card"></i><i class="preview-card"></i></span
+          ><span class="theme-copy"><strong>Север</strong><small>Тёмная · Синий акцент</small></span
+          ><span class="theme-check" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m5 12 4 4L19 6" /></svg></span
+        ></label>
+        <label class="theme-option"
+          ><input type="radio" name="site-theme" value="sage" aria-label="Шалфей" /><span
+            class="theme-preview"
+            data-preview="sage"
+            aria-hidden="true"
+            ><i class="preview-sidebar"></i><i class="preview-heading"></i
+            ><i class="preview-card"></i><i class="preview-card"></i></span
+          ><span class="theme-copy"
+            ><strong>Шалфей</strong><small>Светлая · Зелёный акцент</small></span
+          ><span class="theme-check" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m5 12 4 4L19 6" /></svg></span
+        ></label>
+        <label class="theme-option"
+          ><input type="radio" name="site-theme" value="plum" aria-label="Слива" /><span
+            class="theme-preview"
+            data-preview="plum"
+            aria-hidden="true"
+            ><i class="preview-sidebar"></i><i class="preview-heading"></i
+            ><i class="preview-card"></i><i class="preview-card"></i></span
+          ><span class="theme-copy"
+            ><strong>Слива</strong><small>Тёмная · Розовый акцент</small></span
+          ><span class="theme-check" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m5 12 4 4L19 6" /></svg></span
+        ></label>
+      </fieldset>
+      <div class="theme-footer">
+        <span id="theme-status" role="status" aria-live="polite"
+          >Выбор сохраняется в этом браузере.</span
+        ><button type="button" class="theme-done" id="theme-done">Готово</button>
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

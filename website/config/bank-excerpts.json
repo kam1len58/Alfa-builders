@@ -1,0 +1,200 @@
+[
+  {
+    "id": "alfa-rate-20260911",
+    "title": "Ключевая ставка ЦБ РФ: ставка без изменения на 14,0%, риторика стала жестче",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-11",
+    "url": "https://drive.google.com/uc?export=download&id=1shHG89LtMgHT1_uEebHmQSFZe_zbeq7-",
+    "documentUrl": "https://drive.google.com/file/d/1shHG89LtMgHT1_uEebHmQSFZe_zbeq7-/view",
+    "sha256": "92a96805f2b720f76bd0c52d2491044812b38401ab62d0f4a9157b4ca81c49bb",
+    "filename": "ALFA-Macro_Insights-Policy_Rate_11Sep.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "ЦБ РФ принял решение оставить ставку неизменной на уровне 14,0%"
+      },
+      {
+        "page": 1,
+        "text": "Мы ожидаем сохранения паузы на заседании 23 октября"
+      }
+    ],
+    "topics": ["KEY_RATE", "INFL_COSTS", "CREDIT"],
+    "historical": true,
+    "caveat": "Позиция на 11.09.2026; фраза о заседании 23 октября — исторический прогноз, а не описание фактического решения и не текущая позиция."
+  },
+  {
+    "id": "alfa-inflation-20260902",
+    "title": "Инфляция 25–31 августа: основные выводы",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-02",
+    "url": "https://drive.google.com/uc?export=download&id=19iW3Ph8_wO0HHQY7Ik4lTfC3jRc9gjWV",
+    "documentUrl": "https://drive.google.com/file/d/19iW3Ph8_wO0HHQY7Ik4lTfC3jRc9gjWV/view",
+    "sha256": "09d5537f6a52f5f8f2d9518ed9171e794382972ce38cbdc4bd3099b2db129d0c",
+    "filename": "Inflation_tracker_02.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Мы также полагаем, что наблюдающаяся ситуация на рынке топлива не позволяет рассчитывать на то, что новая волна роста цен уже исчерпана"
+      }
+    ],
+    "topics": ["INFL_COSTS", "FUEL"],
+    "historical": true,
+    "caveat": "Оценка опубликована 02.09.2026 по неделе 25–31.08.2026; не переносить автоматически на текущие цены или последующие события."
+  },
+  {
+    "id": "alfa-macro-20260907",
+    "title": "Макростатистика 7М26: данные по рынку труда не подтверждают охлаждения экономики",
+    "publisher": "Альфа-Банк, Центр макроэкономического анализа",
+    "publishedAt": "2026-09-07",
+    "url": "https://drive.google.com/uc?export=download&id=1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64",
+    "documentUrl": "https://drive.google.com/file/d/1HZDq3WGRFdzgm1TZ5hWL23Q3I9c2Eq64/view",
+    "sha256": "3c64c1e43f3b46a795f9581967f2dbc8efb0994cb77ab82e95da180830e9ff8c",
+    "filename": "ALFA-7M26.pdf",
+    "reviewedAt": "2026-10-24T17:15:01Z",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Ключевым вопросом текущих месяцев является скорость охлаждения рынка труда, этот фактор выглядит основным аргументом в пользу возможного продолжения цикла снижения ставки."
+      }
+    ],
+    "topics": ["LABOR", "KEY_RATE", "PMI_ORDERS"],
+    "historical": true,
+    "caveat": "Оценка на 07.09.2026, относится к статистике за первые семь месяцев года; позднейшие изменения не учтены."
+  },
+  {
+    "id": "alfa-bond-brief-20260914",
+    "title": "Бонд Бриф: Итоги недели. Заседание ЦБ по ставке добавило долговому рынку негатива",
+    "publishedAt": "2026-09-14",
+    "dateEvidence": "page 1 footer",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "На горизонте ближайших недель мы не видим драйверов для улучшения настроений на рынке ОФЗ."
+      }
+    ],
+    "topics": ["BONDS", "RATE", "INFL_COSTS"],
+    "driveId": "1bPzix_332N2CyMY0tqCHuYtGsfJWnFGv",
+    "url": "https://drive.google.com/uc?export=download&id=1bPzix_332N2CyMY0tqCHuYtGsfJWnFGv",
+    "documentUrl": "https://drive.google.com/file/d/1bPzix_332N2CyMY0tqCHuYtGsfJWnFGv/view",
+    "sha256": "87dc17520e2a744f95580ee2ec42461d0ee6ebf19e752622a49c49600cb1b055",
+    "filename": "Бонд_Бриф_14092026.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true,
+    "caveat": "Историческая оценка на 2026-09-14; не выдавать за текущую позицию банка и не переносить прогноз автоматически на новые события."
+  },
+  {
+    "id": "alfa-steel-20210415",
+    "title": "Российская сталь: ралли цен продолжается; прогноз результатов за 1К21",
+    "publishedAt": "2021-04-15",
+    "dateEvidence": "page 1 right header",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Рост оборотного капитала предполагает усиление давления на квартальный СДП."
+      }
+    ],
+    "topics": ["METALS", "STEEL"],
+    "caveat": "Исторический материал апреля 2021 года; не использовать как текущий прогноз или подтверждение ситуации в 2026 году.",
+    "driveId": "1yLCBrIoyIsubLTEBvBHh6io48ysnW-wn",
+    "url": "https://drive.google.com/uc?export=download&id=1yLCBrIoyIsubLTEBvBHh6io48ysnW-wn",
+    "documentUrl": "https://drive.google.com/file/d/1yLCBrIoyIsubLTEBvBHh6io48ysnW-wn/view",
+    "sha256": "36eaaa58ae68d858db3600dbf3cc93d0bdefb8ca03f1f5cc154c532cc32e0c86",
+    "filename": "ALFA_Russian_Steels_1К21PreviewUpdate_15Apr2021.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true
+  },
+  {
+    "id": "alfa-consumption-20260805",
+    "title": "Потребление на пике",
+    "publishedAt": "2026-08-05",
+    "dateEvidence": "page 1 header",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Мы полагаем, что динамика потребления сейчас находится на пике и в следующие месяцы будет происходить постепенное охлаждение темпов роста спроса"
+      }
+    ],
+    "topics": ["CONSUMER_DEMAND", "PMI_ORDERS", "LABOR"],
+    "driveId": "1riR1lhsb6EY1MwGMxdBlS_tI5ed9mIiz",
+    "url": "https://drive.google.com/uc?export=download&id=1riR1lhsb6EY1MwGMxdBlS_tI5ed9mIiz",
+    "documentUrl": "https://drive.google.com/file/d/1riR1lhsb6EY1MwGMxdBlS_tI5ed9mIiz/view",
+    "sha256": "807ee9925cf7d15ecffc72ad7142f9a83d342cd19690e12dd3b90aa2ba8ea1c6",
+    "filename": "ALFA-consumption.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true,
+    "caveat": "Историческая оценка на 2026-08-05; не выдавать за текущую позицию банка и не переносить прогноз автоматически на новые события."
+  },
+  {
+    "id": "alfa-macro-1h2026-20260731",
+    "title": "Макростатистика 1П26: слабый рост 1П26 смещает наш прогноз роста ВВП на 0,1% за год",
+    "publishedAt": "2026-07-31",
+    "dateEvidence": "page 1 header",
+    "excerpts": [
+      {
+        "page": 1,
+        "text": "Рост потребления на этом фоне остается быстрым, и по итогам 1П26 оборот розничной торговли составил 5,4% г/г."
+      }
+    ],
+    "topics": ["GDP", "CONSUMER_DEMAND", "LABOR", "RATE"],
+    "driveId": "1khcHwoS0FkG9p_0J4XoHGaGq3B4V0ime",
+    "url": "https://drive.google.com/uc?export=download&id=1khcHwoS0FkG9p_0J4XoHGaGq3B4V0ime",
+    "documentUrl": "https://drive.google.com/file/d/1khcHwoS0FkG9p_0J4XoHGaGq3B4V0ime/view",
+    "sha256": "84899553fadf3e49abac7074c7b7d2afc2fa5c70b7fde0bf4c3eabe3d7402266",
+    "filename": "ALFA-macro_stat1H26.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true,
+    "caveat": "Историческая оценка на 2026-07-31; не выдавать за текущую позицию банка и не переносить прогноз автоматически на новые события."
+  },
+  {
+    "id": "alfa-bonds-20260722",
+    "title": "Долговой рынок: тактический взгляд на 3-й квартал 2026 г. — Время собирать камни",
+    "publishedAt": "2026-07-22",
+    "dateEvidence": "page 1 cover",
+    "excerpts": [
+      {
+        "page": 2,
+        "text": "Корпоративные облигации с переменным купоном. Основной инструмент привлечения компаниями средств на публичном долговом рынке, формируют более 50% рынка"
+      }
+    ],
+    "topics": ["RATE", "BONDS", "CREDIT"],
+    "driveId": "1hq3Fhyz9ce_sRyGUQB1MdoHeQdfAJfhK",
+    "url": "https://drive.google.com/uc?export=download&id=1hq3Fhyz9ce_sRyGUQB1MdoHeQdfAJfhK",
+    "documentUrl": "https://drive.google.com/file/d/1hq3Fhyz9ce_sRyGUQB1MdoHeQdfAJfhK/view",
+    "sha256": "6c3a4882ee784b608880693d8ba2b62d0ba2236e34b404179adaab909c6dd046",
+    "filename": "FI_Strategy_3Q26_22072026.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true,
+    "caveat": "Историческая оценка на 2026-07-22; не выдавать за текущую позицию банка и не переносить прогноз автоматически на новые события."
+  },
+  {
+    "id": "alfa-gold-202608",
+    "title": "Обзор рынка золота. Август 2026",
+    "publishedAt": null,
+    "period": "2026-08",
+    "datePrecision": "unknown",
+    "dateEvidence": "cover names reporting month only; page 2 references events after August; exact publication date not found",
+    "excerpts": [
+      {
+        "page": 2,
+        "text": "Устойчивая дезинфляция вместе с ослаблением доллара и снижением реальных доходностей, новые притоки в ETF, а также продолжение покупок со стороны мировых ЦБ."
+      }
+    ],
+    "topics": ["GOLD", "FX"],
+    "caveat": "Отчётный период — август 2026; точная дата публикации на просмотренных страницах не указана. Это исторический контекст, а не текущий прогноз.",
+    "driveId": "1a7TXOCHARfKzUR0hn9Cm9gQSrIldxTDE",
+    "url": "https://drive.google.com/uc?export=download&id=1a7TXOCHARfKzUR0hn9Cm9gQSrIldxTDE",
+    "documentUrl": "https://drive.google.com/file/d/1a7TXOCHARfKzUR0hn9Cm9gQSrIldxTDE/view",
+    "sha256": "4159576a6223985dd318b6f5a04ad4aeb888f47a6c266d0e9ee9eb35bf01e245",
+    "filename": "Gold_digest_August26.pdf",
+    "publisher": "Альфа-Банк",
+    "reviewedAt": "2026-10-24T22:17:56.210051+00:00",
+    "historical": true
+  }
+]

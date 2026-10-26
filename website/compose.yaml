@@ -1,0 +1,62 @@
+services:
+  backend:
+    build:
+      context: ${BACKEND_CONTEXT:-../../Alfa-builders-backend/NewsAnalytics}
+      dockerfile_inline: |
+        FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+        WORKDIR /src
+        COPY . .
+        RUN dotnet publish NewsAnalytics/NewsAnalytics.API.csproj -c Release -o /out /p:UseAppHost=false
+        RUN cp NewsAnalytics/demo_profiles.json NewsAnalytics/golden_news.json /out/
+        FROM mcr.microsoft.com/dotnet/aspnet:10.0
+        WORKDIR /app
+        COPY --from=build /out .
+        RUN mkdir /data && chown $APP_UID:$APP_UID /data
+        USER $APP_UID
+        WORKDIR /data
+        ENTRYPOINT ["dotnet","/app/NewsAnalytics.API.dll","--contentRoot","/app","--urls","http://0.0.0.0:8080"]
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Logging__LogLevel__Default: Warning
+    volumes:
+      - backend-data:/data
+    restart: unless-stopped
+  website:
+    build: .
+    environment:
+      BACKEND_URL: http://backend:8080
+      APP_DATA_DIR: /data
+      PROFILES_FILE: ${CONTAINER_PROFILES_FILE:-}
+      APP_BIND_ADDRESS: 0.0.0.0
+      AUTH_USERS_FILE: /run/secrets/access.json
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://changellenge.up.railway.app/v1}
+      LLM_MODEL: ${LLM_MODEL:-deepseek/deepseek-v4.1-flash}
+      LLM_REVIEW_MODEL: ${LLM_REVIEW_MODEL:-qwen/qwen3.6-35b-a3b}
+      LLM_PRICES_RUB_PER_MILLION: ${LLM_PRICES_RUB_PER_MILLION:-}
+      LLM_DAILY_BUDGET_RUB: ${LLM_DAILY_BUDGET_RUB:-500}
+      LLM_CACHE_DIR: /data/ai-cache
+      LLM_AUDIT_PATH: /data/model-metadata.jsonl
+    ports:
+      - '127.0.0.1:${PORT:-4173}:4173'
+    volumes:
+      - website-data:/data
+      - ${ALFA_PROFILES_DIR:-./data}:/profiles:ro
+      - ${ALFA_ACCESS_FILE:?Укажите путь к файлу учётных записей вне Git}:/run/secrets/access.json:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          'Promise.all([fetch("http://127.0.0.1:4173/api/session"),fetch("http://backend:8080/api/Companies").then(r=>r.json())]).then(([s,c])=>process.exit(s.ok&&Array.isArray(c)&&c.length>0?0:1)).catch(()=>process.exit(1))',
+        ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+volumes:
+  backend-data:
+  website-data:

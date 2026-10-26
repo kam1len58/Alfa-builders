@@ -1,0 +1,173 @@
+{
+  "N1": {
+    "content": "По данным Росстата, в сентябре 2026 года цены выросли на 0,35% за месяц; годовая инфляция составила 6,35% против 6,33% в августе. Годовое ускорение составило только 0,02 процентного пункта.",
+    "source": "https://www.interfax.ru/business/1121468",
+    "publishedAt": "2026-10-09",
+    "reviewedAt": "2026-10-25T12:33:36.979307+00:00",
+    "sources": [
+      {
+        "title": "Интерфакс: инфляция в сентябре составила 0,35%, годовая — 6,35%",
+        "url": "https://www.interfax.ru/business/1121468",
+        "publishedAt": "2026-10-09",
+        "role": "news",
+        "liveHttps": true
+      },
+      {
+        "title": "Росстат: об индексе потребительских цен в сентябре 2026 года",
+        "url": "https://rosstat.gov.ru/storage/mediabank/157_09-10-2026.html",
+        "publishedAt": "2026-10-09",
+        "role": "primary",
+        "liveHttps": false,
+        "webIndexVerified": true
+      },
+      {
+        "title": "Банк России: Инфляция в России. Сентябрь2026",
+        "url": "https://www.cbr.ru/Collection/Collection/File/62446/CPD_2026-9.pdf",
+        "role": "primary",
+        "liveHttps": true
+      }
+    ],
+    "warnings": [
+      "Первоначальный фрагмент уточнён по найденным источникам; неподтверждённые детали и комментарии банка исключены."
+    ],
+    "originalExcerpt": {
+      "url": "https://www.cbr.ru/Collection/Collection/File/62446/CPD_2026-9.pdf",
+      "publisher": "Банк России",
+      "title": "Инфляция в России. Сентябрь 2026 года",
+      "language": "ru",
+      "quote": "Годовая инфляция почти не изменилась и составила 6,35% (+0,02 п.п.).",
+      "confirms": "Годовая инфляция в сентябре — 6,35%, изменение к августу — +0,02 процентного пункта. Эта цитата не содержит месячный показатель 0,35%; он отдельно показан на той же странице."
+    },
+    "title": "Инфляция в сентябре: 0,35% за месяц и 6,35% за год"
+  },
+  "N2": {
+    "content": "Производственный PMI России в сентябре 2026 вырос с 48,8 до 49,8, оставаясь ниже 50. Новые заказы и выпуск сократились второй месяц подряд, занятость — десятый месяц. Это замедление темпа спада, а не рост производства.",
+    "source": "https://www.interfax.com/newsroom/top-stories/119352/",
+    "publishedAt": "2026-10-01",
+    "reviewedAt": "2026-10-25T12:33:36.979307+00:00",
+    "sources": [
+      {
+        "title": "Интерфакс: PMI in Russian manufacturing climbs to49.8",
+        "url": "https://www.interfax.com/newsroom/top-stories/119352/",
+        "publishedAt": "2026-10-01",
+        "role": "news",
+        "liveHttps": true
+      },
+      {
+        "title": "Reuters via MarketScreener: Russian manufacturing contracts slightly",
+        "url": "https://www.marketscreener.com/news/russian-manufacturing-contracts-slightly-as-job-cuts-hit-fastest-since-may-pmi-shows-ce785ad3dd80f623",
+        "publishedAt": "2026-10-01",
+        "role": "news",
+        "liveHttps": false
+      }
+    ],
+    "warnings": [
+      "Первоначальный фрагмент уточнён по найденным источникам; неподтверждённые детали и комментарии банка исключены."
+    ],
+    "originalExcerpt": {
+      "url": "https://www.interfax.com/newsroom/top-stories/119352/",
+      "publisher": "Interfax",
+      "title": "PMI in Russian manufacturing climbs to 49.8 in Sept from 48.8 in Aug - S&P Global",
+      "language": "en",
+      "quote": "The Purchasing Managers' Index (PMI) for Russia's manufacturing sector rose to 49.8 points in September from 48.8 points in August",
+      "confirms": "Производственный PMI России вырос с 48,8 в августе до 49,8 в сентябре. Это не подтверждение роста выпуска; информация о сокращении выпуска и занятости проверена отдельно в этой публикации."
+    },
+    "title": "Производственный PMI вырос до 49,8, оставаясь в зоне спада"
+  },
+  "N3": {
+    "content": "Egypt Oil & Gas 17.10.2026 со ссылкой на Reuters сообщает о решении 16.10 временно не применять часть санкций и пошлин до 100% к крупнейшим покупателям российской нефти и газа. Речь о конкретных мерах нового закона; общее снятие санкций не подтверждается.",
+    "source": "https://egyptoil-gas.com/news/trump-waives-russia-oil-sanctions-tariffs-ahead-of-enforcement/",
+    "publishedAt": "2026-10-17",
+    "reviewedAt": "2026-10-25T12:33:36.979307+00:00",
+    "sources": [
+      {
+        "title": "EgyptOilGas: Trump Waives Russia Oil Sanctions, Tariffs Ahead of Enforcement",
+        "url": "https://egyptoil-gas.com/news/trump-waives-russia-oil-sanctions-tariffs-ahead-of-enforcement/",
+        "publishedAt": "2026-10-17",
+        "role": "news",
+        "liveHttps": true
+      },
+      {
+        "title": "Reuters: Trump waives many Russia-related sanctions, tariffs before they were to take effect",
+        "url": "https://www.reuters.com/world/europe/trump-waives-many-russia-related-sanctions-tariffs-before-they-were-take-effect-2026-10-17/",
+        "publishedAt": "2026-10-17",
+        "role": "news",
+        "liveHttps": false
+      }
+    ],
+    "warnings": [
+      "Первоначальный фрагмент уточнён по найденным источникам; неподтверждённые детали и комментарии банка исключены."
+    ],
+    "originalExcerpt": {
+      "url": "https://egyptoil-gas.com/news/trump-waives-russia-oil-sanctions-tariffs-ahead-of-enforcement/",
+      "publisher": "Egypt Oil & Gas, со ссылкой на Reuters",
+      "title": "Trump Waives Russia Oil Sanctions, Tariffs Ahead of Enforcement",
+      "language": "en",
+      "quote": "US President Donald Trump waived key sanctions and tariffs targeting Russia’s oil trade on October 16",
+      "confirms": "Сообщение о решении Дональда Трампа 16 октября относительно части санкций и пошлин в отношении российской нефтяной торговли. Фрагмент не подтверждает снятие всех санкций или рыночные движения 19 октября."
+    },
+    "title": "США временно не применяют часть новых мер к покупателям российской нефти",
+    "eventDate": "2026-10-16"
+  },
+  "N4": {
+    "content": "Публикация Baird Maritime от 14.10.2026 с атрибуцией Reuters подтверждает возобновление отгрузок дизеля из Приморска, частичное снятие российского запрета с 10 октября, танкер около 40 тыс. тонн, загрузку 13 октября и направление в Марокко. Прогноз Новака — 3–3,5 млн тонн в месяц к концу года, а не уже достигнутый объём.",
+    "source": "https://www.bairdmaritime.com/shipping/tankers/russian-diesel-flows-again-from-baltic-port-after-pact-with-us",
+    "publishedAt": "2026-10-14",
+    "reviewedAt": "2026-10-25T12:33:36.979307+00:00",
+    "sources": [
+      {
+        "title": "BairdMaritime / Reuters: Russian diesel flows again from Baltic port after pact withUS",
+        "url": "https://www.bairdmaritime.com/shipping/tankers/russian-diesel-flows-again-from-baltic-port-after-pact-with-us",
+        "publishedAt": "2026-10-14",
+        "role": "news",
+        "liveHttps": true
+      }
+    ],
+    "warnings": [
+      "Первоначальный фрагмент уточнён по найденным источникам; неподтверждённые детали и комментарии банка исключены."
+    ],
+    "originalExcerpt": {
+      "url": "https://www.bairdmaritime.com/shipping/tankers/russian-diesel-flows-again-from-baltic-port-after-pact-with-us",
+      "publisher": "Baird Maritime / Reuters",
+      "title": "Russian diesel flows again from Baltic port after pact with US",
+      "language": "en",
+      "quote": "a tanker carrying around 40,000 tonnes of ultra-low sulphur diesel was loaded on October 13 and is heading towards Morocco.",
+      "confirms": "Танкер примерно с 40 тыс. тонн дизеля загружен 13 октября и направляется в Марокко. Это не подтверждение снижения внутренних цен на топливо."
+    },
+    "title": "Из Приморска возобновились отгрузки дизеля"
+  },
+  "N5": {
+    "content": "Reuters 15.10.2026 оценивает нефтегазовые налоговые поступления октября примерно в 1 трлн рублей, на 10% выше год к году. Оценка сокращения добычи в III квартале — около 5% год к году. Это прогноз, а не итог октября; важная причина месячного скачка — квартальная уплата НДД.",
+    "source": "https://www.themoscowtimes.com/2026/10/15/russias-oil-and-gas-revenues-forecast-to-rise-10-year-on-year-in-october-to-12bln-a93992",
+    "publishedAt": "2026-10-15",
+    "reviewedAt": "2026-10-25T12:33:36.979307+00:00",
+    "sources": [
+      {
+        "title": "Reuters / TheMoscowTimes: Russia’s Oil and Gas Revenues Forecast toRise10%",
+        "url": "https://www.themoscowtimes.com/2026/10/15/russias-oil-and-gas-revenues-forecast-to-rise-10-year-on-year-in-october-to-12bln-a93992",
+        "publishedAt": "2026-10-15",
+        "role": "news",
+        "liveHttps": true
+      },
+      {
+        "title": "Reuters / Devdiscourse: Russia’s oil and gas revenue seen up10%",
+        "url": "https://www.devdiscourse.com/article/international/3992950-russias-oil-and-gas-revenue-seen-up-10-yy-in-october-to-12-billion",
+        "publishedAt": "2026-10-15",
+        "role": "news",
+        "liveHttps": true
+      }
+    ],
+    "warnings": [
+      "Первоначальный фрагмент уточнён по найденным источникам; неподтверждённые детали и комментарии банка исключены."
+    ],
+    "originalExcerpt": {
+      "url": "https://www.themoscowtimes.com/2026/10/15/russias-oil-and-gas-revenues-forecast-to-rise-10-year-on-year-in-october-to-12bln-a93992",
+      "publisher": "Reuters, опубликовано The Moscow Times",
+      "title": "Russia’s Oil and Gas Revenues Forecast to Rise 10% Year-on-Year in October to $12Bln",
+      "language": "en",
+      "quote": "is expected to increase by 10% year-on-year in October to reach 1 trillion rubles ($11.97 billion),",
+      "confirms": "Прогноз роста нефтегазовых налоговых поступлений в октябре на 10% год к году до 1 трлн рублей. Это ожидаемое значение, а не окончательный факт; оценка снижения добычи на 5% проверена в другом абзаце той же публикации."
+    },
+    "title": "Reuters прогнозирует рост нефтегазовых доходов бюджета в октябре"
+  }
+}

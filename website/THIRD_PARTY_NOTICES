@@ -1,0 +1,35 @@
+Manrope variable font
+Copyright and license: dist/assets/manrope-license.txt (SIL Open Font License 1.1).
+Source: https://github.com/google/fonts/tree/main/ofl/manrope
+
+Editorial photographs: Unsplash, downloaded as local assets.
+finance.jpg: https://images.unsplash.com/photo-1486406146926-c627a92ad1ab
+logistics.jpg: https://images.unsplash.com/photo-1494412519320-aa613dfb7738
+industry.jpg: https://images.unsplash.com/photo-1486262715619-67b85e0b08d3
+License information: https://unsplash.com/license
+Photographs illustrate themes and are not evidence of described events.
+
+The Alfa-Business name and red A mark identify the banking context of the user-provided case.
+This is an unofficial design prototype, not a production banking service.
+
+Four anonymized company profiles, including revenue and payment relationship information, come from the user-provided demo_profiles.json.
+An optional local profile builder processes the user-supplied original CSVs. Generated profiles are not distributed in this repository. Payment counterparties are not verified suppliers/customers.
+News text, relevance scores, explanations, rules and suggested products are returned by the team's NewsAnalytics backend.
+The backend currently seeds its news from the team's manually prepared golden_news.json.
+Company display names describe the industry and are not legal names.
+The supplied demo_profiles.json and feed_preview.xlsx are included in data/ for the team.
+The web server serves dist/, forwards read-only /api/ requests to the configured backend, and handles server-only /api/ai/ analysis and chat requests.
+Original source files in data/ are not served. News text is displayed with source attribution, without independent fact verification. Backend scores are preserved; the adapter replaces ambiguous supplier-concentration, PMI-direction and fuel-price rule wording with cautious profile-context notes.
+Scores are not risk probabilities. Bank expertise and source links absent from the feed response are not invented by the website.
+AI inference uses the organizer-provided OpenAI-compatible service at https://changellenge.up.railway.app/v1 with deepseek/deepseek-v4.1-flash by default. Model availability and team limits are controlled by the organizer. Authentication is server-only through LLM_API_KEY; no key is included in source files or browser code.
+The application implements its own planning, allowlisted data tools, JSON validation, review/repair and cache. It uses built-in Node.js HTTP/fetch/crypto/filesystem APIs, without an external agent framework or model SDK.
+Model-generated interpretations are separate from source news, deterministic relevance scores, and bank materials. Model review is not independent fact verification. Unverified prepared bank comments are not attributed to Alfa-Bank.
+Live collection uses the official Bank of Russia RSS channel: https://www.cbr.ru/rss/RssPress. Source documents are retrieved over HTTPS; original text remains attributed to the publisher. Corpus search is limited to configured sources, not general internet search.
+Three historical Alfa-Bank reports are supplied by the case materials folder: https://drive.google.com/drive/folders/15xZTLF1lZ65p6o5xpNA_fRbxjoV-UlG1. Only short page-verified quotations and document metadata/hashes are distributed in config/bank-excerpts.json; complete PDF files and rendered pages are not included in Git. These documents retain the bank's copyright; case access does not imply a redistribution licence.
+The default reviewer is qwen/qwen3.6-35b-a3b through the same organizer API. Review by another model is not independent fact verification.
+Server parsing dependencies (versions and transitive resolution are fixed in package.json/pnpm-lock.yaml): linkedom 0.18.14 (ISC, https://github.com/WebReflection/linkedom); fast-xml-parser 5.11.2 (MIT, https://github.com/NaturalIntelligence/fast-xml-parser); pdfjs-dist 6.4.299 (Apache-2.0, https://github.com/mozilla/pdf.js). Dependencies include their upstream licence notices; optional PDF rendering support may install @napi-rs/canvas and its platform package.
+data/quality-benchmark.json and automated-test content are synthetic examples authored for regression checks; their metrics are not an independent accuracy evaluation.
+Local mode represents the owner of the local computer. Optional accounts, roles, company scopes and expert reviews are implemented by the application; production banking SSO is not integrated.
+
+Local PDF rendering/OCR: @napi-rs/canvas 1.0.13 (MIT), https://github.com/Brooooooklyn/canvas; Tesseract.js 7.0.0 (Apache-2.0), https://github.com/naptha/tesseract.js; packaged Russian/English trained-data distributions @tesseract.js-data/rus and eng 1.0.0 (MIT package license), https://github.com/naptha/tessdata. Transitive dependency licenses remain in installed packages.
+Five Vedomosti RSS channels contribute publisher-provided headlines and short summaries with source URLs; full articles are not redistributed. See https://www.vedomosti.ru/info/rss. Full bank PDFs, OCR output and review packets stay outside Git; the public configuration contains short reviewed excerpts, dates, URLs and SHA-256 only.

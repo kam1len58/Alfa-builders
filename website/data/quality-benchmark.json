@@ -1,0 +1,1156 @@
+{
+  "version": "synthetic-holdout-2",
+  "description": "Расширенный синтетический контрольный набор: 120 примеров для 16 профилей компаний. Есть релевантные, нерелевантные, пограничные и лексически неоднозначные случаи; метки представляют экспертные ожидания, а не независимое измерение фактологической точности.",
+  "profiles": {
+    "wholesale": {
+      "okvedCode": "46.3",
+      "industry": "Оптовая торговля",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "construction": {
+      "okvedCode": "41.2",
+      "industry": "Строительство",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "software": {
+      "okvedCode": "62.0",
+      "industry": "Разработка программ",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "transport": {
+      "okvedCode": "49.4",
+      "industry": "Грузовые перевозки",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "retail": {
+      "okvedCode": "47.11",
+      "industry": "Розничная торговля продуктами",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "food_manufacturing": {
+      "okvedCode": "10.89",
+      "industry": "Производство пищевых продуктов",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "agriculture": {
+      "okvedCode": "01.11",
+      "industry": "Растениеводство",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "oil_gas": {
+      "okvedCode": "06.10",
+      "industry": "Добыча нефти",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "logistics": {
+      "okvedCode": "52.29",
+      "industry": "Логистика и складирование",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasDeposit": 0,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "real_estate": {
+      "okvedCode": "68.20",
+      "industry": "Аренда и управление недвижимостью",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 1,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "hospitality": {
+      "okvedCode": "56.10",
+      "industry": "Общественное питание",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasDeposit": 1,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "telecom": {
+      "okvedCode": "63.11",
+      "industry": "Обработка данных и инфраструктура связи",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "utilities": {
+      "okvedCode": "35.11",
+      "industry": "Электроэнергетика",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "machinery": {
+      "okvedCode": "28.99",
+      "industry": "Производство промышленного оборудования",
+      "bankProducts": {
+        "hasLoans": 1,
+        "hasDeposit": 0,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    },
+    "pharma_wholesale": {
+      "okvedCode": "46.46",
+      "industry": "Оптовая торговля фармацевтическими товарами",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasDeposit": 0,
+        "hasGuarantees": 1
+      },
+      "ved": {
+        "hasVed": 1
+      }
+    },
+    "professional_services": {
+      "okvedCode": "70.22",
+      "industry": "Консультирование по вопросам управления",
+      "bankProducts": {
+        "hasLoans": 0,
+        "hasDeposit": 0,
+        "hasGuarantees": 0
+      },
+      "ved": {
+        "hasVed": 0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "w-inflation",
+      "profile": "wholesale",
+      "title": "Инфляция замедлилась",
+      "text": "Потребительские цены выросли меньше ожиданий.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-rate",
+      "profile": "software",
+      "title": "Изменение ключевой ставки",
+      "text": "Банк России объявил решение по ставке.",
+      "relevant": false,
+      "critical": true
+    },
+    {
+      "id": "c-rate",
+      "profile": "construction",
+      "title": "Ключевая ставка",
+      "text": "Изменились денежно-кредитные условия.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "t-diesel",
+      "profile": "transport",
+      "title": "Поставки дизеля",
+      "text": "Экспорт дизельного топлива увеличился.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-diesel",
+      "profile": "wholesale",
+      "title": "Дизельное топливо",
+      "text": "На внутреннем рынке изменились цены на топливо.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-tender",
+      "profile": "construction",
+      "title": "Новые условия тендеров",
+      "text": "Уточнён порядок госзакупок по 44-ФЗ.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-tender",
+      "profile": "software",
+      "title": "Новые условия тендеров",
+      "text": "Уточнён порядок госзакупок по 44-ФЗ.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "w-customs",
+      "profile": "wholesale",
+      "title": "Изменились пошлины",
+      "text": "Новые таможенные условия для импорта.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "c-customs",
+      "profile": "construction",
+      "title": "Изменились пошлины",
+      "text": "Новые таможенные условия для импорта.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "t-sanctions",
+      "profile": "transport",
+      "title": "Санкционные ограничения",
+      "text": "Уточнены санкции для международных перевозок.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "s-sanctions",
+      "profile": "software",
+      "title": "Санкционные ограничения",
+      "text": "Уточнены санкции для международных перевозок.",
+      "relevant": false,
+      "critical": true
+    },
+    {
+      "id": "w-pmi",
+      "profile": "wholesale",
+      "title": "PMI: 49,8",
+      "text": "Показатель деловой активности изменился.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-pmi",
+      "profile": "software",
+      "title": "PMI: 49,8",
+      "text": "Показатель деловой активности изменился.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-wages",
+      "profile": "construction",
+      "title": "ФОТ вырос",
+      "text": "Повышение зарплат влияет на расходы.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-wages",
+      "profile": "software",
+      "title": "ФОТ вырос",
+      "text": "Повышение зарплат влияет на расходы.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-neutral",
+      "profile": "wholesale",
+      "title": "Новый музей",
+      "text": "В городе открылась выставка художников.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "c-neutral",
+      "profile": "construction",
+      "title": "Спортивные результаты",
+      "text": "Команда выиграла международный турнир.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "t-customs",
+      "profile": "transport",
+      "title": "Условия экспорта",
+      "text": "Обновлены таможенные требования к экспорту товаров.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-demand",
+      "profile": "wholesale",
+      "title": "Снижение спроса",
+      "text": "Заказы промышленным компаниям сократились.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "t-pmi",
+      "profile": "transport",
+      "title": "Производственный PMI",
+      "text": "Деловая активность в промышленности изменилась.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "s-security",
+      "profile": "software",
+      "title": "Цифровая безопасность",
+      "text": "Обнаружена уязвимость в программном обеспечении.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "c-fuel",
+      "profile": "construction",
+      "title": "Цены на бензин",
+      "text": "Топливные издержки изменились.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "w-mixed",
+      "profile": "wholesale",
+      "title": "PMI вырос ниже 50",
+      "text": "Новые заказы сократились, индекс вырос.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "s-neutral",
+      "profile": "software",
+      "title": "Наука и культура",
+      "text": "Объявлены результаты конкурса музейных проектов.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "retail-inflation-cost",
+      "profile": "retail",
+      "title": "Продовольственная инфляция ускорилась",
+      "text": "Цены поставщиков продуктов выросли, розничные сети пересматривают закупочные бюджеты.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "retail-wages",
+      "profile": "retail",
+      "title": "Изменились расходы на персонал",
+      "text": "Рост фонда оплаты труда влияет на операционные расходы торговых точек.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "retail-rate-no-products",
+      "profile": "retail",
+      "title": "Ключевая ставка снижена",
+      "text": "Регулятор изменил ставку, но в профиле компании нет кредитных или депозитных продуктов.",
+      "relevant": false,
+      "critical": true
+    },
+    {
+      "id": "retail-pmi",
+      "profile": "retail",
+      "title": "Промышленный PMI снизился",
+      "text": "Индекс отражает выпуск заводов, прямой связи с розничным бизнесом не установлено.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "retail-fuel",
+      "profile": "retail",
+      "title": "Оптовая цена дизеля выросла",
+      "text": "Изменение касается топлива, сведений о собственном автопарке в профиле нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "retail-customs",
+      "profile": "retail",
+      "title": "Новые таможенные требования",
+      "text": "Порядок импорта изменился; признаки внешнеэкономической деятельности отсутствуют.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "retail-cyber",
+      "profile": "retail",
+      "title": "Уязвимость в корпоративной платформе",
+      "text": "Обнаружена уязвимость в программном обеспечении стороннего разработчика.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "retail-neutral",
+      "profile": "retail",
+      "title": "Открытие городского музея",
+      "text": "В городе состоялось открытие выставки современного искусства.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "food-pmi-orders",
+      "profile": "food_manufacturing",
+      "title": "Сокращаются новые промышленные заказы",
+      "text": "Производственный PMI снизился на фоне уменьшения заказов предприятиям.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "food-rate",
+      "profile": "food_manufacturing",
+      "title": "Условия кредитования изменились",
+      "text": "Банк России изменил ключевую ставку; у компании есть кредитный продукт.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "food-costs",
+      "profile": "food_manufacturing",
+      "title": "Инфляция сырья ускорилась",
+      "text": "У производителей выросли цены на сырьё и упаковку.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "food-fuel",
+      "profile": "food_manufacturing",
+      "title": "Цены на дизельное топливо",
+      "text": "Оптовые цены на дизель изменились; отраслевой код не относится к транспорту или строительству.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "food-tender",
+      "profile": "food_manufacturing",
+      "title": "Обновлены правила госконтрактов",
+      "text": "Изменился порядок закупок по 44-ФЗ, банковских гарантий в профиле нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "food-customs-no-ved",
+      "profile": "food_manufacturing",
+      "title": "Импортные пошлины изменились",
+      "text": "Новые таможенные условия затронули импортёров, признаков ВЭД у компании нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "food-cyber",
+      "profile": "food_manufacturing",
+      "title": "Утечка данных в приложении",
+      "text": "Поставщик программного обеспечения сообщил об уязвимости.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "food-neutral",
+      "profile": "food_manufacturing",
+      "title": "Премьера фильма о кулинарии",
+      "text": "Документальный фильм получил награду на фестивале.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "agri-fuel-cost",
+      "profile": "agriculture",
+      "title": "Подорожало дизельное топливо",
+      "text": "Изменение стоимости топлива может повлиять на полевые работы и перевозку урожая.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "agri-customs",
+      "profile": "agriculture",
+      "title": "Изменились правила экспорта зерна",
+      "text": "Новые таможенные требования могут затронуть международные поставки сельхозпродукции.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "agri-sanctions",
+      "profile": "agriculture",
+      "title": "Ограничения для внешней торговли",
+      "text": "Объявлены санкционные ограничения для отдельных товарных направлений; у компании есть ВЭД.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "agri-rate",
+      "profile": "agriculture",
+      "title": "Изменение ключевой ставки",
+      "text": "У компании есть кредитный продукт, поэтому стоимость финансирования стоит проверить.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "agri-wages",
+      "profile": "agriculture",
+      "title": "Увеличились расходы на персонал",
+      "text": "Изменения оплаты труда повлияли на расчёт себестоимости.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "agri-pmi",
+      "profile": "agriculture",
+      "title": "PMI промышленности снизился",
+      "text": "Индекс выпуска заводов не описывает напрямую сельскохозяйственный сезон.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "agri-tender",
+      "profile": "agriculture",
+      "title": "Изменились правила госзакупок",
+      "text": "Обновлён порядок тендеров, но банковских гарантий у компании нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "agri-cyber",
+      "profile": "agriculture",
+      "title": "Уязвимость в облачном сервисе",
+      "text": "Производитель ПО устраняет техническую уязвимость в системе учёта.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "oil-brent",
+      "profile": "oil_gas",
+      "title": "Цена Brent резко изменилась",
+      "text": "Мировая динамика нефтяных котировок может повлиять на отраслевую конъюнктуру.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "oil-rate",
+      "profile": "oil_gas",
+      "title": "Ключевая ставка и кредитование",
+      "text": "Изменение ставки затрагивает финансовые условия компании с действующим кредитом.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "oil-customs",
+      "profile": "oil_gas",
+      "title": "Новые экспортные пошлины",
+      "text": "Изменились таможенные условия для экспорта нефтепродуктов.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "oil-sanctions",
+      "profile": "oil_gas",
+      "title": "Санкционные ограничения для энергетики",
+      "text": "Опубликованы ограничения, которые могут затронуть международные поставки.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "oil-wages",
+      "profile": "oil_gas",
+      "title": "Расходы на персонал выросли",
+      "text": "Увеличение фонда оплаты труда может повлиять на операционные затраты.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "oil-gas-word-collision",
+      "profile": "oil_gas",
+      "title": "Газированная вода получила премию",
+      "text": "Производитель напитков представил новую линейку минеральной воды.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "oil-tender",
+      "profile": "oil_gas",
+      "title": "Изменены правила тендера",
+      "text": "Изменился порядок закупок по 44-ФЗ; банковских гарантий у компании нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "oil-cyber",
+      "profile": "oil_gas",
+      "title": "Уязвимость бухгалтерского ПО",
+      "text": "Вендор сообщил об уязвимости программного обеспечения для учёта.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "logistics-fuel",
+      "profile": "logistics",
+      "title": "Дизельное топливо подорожало",
+      "text": "Рост стоимости топлива повышает риск увеличения транспортных расходов.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "logistics-customs",
+      "profile": "logistics",
+      "title": "Обновлены таможенные правила",
+      "text": "Изменения могут повлиять на оформление международных грузов.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "logistics-sanctions",
+      "profile": "logistics",
+      "title": "Ограничения международных перевозок",
+      "text": "Введены новые санкционные ограничения для отдельных направлений перевозки.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "logistics-guarantees",
+      "profile": "logistics",
+      "title": "Условия государственных тендеров изменились",
+      "text": "Для участия в контрактах могут потребоваться банковские гарантии.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "logistics-rate-no-credit",
+      "profile": "logistics",
+      "title": "Изменена ключевая ставка",
+      "text": "В профиле компании нет кредитных или депозитных продуктов.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "logistics-pmi",
+      "profile": "logistics",
+      "title": "Производственный PMI снизился",
+      "text": "Индекс описывает выпуск промышленности, а не грузопотоки компании.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "logistics-oil",
+      "profile": "logistics",
+      "title": "Добыча нефти в регионе выросла",
+      "text": "Новость касается объёмов добычи, не тарифов перевозки или стоимости топлива.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "logistics-fuel-film",
+      "profile": "logistics",
+      "title": "Фильм о топливе получил награду",
+      "text": "На кинофестивале показали документальную ленту об истории нефтепродуктов.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-rate",
+      "profile": "real_estate",
+      "title": "Изменились условия ипотечного финансирования",
+      "text": "Ключевая ставка влияет на стоимость кредитования компании.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "estate-inflation",
+      "profile": "real_estate",
+      "title": "Строительные материалы дорожают",
+      "text": "Рост цен на материалы способен увеличить расходы на обслуживание объектов.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "estate-pmi",
+      "profile": "real_estate",
+      "title": "Производственный PMI вырос",
+      "text": "Индекс отражает активность промышленности; прямой связи с арендным бизнесом нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-fuel",
+      "profile": "real_estate",
+      "title": "Розничные цены на бензин",
+      "text": "Изменились котировки топлива, но профиль не указывает транспортную или строительную деятельность.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-customs",
+      "profile": "real_estate",
+      "title": "Уточнены импортные пошлины",
+      "text": "Компания не имеет признака внешнеэкономической деятельности.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-tender",
+      "profile": "real_estate",
+      "title": "Новые правила госзакупок",
+      "text": "Публикация касается тендеров, банковских гарантий у компании нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-cyber",
+      "profile": "real_estate",
+      "title": "Уязвимость в программном обеспечении",
+      "text": "Сообщение относится к технической инфраструктуре стороннего разработчика.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "estate-sports-bet-rate",
+      "profile": "real_estate",
+      "title": "Ставки на финал чемпионата выросли",
+      "text": "Материал описывает коэффициенты спортивных ставок, а не кредитные условия компании.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-rate",
+      "profile": "hospitality",
+      "title": "Ключевая ставка изменилась",
+      "text": "У компании есть депозитный продукт; стоит проверить применимые условия.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "hospitality-inflation",
+      "profile": "hospitality",
+      "title": "Продукты для ресторанов подорожали",
+      "text": "Изменение цен поставщиков может увеличить себестоимость меню.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "hospitality-fuel",
+      "profile": "hospitality",
+      "title": "Дизельное топливо подорожало",
+      "text": "Профиль не содержит признаков транспортной деятельности или автопарка.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-customs",
+      "profile": "hospitality",
+      "title": "Импортные пошлины изменились",
+      "text": "В профиле нет признака внешнеэкономической деятельности.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-sanctions",
+      "profile": "hospitality",
+      "title": "Санкции для перевозчиков",
+      "text": "Ограничения относятся к международным перевозкам, а не к ресторанам.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-pmi",
+      "profile": "hospitality",
+      "title": "PMI промышленности снизился",
+      "text": "Промышленный индекс не описывает напрямую ресторанный спрос.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-tender",
+      "profile": "hospitality",
+      "title": "Новые требования к тендерам",
+      "text": "У компании нет банковских гарантий в профиле.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "hospitality-cyber",
+      "profile": "hospitality",
+      "title": "Уязвимость в корпоративном ПО",
+      "text": "Сообщение касается стороннего программного продукта.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "telecom-cyber",
+      "profile": "telecom",
+      "title": "Выявлена уязвимость сетевого ПО",
+      "text": "Уязвимость может затронуть программное обеспечение инфраструктуры связи.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "telecom-data-leak",
+      "profile": "telecom",
+      "title": "Раскрыта утечка данных",
+      "text": "Поставщик сообщил о компрометации данных в цифровом сервисе.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "telecom-rate",
+      "profile": "telecom",
+      "title": "Ключевая ставка снизилась",
+      "text": "У компании есть кредитный продукт; стоимость финансирования следует перепроверить.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "telecom-wages",
+      "profile": "telecom",
+      "title": "Вырос фонд оплаты труда",
+      "text": "Рост расходов на персонал может повлиять на операционные затраты.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "telecom-customs",
+      "profile": "telecom",
+      "title": "Обновлены таможенные требования",
+      "text": "Признаков внешнеэкономической деятельности у компании нет.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "telecom-sanctions",
+      "profile": "telecom",
+      "title": "Санкционные ограничения для экспорта",
+      "text": "Профиль не содержит данных о внешней торговле.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "telecom-fuel",
+      "profile": "telecom",
+      "title": "Топливо подорожало",
+      "text": "Новость о топливе не подтверждает прямую связь с инфраструктурным оператором.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "telecom-museum-software",
+      "profile": "telecom",
+      "title": "История программного обеспечения в музее",
+      "text": "Выставка рассказывает о развитии компьютерной техники, без сообщения об угрозе безопасности.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "utilities-rate",
+      "profile": "utilities",
+      "title": "Изменена ключевая ставка",
+      "text": "У компании есть кредитный продукт, поэтому стоит оценить условия финансирования.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "utilities-tender",
+      "profile": "utilities",
+      "title": "Изменились правила госконтрактов",
+      "text": "Новые условия могут затронуть участие в закупках с банковской гарантией.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "utilities-inflation",
+      "profile": "utilities",
+      "title": "Инфляция затрат ускорилась",
+      "text": "Цены на материалы и услуги подрядчиков изменились.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "utilities-pmi",
+      "profile": "utilities",
+      "title": "PMI промышленности вырос",
+      "text": "Показатель выпуска промышленности не описывает напрямую регулируемую энергетику.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "utilities-fuel",
+      "profile": "utilities",
+      "title": "Бензин и дизель подорожали",
+      "text": "Профиль относится к энергетике и не указывает транспортную или строительную деятельность.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "utilities-oil",
+      "profile": "utilities",
+      "title": "Нефтяная добыча увеличилась",
+      "text": "Изменение относится к добывающему сектору, не к энергетической компании.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "utilities-cyber",
+      "profile": "utilities",
+      "title": "Уязвимость ПО для дизайнеров",
+      "text": "Уязвимость затрагивает продукт стороннего поставщика.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "utilities-customs",
+      "profile": "utilities",
+      "title": "Изменились экспортные пошлины",
+      "text": "В профиле отсутствует признак ВЭД.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "machinery-pmi",
+      "profile": "machinery",
+      "title": "Сократились промышленные заказы",
+      "text": "Снижение новых заказов отражено в производственном PMI.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "machinery-rate",
+      "profile": "machinery",
+      "title": "Изменена ключевая ставка",
+      "text": "У предприятия есть кредитный продукт.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "machinery-tender",
+      "profile": "machinery",
+      "title": "Обновлены условия госконтрактов",
+      "text": "Для участия в закупках может потребоваться банковская гарантия.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "machinery-costs",
+      "profile": "machinery",
+      "title": "Инфляция металла и комплектующих",
+      "text": "Повышение цен на сырьё способно увеличить производственную себестоимость.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "machinery-oil",
+      "profile": "machinery",
+      "title": "Изменились нефтяные котировки",
+      "text": "Событие касается добычи и цен на нефть, прямая связь с машиностроением не задана.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "machinery-customs",
+      "profile": "machinery",
+      "title": "Импортные пошлины обновлены",
+      "text": "В профиле нет признака внешнеэкономической деятельности.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "machinery-cyber",
+      "profile": "machinery",
+      "title": "Уязвимость программного обеспечения",
+      "text": "Сообщение касается ПО сторонней организации, а не продукта предприятия.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "machinery-neutral",
+      "profile": "machinery",
+      "title": "Спортивная команда выиграла финал",
+      "text": "Опубликованы результаты международного турнира.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "pharma-pmi",
+      "profile": "pharma_wholesale",
+      "title": "Сократился объём оптовых заказов",
+      "text": "Индекс деловой активности указывает на снижение новых заказов.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "pharma-customs",
+      "profile": "pharma_wholesale",
+      "title": "Изменены требования к импорту лекарств",
+      "text": "Таможенные требования могут повлиять на международные поставки фармацевтической продукции.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "pharma-sanctions",
+      "profile": "pharma_wholesale",
+      "title": "Ограничения международной торговли",
+      "text": "Новые ограничения могут затронуть внешние поставки продукции.",
+      "relevant": true,
+      "critical": true
+    },
+    {
+      "id": "pharma-tender",
+      "profile": "pharma_wholesale",
+      "title": "Условия государственных закупок изменились",
+      "text": "Для контрактов может понадобиться банковская гарантия.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "pharma-rate-no-product",
+      "profile": "pharma_wholesale",
+      "title": "Ключевая ставка изменилась",
+      "text": "В профиле не указаны кредиты или депозиты.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "pharma-fuel",
+      "profile": "pharma_wholesale",
+      "title": "Дизельное топливо подорожало",
+      "text": "Профиль относится к оптовой торговле и не содержит транспортного ОКВЭД.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "pharma-cyber",
+      "profile": "pharma_wholesale",
+      "title": "Уязвимость в ПО",
+      "text": "Сообщение касается программного обеспечения, не отраслевого события.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "pharma-neutral",
+      "profile": "pharma_wholesale",
+      "title": "Городская библиотека открыла зал",
+      "text": "Организована новая культурная экспозиция.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-wages",
+      "profile": "professional_services",
+      "title": "Фонд оплаты труда увеличился",
+      "text": "Повышение расходов на персонал влияет на административные затраты.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "services-inflation",
+      "profile": "professional_services",
+      "title": "Инфляция замедлилась",
+      "text": "Изменение общего уровня цен может быть полезно для пересмотра бюджета.",
+      "relevant": true,
+      "critical": false
+    },
+    {
+      "id": "services-rate-no-product",
+      "profile": "professional_services",
+      "title": "Ключевая ставка снижена",
+      "text": "В профиле нет кредитных или депозитных продуктов.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-pmi",
+      "profile": "professional_services",
+      "title": "Производственный PMI снизился",
+      "text": "Показатель относится к производству, профиль компании — управленческий консалтинг.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-customs",
+      "profile": "professional_services",
+      "title": "Изменились таможенные пошлины",
+      "text": "Нет признаков внешнеэкономической деятельности.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-fuel",
+      "profile": "professional_services",
+      "title": "Подорожали нефтепродукты",
+      "text": "В профиле не указана транспортная или производственная деятельность.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-tender",
+      "profile": "professional_services",
+      "title": "Изменены правила тендеров",
+      "text": "Банковские гарантии в профиле отсутствуют.",
+      "relevant": false,
+      "critical": false
+    },
+    {
+      "id": "services-neutral",
+      "profile": "professional_services",
+      "title": "Опубликована программа кинофестиваля",
+      "text": "Организаторы представили список участников культурного события.",
+      "relevant": false,
+      "critical": false
+    }
+  ]
+}
