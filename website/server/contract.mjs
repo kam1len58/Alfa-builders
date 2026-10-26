@@ -109,5 +109,6 @@ export function traceView(value) {
     sources: value.sources,
     company_features_used: companyFeatures(value),
     checks: value.quality,
+    ...(value.ml ? { ml: value.ml } : {}),
   };
 }

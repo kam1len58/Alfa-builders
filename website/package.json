@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node scripts/start.mjs",
+    "setup:ml": "node scripts/setup-ml.mjs",
     "check": "node scripts/check.mjs",
     "test": "node --test test/*.test.mjs"
   },

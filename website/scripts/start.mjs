@@ -12,8 +12,28 @@ try {
   if (error.code !== 'ENOENT') throw error;
 }
 const runtime = resolve(process.env.APP_DATA_DIR || join(homedir(), '.alfa-business', 'runtime'));
+process.env.ML_ENABLED ??= '1';
+if (process.env.ML_ENABLED === '1' && !process.env.ML_PYTHON_EXE) {
+  const mlPython = join(
+    runtime,
+    'ml',
+    'venv',
+    process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python'
+  );
+  try {
+    await access(mlPython);
+    process.env.ML_PYTHON_EXE = mlPython;
+  } catch {}
+}
 buildProfiles();
-const backend = resolve(process.env.BACKEND_PATH || join(site, '../../Alfa-builders-backend'));
+let backend = resolve(process.env.BACKEND_PATH || join(site, '..'));
+if (!process.env.BACKEND_PATH) {
+  try {
+    await access(join(backend, 'NewsAnalytics/NewsAnalytics/NewsAnalytics.API.csproj'));
+  } catch {
+    backend = resolve(site, '../../Alfa-builders-backend');
+  }
+}
 const project = join(backend, 'NewsAnalytics/NewsAnalytics/NewsAnalytics.API.csproj');
 await access(project);
 const schema = await readFile(join(backend, 'NewsAnalytics/NewsAnalytics.Models/NewsItem.cs'));
@@ -71,6 +91,7 @@ if (!(await available())) {
         ...process.env,
         ASPNETCORE_ENVIRONMENT: 'Production',
         Logging__LogLevel__Default: 'Warning',
+        Llm__ApiKey: '',
       },
       stdio: 'inherit',
       windowsHide: true,

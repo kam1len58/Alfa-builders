@@ -146,6 +146,7 @@ export function createInsightsService({
   fetcher = fetch,
   dataService,
   collector,
+  ml = null,
   onAnalysis = async () => {},
   onAudit = async () => {},
 }) {
@@ -516,19 +517,43 @@ export function createInsightsService({
     if (collector && !bank.items.length)
       addSearchEvidence(ctx.item.news.title + ' ' + ctx.item.news.content, 'missing_bank_material');
 
-    let analysis = await modelStep(
-      'analysis',
-      'Подготовь персональный разбор: максимум 2 риска, 1 возможность и 2 действия; если они не обоснованы, верни пустой массив. Один пункт — 1–2 коротких предложения. В whyImportant явно отдели известные признаки от условного влияния. Для кредита условие — фактические условия договора и ставка; признак кредита сам по себе не доказывает нагрузку. Для депозита не обещай доходность без условий договора. Действия — проверка договоров, сценариев и собственных показателей, не готовые финансовые решения. Каждый вывод должен иметь sourceIds и точные evidence. Исторический материал банка используй лишь как датированный контекст, не актуальный прогноз. Строго соблюдай эту структуру: ' +
-        JSON.stringify(analysisSchema),
-      {
-        asOfDate: new Date().toISOString().slice(0, 10),
-        plan: outline.questions,
+    let mlResult;
+    if (ml) {
+      function snake(value) {
+        if (Array.isArray(value)) return value.map(snake);
+        if (!value || typeof value !== 'object') return value;
+        return Object.fromEntries(
+          Object.entries(value).map(([key, item]) => [
+            key.replace(/[A-Z]/g, (c) => '_' + c.toLowerCase()),
+            snake(item),
+          ])
+        );
+      }
+      mlResult = await ml.draft({
+        profile: snake(ctx.company),
+        newsText: ctx.item.news.title + '\n' + ctx.item.news.content,
+        newsId: ctx.item.news.id,
         sources,
-        bankStatus: bank.note,
-      },
-      5200,
-      workflow
-    );
+        schema: analysisSchema,
+        rules: coreRules,
+      });
+      workflow.push(...mlResult.workflow, ...mlResult.modelCalls);
+    }
+    let analysis = mlResult
+      ? mlResult.analysis
+      : await modelStep(
+          'analysis',
+          'Подготовь персональный разбор: максимум 2 риска, 1 возможность и 2 действия; если они не обоснованы, верни пустой массив. Один пункт — 1–2 коротких предложения. В whyImportant явно отдели известные признаки от условного влияния. Для кредита условие — фактические условия договора и ставка; признак кредита сам по себе не доказывает нагрузку. Для депозита не обещай доходность без условий договора. Действия — проверка договоров, сценариев и собственных показателей, не готовые финансовые решения. Каждый вывод должен иметь sourceIds и точные evidence. Исторический материал банка используй лишь как датированный контекст, не актуальный прогноз. Строго соблюдай эту структуру: ' +
+            JSON.stringify(analysisSchema),
+          {
+            asOfDate: new Date().toISOString().slice(0, 10),
+            plan: outline.questions,
+            sources,
+            bankStatus: bank.note,
+          },
+          5200,
+          workflow
+        );
     let repaired = false;
     for (let attempt = 0; attempt < 3; attempt++) {
       const sourceIds = sources.map((source) => source.id);
@@ -590,6 +615,19 @@ export function createInsightsService({
             : { status: 'unavailable', text: bank.note, sourceIds: [] },
           sources: sources.map(({ data, ...source }) => source),
           workflow,
+          ...(mlResult
+            ? {
+                ml: {
+                  version: ml.version,
+                  traceId: mlResult.traceId,
+                  facts: mlResult.facts,
+                  ranking: mlResult.ranking,
+                  retrieval: mlResult.retrieval,
+                  selfCheck: mlResult.selfCheck,
+                  note: 'Балл карточки сохранён из сервиса данных. Оценка ML — отдельная эвристика. Итог дополнительно проверен по цитатам и моделью-редактором.',
+                },
+              }
+            : {}),
           plan: outline.questions.slice(0, 4),
           quality: {
             status: 'reviewed',
@@ -676,6 +714,7 @@ export function createInsightsService({
           version: VERSION,
           model: llm.model,
           reviewer: reviewer.model,
+          ml: ml?.version || null,
           sources,
           corpus: collector?.fingerprint(),
         })
@@ -930,6 +969,7 @@ export function createInsightsService({
           version: VERSION,
           model: llm.model,
           reviewer: reviewer.model,
+          ml: ml?.version || null,
           sources,
           corpus: collector?.fingerprint(),
         })
@@ -951,6 +991,11 @@ export function createInsightsService({
     cachedForContext,
     savedTrace,
     chat,
-    status: () => ({ configured: llm.configured, model: llm.model, onDemand: true }),
+    status: () => ({
+      configured: llm.configured,
+      model: llm.model,
+      onDemand: true,
+      ml: ml?.status() || { enabled: false },
+    }),
   };
 }

@@ -12,6 +12,9 @@ import { createQuality, evaluateBenchmark } from './quality.mjs';
 import { loadProfiles } from './profiles.mjs';
 import { createContractApi } from './contract-api.mjs';
 import { createMeter } from './meter.mjs';
+import { createDemoInsights, demoCatalogue } from './public-demo.mjs';
+import { createMlBridge } from './ml-bridge.mjs';
+const publicDemo = process.env.PUBLIC_DEMO === '1';
 
 const publicDirectory = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
 const contentTypes = {
@@ -38,25 +41,33 @@ const store = await openState();
 const collector = await createCollector({ store });
 const access = await createAccess({ port });
 const quality = createQuality({ store });
-const profiles = await loadProfiles();
+const profiles = publicDemo ? demoCatalogue() : await loadProfiles();
 const data = createDataService({ backendUrl, collector, profiles, eventStore: store });
 const meter = createMeter({
   store,
   prices: JSON.parse(process.env.LLM_PRICES_RUB_PER_MILLION || '{}'),
   budget: Number(process.env.LLM_DAILY_BUDGET_RUB || 500),
 });
-const insights = createInsightsService({
-  llm: createLlmClient({ meter }),
-  reviewer: createLlmClient({
-    model: process.env.LLM_REVIEW_MODEL || 'qwen/qwen3.6-35b-a3b',
-    meter,
-  }),
-  backendUrl,
-  dataService: data,
-  collector,
-  onAnalysis: quality.recordAnalysis,
-  onAudit: store.audit,
-});
+const ml =
+  process.env.ML_ENABLED === '1' && !publicDemo
+    ? await createMlBridge({ createClient: (model) => createLlmClient({ model, meter }) })
+    : null;
+const insights = publicDemo
+  ? createDemoInsights({ data })
+  : createInsightsService({
+      llm: createLlmClient({ meter }),
+      reviewer: createLlmClient({
+        model: process.env.LLM_REVIEW_MODEL || 'qwen/qwen3.6-35b-a3b',
+        meter,
+      }),
+      backendUrl,
+      dataService: data,
+      collector,
+      ml,
+      onAnalysis: quality.recordAnalysis,
+      onAudit: store.audit,
+    });
+if (ml) process.on('exit', () => ml.close());
 const benchmark = JSON.parse(
   await readFile(new URL('../data/quality-benchmark.json', import.meta.url), 'utf8')
 );
@@ -366,7 +377,10 @@ const server = http.createServer(async (request, response) => {
 server.requestTimeout = 300000;
 server.headersTimeout = 15000;
 const bindAddress = process.env.APP_BIND_ADDRESS || '127.0.0.1';
-if (bindAddress !== '127.0.0.1' && !(bindAddress === '0.0.0.0' && process.env.AUTH_USERS_FILE))
+if (
+  bindAddress !== '127.0.0.1' &&
+  !(bindAddress === '0.0.0.0' && (process.env.AUTH_USERS_FILE || publicDemo))
+)
   throw new Error(
     'Сетевой режим требует AUTH_USERS_FILE. Для локального запуска используйте 127.0.0.1.'
   );

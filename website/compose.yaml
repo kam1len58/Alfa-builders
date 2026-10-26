@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: ${BACKEND_CONTEXT:-../../Alfa-builders-backend/NewsAnalytics}
+      context: ${BACKEND_CONTEXT:-../NewsAnalytics}
       dockerfile_inline: |
         FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
         WORKDIR /src
@@ -18,14 +18,19 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       Logging__LogLevel__Default: Warning
+      Llm__ApiKey: ''
     volumes:
       - backend-data:/data
     restart: unless-stopped
   website:
-    build: .
+    build:
+      context: .
+      dockerfile: ${WEBSITE_DOCKERFILE:-Dockerfile.ml}
     environment:
       BACKEND_URL: http://backend:8080
       APP_DATA_DIR: /data
+      ML_ENABLED: ${ML_ENABLED:-1}
+      ML_PYTHON_EXE: /usr/local/bin/python
       PROFILES_FILE: ${CONTAINER_PROFILES_FILE:-}
       APP_BIND_ADDRESS: 0.0.0.0
       AUTH_USERS_FILE: /run/secrets/access.json

@@ -1,12 +1,14 @@
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { AiError } from './llm-client.mjs';
+import { demoIds } from './public-demo.mjs';
 const permissions = {
   owner: ['read', 'analyze', 'feedback', 'sources', 'quality', 'review'],
   editor: ['read', 'analyze', 'feedback', 'sources', 'quality'],
   analyst: ['read', 'analyze', 'feedback'],
   expert: ['read', 'analyze', 'feedback', 'quality', 'review'],
   viewer: ['read'],
+  demo: ['read', 'analyze'],
 };
 export function passwordHash(password, salt = randomBytes(16).toString('hex')) {
   return 'scrypt$' + salt + '$' + scryptSync(password, salt, 64).toString('hex');
@@ -20,10 +22,28 @@ export async function createAccess({
   port,
   usersFile = process.env.AUTH_USERS_FILE,
   now = Date.now,
+  publicDemo = process.env.PUBLIC_DEMO === '1',
+  publicOrigin = process.env.APP_PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL,
 } = {}) {
-  const users = usersFile
-    ? JSON.parse(await readFile(usersFile, 'utf8')).users
-    : [{ id: 'local-owner', name: 'Локальный пользователь', role: 'owner', companies: ['*'] }];
+  if (publicDemo) usersFile = null;
+  let external;
+  if (publicOrigin) {
+    external = new URL(publicOrigin);
+    if (
+      external.protocol !== 'https:' ||
+      external.username ||
+      external.password ||
+      external.pathname !== '/' ||
+      external.search ||
+      external.hash
+    )
+      throw new Error('APP_PUBLIC_ORIGIN must be an HTTPS origin');
+  }
+  const users = publicDemo
+    ? [{ id: 'public-demo', name: 'Гость демоверсии', role: 'demo', companies: demoIds }]
+    : usersFile
+      ? JSON.parse(await readFile(usersFile, 'utf8')).users
+      : [{ id: 'local-owner', name: 'Локальный пользователь', role: 'owner', companies: ['*'] }];
   if (
     !Array.isArray(users) ||
     !users.length ||
@@ -40,15 +60,22 @@ export async function createAccess({
     attempts = new Map(),
     limits = new Map();
   function boundary(request) {
-    if (!['127.0.0.1:' + port, 'localhost:' + port].includes(request.headers.host))
+    const externalHost = external && request.headers.host === external.host;
+    if (
+      !['127.0.0.1:' + port, 'localhost:' + port, external?.host]
+        .filter(Boolean)
+        .includes(request.headers.host)
+    )
       throw new AiError('ACCESS_HOST', 'Недопустимый адрес запроса.', 403);
     if (
-      (request.headers.origin && request.headers.origin !== 'http://' + request.headers.host) ||
+      (request.headers.origin &&
+        request.headers.origin !==
+          (externalHost ? external.origin : 'http://' + request.headers.host)) ||
       request.headers['sec-fetch-site'] === 'cross-site'
     )
       throw new AiError('ACCESS_ORIGIN', 'Запрос с другого сайта отклонён.', 403);
   }
-  function issue(user, response) {
+  function issue(user, response, request) {
     const token = randomBytes(32).toString('hex'),
       csrf = randomBytes(24).toString('hex');
     const session = { user, csrf, expires: now() + 8 * 3600000 };
@@ -59,7 +86,10 @@ export async function createAccess({
     }
     response.setHeader(
       'Set-Cookie',
-      'alfa_session=' + token + '; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800'
+      'alfa_session=' +
+        token +
+        '; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800' +
+        (external && request.headers.host === external.host ? '; Secure' : '')
     );
     return session;
   }
@@ -71,7 +101,7 @@ export async function createAccess({
       sessions.delete(token);
       found = null;
     }
-    if (!found && !usersFile) found = issue(users[0], response);
+    if (!found && !usersFile) found = issue(users[0], response, request);
     if (!found && !optional) throw new AiError('AUTH_REQUIRED', 'Войдите в сервис.', 401);
     return found;
   }
@@ -116,7 +146,7 @@ export async function createAccess({
       throw new AiError('LOGIN_FAILED', 'Неверные данные для входа.', 401);
     }
     attempts.delete(key);
-    return issue(user, response);
+    return issue(user, response, request);
   }
   const publicSession = (active) =>
     active
@@ -129,7 +159,7 @@ export async function createAccess({
             companies: active.user.companies,
           },
           csrfToken: active.csrf,
-          mode: usersFile ? 'accounts' : 'local',
+          mode: publicDemo ? 'public-demo' : usersFile ? 'accounts' : 'local',
           permissions: permissions[active.user.role],
         }
       : { authenticated: false, mode: 'accounts' };

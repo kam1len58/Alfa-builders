@@ -8,6 +8,8 @@
 !/pnpm-workspace.yaml
 !/analytics/
 !/Dockerfile
+!/Dockerfile.public-demo
+!/Dockerfile.ml
 !/.dockerignore
 !/compose.yaml
 !/ARCHITECTURE.md
@@ -22,6 +24,7 @@
 !/config/
 !/scripts/
 !/test/
+!/ml/
 
 /data/*
 !/data/*.xlsx
@@ -64,3 +67,19 @@ tmp/
 !/server/*.mjs
 !/.env.example
 *.dpapi
+
+/ml/*
+!/ml/src/
+!/ml/tests/
+!/ml/data/
+!/ml/README.md
+!/ml/requirements.txt
+!/ml/THIRD_PARTY_NOTICES.md
+/ml/data/*
+!/ml/data/business_matrix.json
+!/ml/data/golden_news.json
+!/ml/data/demo_profiles.json
+/ml/src/*
+!/ml/src/*.py
+/ml/tests/*
+!/ml/tests/*.py

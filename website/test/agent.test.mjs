@@ -66,7 +66,7 @@ const plan = {
   tools: ['company_profile', 'news_text', 'ranking', 'bank_materials', 'source_search'],
   questions: ['Как соотнести инфляцию с профилем?'],
 };
-function create(queue, { changed = false } = {}) {
+function create(queue, { changed = false, ml = null } = {}) {
   const operations = [],
     events = [];
   const dataService = {
@@ -103,6 +103,7 @@ function create(queue, { changed = false } = {}) {
       backendUrl: new URL('http://127.0.0.1'),
       dataService,
       collector,
+      ml,
       cacheDirectory: '',
       auditPath: '',
       onAnalysis: async (e) => events.push(e),
@@ -127,6 +128,35 @@ test('План, инструменты, источники банка, точн�
   assert.equal((await service.analysisFor('C1', 'UNSEEN')).cached, true);
   assert.equal(events.filter((e) => !e.cached).length, 1);
   assert.equal(events.at(-1).cached, true);
+});
+
+test('ML creates the draft; source checks and the independent reviewer still gate the final card', async () => {
+  let inputs;
+  const ml = {
+    version: 'test-ml-v1',
+    draft: async (input) => {
+      inputs = input;
+      return {
+        analysis: structuredClone(good),
+        workflow: [{ stage: 'tool', tool: 'ml_rules', status: 'completed' }],
+        modelCalls: [],
+        traceId: 'test-trace',
+        facts: { topic: 'инфляция' },
+        ranking: { score: 0.99 },
+        retrieval: { items: [{ sourceId: 'bank:BANK' }] },
+        selfCheck: { passed: true, issues: [] },
+      };
+    },
+    status: () => ({ enabled: true, ready: true }),
+  };
+  const { service } = create([plan, { approved: true, issues: [] }], { ml });
+  const result = await service.analysisFor('C1', 'UNSEEN');
+  assert.equal(inputs.profile.synthetic_u, 'C1');
+  assert.equal(result.ml.ranking.score, 0.99);
+  assert.equal(result.quality.valid, true);
+  assert.ok(result.workflow.some((s) => s.tool === 'ml_rules'));
+  assert.equal(service.status().ml.enabled, true);
+  assert.equal((await service.cachedForContext({ company, item })).id, result.id);
 });
 test('Пустой ответ проверяющей модели и null в цитатах запускают исправление без TypeError', async () => {
   const first = create([plan, good, null, good, { approved: true, issues: [] }]);

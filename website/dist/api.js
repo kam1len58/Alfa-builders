@@ -10,6 +10,18 @@ window.AlfaApi = (() => {
       .then((response) => response.json())
       .then((value) => {
         session = value;
+        if (value.mode === 'public-demo') {
+          document.documentElement.dataset.publicDemo = 'true';
+          let notice = document.getElementById('public-demo-notice');
+          if (!notice) {
+            notice = document.createElement('aside');
+            notice.id = 'public-demo-notice';
+            notice.className = 'public-demo-notice';
+            document.querySelector('#main').prepend(notice);
+          }
+          notice.textContent =
+            'Открытая демоверсия · Все компании и финансовые показатели вымышлены. Разборы и диалог — подготовленные примеры по правилам, без вызова нейросети.';
+        }
         return value;
       })
       .finally(() => {
@@ -170,6 +182,9 @@ window.AlfaApi = (() => {
 
   return {
     getSession,
+    isPublicDemo() {
+      return session?.mode === 'public-demo';
+    },
     userId() {
       return session?.user?.id || 'anonymous';
     },

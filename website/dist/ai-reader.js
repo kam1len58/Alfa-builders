@@ -18,6 +18,8 @@ window.NewsAI = (() => {
     analysis: 'Персональный разбор',
     review: 'Проверка оснований',
     repair: 'Уточнение выводов',
+    demo: 'Подготовленный демонстрационный пример',
+    ml_model: 'Обращение к модели ML',
   };
   const toolNames = {
     company_profile: 'Профиль компании',
@@ -25,6 +27,11 @@ window.NewsAI = (() => {
     ranking: 'Оценка и правила',
     bank_materials: 'Материалы банка',
     source_search: 'Поиск по корпусу источников',
+    ml_extractor: 'Извлечение фактов ML',
+    ml_rules: '25 правил ML',
+    ml_rag: 'Поиск по проверенным материалам банка',
+    ml_generation: 'Персональный вывод ML',
+    ml_self_check: 'Самопроверка ML',
   };
 
   function evidence(claim) {
@@ -76,14 +83,14 @@ window.NewsAI = (() => {
     const a = result.analysis;
     $('#ai-summary').hidden = false;
     $('#ai-summary').innerHTML =
-      `<div class="content-origin">Краткий разбор модели</div><p>${formatLines(a.summary.text)}</p>${refs(a.summary.sourceIds)}${evidence(a.summary)}`;
+      `<div class="content-origin">${result.demo ? 'Подготовленный пример' : 'Краткий разбор модели'}</div><p>${formatLines(a.summary.text)}</p>${refs(a.summary.sourceIds)}${evidence(a.summary)}`;
     $('#ai-impact').innerHTML =
-      `<section class="analysis-block"><div class="content-origin">Вывод модели · Контекст компании</div><h3>Как событие связано с бизнесом</h3><p>${formatLines(a.whyImportant.text)}</p>${refs(a.whyImportant.sourceIds)}${evidence(a.whyImportant)}</section>
+      `<section class="analysis-block"><div class="content-origin">${result.demo ? 'Демонстрационный пример' : 'Вывод модели'} · Контекст компании</div><h3>Как событие связано с бизнесом</h3><p>${formatLines(a.whyImportant.text)}</p>${refs(a.whyImportant.sourceIds)}${evidence(a.whyImportant)}</section>
       <section class="analysis-block"><h3>Возможные риски</h3>${claimList(a.risks, 'risks')}</section>
       <section class="analysis-block"><h3>Возможности</h3>${claimList(a.opportunities, 'opportunities')}</section>
       <section class="ai-missing"><h3>Для уточнения оценки</h3>${a.missingData.length ? `<ul>${a.missingData.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>Дополнительные пробелы модель не выделила. Это не означает полноту исходных данных.</p>'}</section>`;
     $('#ai-actions').innerHTML =
-      `<section class="analysis-block"><div class="content-origin">Предложенные моделью действия</div><h3>Что можно сделать</h3>${claimList(a.actions, 'actions')}<span class="analysis-caption">Действия предложены с учётом доступных данных. Условия контрактов и обязательств требуют проверки.</span></section>`;
+      `<section class="analysis-block"><div class="content-origin">${result.demo ? 'Действия из демонстрационного примера' : 'Предложенные моделью действия'}</div><h3>Что можно сделать</h3>${claimList(a.actions, 'actions')}<span class="analysis-caption">Действия предложены с учётом доступных данных. Условия контрактов и обязательств требуют проверки.</span></section>`;
     $('#ai-bank').innerHTML =
       `<h3>${result.bankView.historical ? 'Исторический контекст Альфа-Банка' : 'Позиция Альфа-Банка'}</h3><p>${formatLines(result.bankView.status === 'available' ? result.bankView.text : 'Подтверждённый материал банка с датой и первоисточником для этого события не найден.')}</p>${refs(result.bankView.sourceIds)}<span class="analysis-caption">${result.bankView.status === 'available' ? 'Короткие цитаты из материалов банка на указанную дату. Они не являются текущей оценкой новой новости.' : 'Выводы модели выше не являются позицией банка.'}</span>`;
     const stamp = new Intl.DateTimeFormat('ru-RU', {
@@ -91,10 +98,12 @@ window.NewsAI = (() => {
       timeStyle: 'short',
     }).format(new Date(result.generatedAt));
     $('#ai-sources').innerHTML =
-      `<section class="ai-provenance"><div class="content-origin">Происхождение разбора</div><h3>${escapeHtml(result.model)}</h3><p>Сформирован ${stamp}${result.cached ? ' · Из кэша' : ''}. Проверен форматом и отдельным обращением к модели; независимая проверка фактов не выполнялась.</p></section>
+      `<section class="ai-provenance"><div class="content-origin">Происхождение разбора</div><h3>${escapeHtml(result.model)}</h3><p>Сформирован ${stamp}${result.cached ? ' · Из кэша' : ''}. ${result.demo ? 'Подготовленный пример по правилам. Нейросеть не вызывалась; все сведения о компании вымышлены.' : 'Проверен форматом и отдельным обращением к модели; независимая проверка фактов не выполнялась.'}</p></section>
       ${result.sources.map((source) => `<div class="source-card" id="${sourceElementId(source.id)}"><div class="source-card-title">${escapeHtml(sourceNames[source.kind] || 'Основание')}<span>${escapeHtml(source.id)}</span></div><p>${escapeHtml(source.title)}${source.date ? ' · ' + escapeHtml(source.date) : ''}</p>${source.url ? `<a class="inline-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">Открыть материал ${icon('arrow-up-right')}</a>` : ''}</div>`).join('')}
       <details class="ai-workflow"><summary>Как подготовлен разбор</summary><ol>${result.workflow.map((step) => `<li>${escapeHtml(step.stage === 'tool' ? toolNames[step.tool] || step.tool : stages[step.stage] || step.stage)}${step.status === 'no_verified_material' ? ' — подтверждённые материалы не найдены' : ''}</li>`).join('')}</ol><span class="analysis-caption">Это этапы обработки и обращения к данным, без внутренних рассуждений модели.</span></details>`;
-    $('#ai-state').textContent = 'Разбор готов · ' + stamp;
+    $('#ai-state').textContent = result.demo
+      ? 'Подготовленный пример · Без вызова нейросети'
+      : 'Разбор готов · ' + stamp;
     $('#ai-state').dataset.state = 'ready';
     $('#ai-run').textContent = 'Открыть разбор';
     $('#ai-run').disabled = false;

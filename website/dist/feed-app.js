@@ -291,7 +291,7 @@ function renderEventCard(event, isFirst) {
     <div class="company-relevance">
       <div class="relevance-label">${icon('link')}Почему важно для компании</div>
       <p>${escapeHtml(event.insight?.analysis.whyImportant.text || assignment.explanation)}</p>
-      <div class="relevance-meta">${event.insight ? '<span>Вывод модели</span>' : ''}<button class="relevance-more" data-event="${escapeHtml(event.id)}" ${event.insight ? 'data-open-impact' : ''} aria-label="Подробнее: почему событие важно для компании — ${escapeHtml(event.title)}">Подробнее ${icon('arrow-right')}</button></div>
+      <div class="relevance-meta">${event.insight ? '<span>' + (event.insight.demo ? 'Демопример' : 'Вывод модели') + '</span>' : ''}<button class="relevance-more" data-event="${escapeHtml(event.id)}" ${event.insight ? 'data-open-impact' : ''} aria-label="Подробнее: почему событие важно для компании — ${escapeHtml(event.title)}">Подробнее ${icon('arrow-right')}</button></div>
     </div>
     <div class="card-footer">
       <span class="impact neutral"><i></i>${assignment.placement === 'В фокусе' ? 'В фокусе' : 'Общий контекст'}</span

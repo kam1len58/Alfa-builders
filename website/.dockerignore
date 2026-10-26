@@ -13,3 +13,11 @@
 !config/prepared-news.json
 !data/
 !data/quality-benchmark.json
+!scripts/
+!scripts/public-demo.mjs
+!ml/
+!ml/requirements.txt
+!ml/src/
+!ml/src/*.py
+!ml/data/
+!ml/data/business_matrix.json

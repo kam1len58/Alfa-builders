@@ -1,0 +1,13 @@
+FROM node:24.22.1-bookworm-slim
+WORKDIR /app
+RUN npm install --global pnpm@11.25.0
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+COPY dist ./dist
+COPY server ./server
+COPY config ./config
+COPY scripts/public-demo.mjs ./scripts/public-demo.mjs
+COPY data/quality-benchmark.json ./data/quality-benchmark.json
+USER node
+ENV NODE_ENV=production
+CMD ["node","scripts/public-demo.mjs"]
